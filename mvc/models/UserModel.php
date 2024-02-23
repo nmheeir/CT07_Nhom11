@@ -67,9 +67,9 @@ class UserModel extends BaseModel {
     }
 
     public function getUserByUsername($username) {
-        $checkIsExitsUsername = $this->getUser(["where" => "username = '{$username}'"]);
-        if($checkIsExitsUsername->isSuccess) {
-            return new DataView(true, $checkIsExitsUsername , "USERNAME đã tồn tại");
+        $checkIsExistUsername = $this->getUser(["where" => "username = '{$username}'"]);
+        if($checkIsExistUsername->isSuccess) {
+            return new DataView(true, $checkIsExistUsername , "USERNAME đã tồn tại");
         }
         else {
             return new DataView(false, null , "USERNAME không tồn tại");
@@ -77,9 +77,9 @@ class UserModel extends BaseModel {
     }
 
     public function getUserByEmail($email) {
-        $checkIsExitsUsername = $this->getUser(["where" => "username = '{$email}'"]);
-        if ($checkIsExitsUsername->isSuccess) {
-            return new DataView(true, $checkIsExitsUsername, "EMAIL đã tồn tại");
+        $checkIsExistUsername = $this->getUser(["where" => "email = '{$email}'"]);
+        if ($checkIsExistUsername->isSuccess) {
+            return new DataView(true, $checkIsExistUsername, "EMAIL đã tồn tại");
         } else {
             return new DataView(false, null, "EMAIL không tồn tại");
         }

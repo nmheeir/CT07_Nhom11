@@ -22,7 +22,7 @@
         <h2>Đăng kí công ty mới</h2>
         <form method="post" action="http://localhost/Project/TEST_3/Authenciation/registerCompany">
             <div class="user-box">
-                <input type="text" name="username" required oninput="validateUsername()" <? if (isset($_SESSION["session_register_company"])) echo "value={$_SESSION['session_register_user']['username']}" ?>>
+                <input type="text" name="username" required oninput="validateUsername()" <? if (isset($_SESSION["session_register_company"])) echo "value={$_SESSION['session_register_company']['username']}" ?>>
                 <label>Username</label>
                 <div id="usernameError" class="error-message"></div>
             </div>

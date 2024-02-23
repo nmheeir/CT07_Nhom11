@@ -92,10 +92,9 @@ class AuthenciationController extends BaseController
                     //kiểm tra username
                     $checkRegisterUsername =  $this->userModel->getUserByUsername($username);
                     //kiểm tra email
-                    //thiếu
-
+                    $checkRegisterEmail = $this->userModel->getUserByEmail($email);
                     // Kiểm tra kết quả đăng ký
-                    if (!$checkRegisterUsername->isSuccess) {
+                    if (!$checkRegisterUsername->isSuccess && !$checkRegisterEmail->isSuccess) {
                         $mail = $_SESSION['session_register_user']['email'];
 
                         sendVerifyCode($mail);
@@ -104,8 +103,11 @@ class AuthenciationController extends BaseController
                         unset($_SESSION["error_register"]);
                         exit;
                     } else {
-                        if (!$checkRegisterUsername->isSuccess) {
+                        if ($checkRegisterUsername->isSuccess) {
                             $_SESSION["error_register"] = $checkRegisterUsername->message;
+                        }
+                        if ($checkRegisterEmail->isSuccess) {
+                            $_SESSION["error_register"] = $checkRegisterEmail->message;
                         }
                     }
                 }
@@ -137,10 +139,8 @@ class AuthenciationController extends BaseController
             } else {
                 // Sử dụng hàm registerUser từ class User để đăng ký người dùng mới
                 $checkUsernameExist =  $this->userModel->getUserByUsername($username);
-                if ($checkUsernameExist->isSuccess) {
-                    $_SESSION["error_registerCompany"] = $checkUsernameExist->message;
-                }
-                else {
+                $checkEmailExist = $this->userModel->getUserByEmail($email);
+                if (!$checkUsernameExist->isSuccess && !$checkEmailExist->isSuccess) {
                     // Kiểm tra kết quả đăng kí công ty
                     $checkCompanyExist = $this->companyModel->getCompanyName($company_name);
                     if ($checkCompanyExist->isSuccess) {
@@ -148,10 +148,18 @@ class AuthenciationController extends BaseController
                         //chuyển sang trang verify email
                         sendVerifyCode($mail);
                         header("Location: verifyemail/company");
-                        
                     } else {
                         $_SESSION["error_registerCompany"] = $checkCompanyExist->message;
                     }
+                }
+                else {
+                    if ($checkUsernameExist->isSuccess) {
+                        $_SESSION["error_registerCompany"] = $checkUsernameExist->message;
+                    }
+                    if ($checkEmailExist->isSuccess) {
+                        $_SESSION["error_registerCompany"] = $checkEmailExist->message;
+                    }
+                    
                 }
             }
         }
@@ -161,7 +169,16 @@ class AuthenciationController extends BaseController
     public function verifyEmail($userOrCompany)
     {
         if (isset($_POST['btnVerify'])) {
-            $verifyCode = $_POST['verifyCode'];
+            $digit1 = $_POST['digit1'];
+            $digit2 = $_POST['digit2'];
+            $digit3 = $_POST['digit3'];
+            $digit4 = $_POST['digit4'];
+            $digit5 = $_POST['digit5'];
+            $digit6 = $_POST['digit6'];
+            $verifyCode = $digit1 . $digit2 . $digit3 . $digit4 . $digit5 . $digit6;
+
+            
+            echo $verifyCode;
 
             $session_register = 'session_register_' . $userOrCompany;
             //lấy code trong bảng verify dựa vào email
@@ -184,7 +201,7 @@ class AuthenciationController extends BaseController
                     if ($userOrCompany == "user") {
                         $company_id = $_SESSION[$session_register]['company_id'];
                         $this->userModel->registerUser($username, $password, $fullname, $company_id, $email);
-                        // unset($_SESSION['session_register']);
+                        unset($_SESSION['session_register_user']);
                     }
                     else if ($userOrCompany == "company") {
                         $company_name = $_SESSION[$session_register]['company_name'];
@@ -194,9 +211,9 @@ class AuthenciationController extends BaseController
                             "id" => $checkCompanyExist->data,
                             "master_user_id" => $masterUserId->data
                         ]);
-                        // dẫn qua login
-                        unset($_SESSION["error_registerCompany"]);  
+                        unset($_SESSION['session_register_company']);
                     }
+                    // dẫn qua login
                     header("Location: http://localhost/Project/TEST_3/Authenciation/login");
                     exit;
                 } else if ($time > $expiresTime) {
