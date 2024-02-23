@@ -8,6 +8,18 @@ function validateUsername() {
     }
 }
 
+function validateEmail() {
+    var email = document.getElementsByName('email')[0].value;
+    var emailError = document.getElementById('emailError');
+    var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        emailError.innerHTML = 'Địa chỉ email không hợp lệ';
+    } else {
+        emailError.innerHTML = '';
+    }
+}
+
 function validatePassword() {
     var password = document.getElementsByName('password')[0].value;
     var passwordError = document.getElementById('passwordError');

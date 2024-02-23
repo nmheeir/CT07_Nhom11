@@ -8,6 +8,9 @@ class App {
     private $action = "index";
     private $params = [];
     public function __construct() {
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
         $arr = $this->processURL();
         // Kiểm tra đã đăng nhập chưa khi truy cập vào các contrlller
         if (!checkLogin() && $arr[0] != 'Authenciation') { 
