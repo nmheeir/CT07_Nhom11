@@ -75,9 +75,22 @@ class UserModel extends BaseModel {
             return new DataView(false, null , "USERNAME không tồn tại");
         }
     }
-    public function registerUser($username, $password, $fullname, $company_id, $roleId = 3) {
+
+    public function getUserByEmail($email) {
+        $checkIsExitsUsername = $this->getUser(["where" => "username = '{$email}'"]);
+        if ($checkIsExitsUsername->isSuccess) {
+            return new DataView(true, $checkIsExitsUsername, "EMAIL đã tồn tại");
+        } else {
+            return new DataView(false, null, "EMAIL không tồn tại");
+        }
+    }
+    
+    public function registerUser($username, $password, $fullname, $company_id, $email, $roleId = 3) {
         if($this->getUserByUsername($username)->isSuccess) {
             return new DataView(false, null, "USERNAME đã tồn tại");
+        }
+        if ($this->getUserByEmail($email)->isSuccess) {
+            return new DataView(false, null, "EMAIL đã tồn tại");
         }
 
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);      
@@ -87,7 +100,8 @@ class UserModel extends BaseModel {
             'fullname' => $fullname,
             'company_id' => $company_id,
             'hash_password' => $hashedPassword,
-            'role_id' => $roleId
+            'role_id' => $roleId,
+            'email' => $email
         ];
         $newUserId = $this->save(self::TABLE_NAME, $newUser);
         return new DataView(true, $newUserId, "Ok");
