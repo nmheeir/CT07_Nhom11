@@ -16,4 +16,8 @@ class BaseController {
     {
         require(self::MODEL_FOLDER_NAME . str_replace('.', '/', $path) . '.php');
     }
+
+    public function index() {
+        //hiển thị trang 404
+    }
 }
