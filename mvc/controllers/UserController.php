@@ -5,6 +5,8 @@ class UserController extends BaseController
     private $userModel;
     private $companyModel;
     private $roleModel;
+
+    private $orderModel;
     public function __construct()
     {
         $this->loadModel('UserModel');

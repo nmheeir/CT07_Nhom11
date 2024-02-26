@@ -6,6 +6,7 @@ class AuthenciationController extends BaseController
 {
     private $userModel;
     private $companyModel;
+    
     public function __construct()
     {
         $this->loadModel('UserModel');
