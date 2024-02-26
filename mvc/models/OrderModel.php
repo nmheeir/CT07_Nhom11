@@ -1,6 +1,7 @@
 <?
 require_once "../TEST_3/mvc/models/BaseModel.php";
-class OrderModel extends BaseModel {
+class OrderModel extends BaseModel
+{
     private $id;
     private $companyId;
     private $shipperId;
@@ -14,7 +15,8 @@ class OrderModel extends BaseModel {
 
     const TABLE_NAME = "orders";
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -30,36 +32,40 @@ class OrderModel extends BaseModel {
         $order->isCompleted = $isCompleted;
         $order->createdAt = $createdAt;
         $order->completedAt = $completedAt;
-        
+
         return $order;
     }
 
     public function getOrder($option = [
         'select' => '*',
         'order_by' => 'id asc'
-    ]) {
+    ])
+    {
         $data = $this->get(self::TABLE_NAME, $option);
-        if(count($data) > 0) {
+        if (count($data) > 0) {
             return new DataView(true, $data, "Ok");
-        }
-        else {
+        } else {
             return new DataView(false, [], "NO DATA");
         }
     }
 
-    public function saveOrder(array $data) {
-        if(isset($data["is_completed"])) {
-            if($data["is_completed"] == 1) {
+    public function saveOrder(array $data)
+    {
+        if (isset($data["is_completed"])) {
+            if ($data["is_completed"] == 1) {
                 $data["completed_at"] = date('Y-m-d H:i:s', time());
-            }
-            else {
-                $data["completed_at"] = NULL;
+            } else {
+                $data["completed_at"] = NULL; // Gán giá trị NULL
+                // $data["is_completed"] = 2; // Gán giá trị NULL
             }
         }
-        return $this->save(self::TABLE_NAME, $data);
+        $this->save(self::TABLE_NAME, $data);
+        return new DataView(true, $data, "Thêm/chỉnh sửa đơn hàng đã thực hiện thành công");
     }
 
-    public function countOrder($id) {
+
+    public function countOrder($id)
+    {
         $sql = "
         SELECT
             0 AS is_completed,
