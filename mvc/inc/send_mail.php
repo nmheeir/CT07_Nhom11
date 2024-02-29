@@ -42,7 +42,7 @@ function sendMail($recipient, $subject, $message)
 }
 
 function sendVerifyCode($mail) {
-    $userModel = new UserModel;
+    $baseModel = new BaseModel;
 
     $verifyCode = rand(100000, 999999);
 
@@ -52,7 +52,7 @@ function sendVerifyCode($mail) {
     $sql = "INSERT INTO verify (code, expires, email) 
                             VALUES ({$verifyCode}, DATE_ADD(NOW(), INTERVAL 60 MINUTE), '{$mail}');";
 
-    $userModel->custom($sql);
+    $baseModel->custom($sql);
 
     sendMail($mail, $subject, $message);
 }
