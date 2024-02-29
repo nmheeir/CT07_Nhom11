@@ -56,7 +56,6 @@ class OrderModel extends BaseModel
                 $data["completed_at"] = date('Y-m-d H:i:s', time());
             } else {
                 $data["completed_at"] = NULL; // Gán giá trị NULL
-                // $data["is_completed"] = 2; // Gán giá trị NULL
             }
         }
         $this->save(self::TABLE_NAME, $data);

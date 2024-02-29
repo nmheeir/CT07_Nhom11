@@ -8,16 +8,11 @@ class BaseController {
         foreach ($data as $key => $value) {
             $$key = $value;
         }
-        // require(self::VIEW_FOLDER_NAME . str_replace('.', '/', $path) . '.php');
         require(self::VIEW_FOLDER_NAME . str_replace('.', '/', $path) . '.php');
     }
 
     protected function loadModel($path)
     {
         require(self::MODEL_FOLDER_NAME . str_replace('.', '/', $path) . '.php');
-    }
-
-    public function index() {
-        //hiển thị trang 404
     }
 }

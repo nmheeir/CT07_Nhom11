@@ -4,7 +4,6 @@ function completedOrderUpdate(orderId, isCompleted) {
     const dataToSend = {
         id: orderId,
         is_completed: isCompleted == 0 ? 1 : 0,
-        completed_at: new Date().toISOString().slice(0, 19).replace('T', ' ')
     };
     // Sử dụng Fetch API để thực hiện PUT request
     fetch(`http://localhost/Project/TEST_3/Order/save`, {
@@ -45,11 +44,11 @@ function updateOrder() {
     },
     body: JSON.stringify(dataToSend),
     })
-    .then(() => {
-        showToast("đã cập nhật đơn hàng thành công");
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        showToast(data.message)
     })
     .catch(error => {
-        console.error('Error:', error);
-        // Xử lý lỗi (nếu cần)
+        showToast("Có lỗi, hãy đảm bảo đã điền đủ thông tin và chọn địa chỉ ở phần gợi ý.");
     });
 }

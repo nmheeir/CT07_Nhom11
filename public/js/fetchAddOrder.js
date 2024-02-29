@@ -15,11 +15,12 @@ function fetchAddOrder() {
     },
     body: JSON.stringify(order),
     })
-    .then(() => {
-        showToast("đã thêm đơn hàng thành công")
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        showToast(data.message)
+        clearInputs();
     })
     .catch(error => {
-        console.error('Error:', error);
-        // Xử lý lỗi (nếu cần)
+        showToast("Có lỗi, hãy đảm bảo đã điền đủ thông tin và chọn địa chỉ ở phần gợi ý.");
     });
 }

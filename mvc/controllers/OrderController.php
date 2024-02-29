@@ -1,5 +1,6 @@
 <?
 require_once "../TEST_3/mvc/controllers/BaseController.php";
+require_once "../TEST_3/mvc/controllers/AuthenciationController.php";
 class OrderController extends BaseController
 {
     private $orderModel;
@@ -16,10 +17,13 @@ class OrderController extends BaseController
         $newOrder = json_decode(file_get_contents("php://input"), true);
         if ($newOrder !== null) {
             // Dữ liệu đã được nhận thành công
-            $this->orderModel->saveOrder($newOrder);
-        } else {
-            // Đối với một số lý do nào đó, không thể giải mã JSON
-            echo "Failed to decode JSON data";
+            $result = $this->orderModel->saveOrder($newOrder);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => $result->message]);
+        } 
+        else {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'Không có dữ liệu']);
         }
     }
 
@@ -30,32 +34,49 @@ class OrderController extends BaseController
     public function orderDetail($id) {
         $orderDetail = $this->orderModel->getOrder([
             'where' => "id = {$id}"
-        ])->data[0];
-        $shipperName = $this->userModel->getUser([
-            'where' => "id = {$orderDetail['shipper_id']}"
-        ])->data[0]['fullname'];
-        $orderDetail["shipper_name"] = $shipperName;
+        ])->data;
+        if(!isset($orderDetail[0])) {
+            $this->loadView("_404");
+        }
+        else {
+            $orderDetail = $orderDetail[0];
+            $shipperName = $this->userModel->getUser([
+                'where' => "id = {$orderDetail['shipper_id']}"
+            ])->data[0]['fullname'];
+            $orderDetail["shipper_name"] = $shipperName;
 
-        $data = [
-            'order' => $orderDetail
-        ];
+            $data = [
+                'order' => $orderDetail
+            ];
 
-        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => $data,
-            'page' => 'orders',
-            'action' => "orderDetail",
-        ]);
+            $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+                'data' => $data,
+                'page' => 'orders',
+                'action' => "orderDetail",
+            ]);
+        }
     }
 
 
-    public function userOrderList($isCompleted = 0, $shipperId = null) {
+    public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
         if(!isset($shipperId)) {
             $shipperId = $_SESSION["user"]["id"];
         }
+
+        // kiểm tra còn hạn
+        $checkIsOutOfDate = "";
+        if($isCompleted == 0) {
+            $checkIsOutOfDate = 'AND created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+        }
+        if($isCompleted == 2) {
+            $checkIsOutOfDate = 'AND created_at <= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+            $isCompleted = 0;
+        }
+        
         $orders = $this->orderModel->getOrder([
             'select' => '*',
             'order_by' => 'id asc',
-            'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted}"
+            'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}"
         ]);
 
         $data = [
@@ -70,17 +91,23 @@ class OrderController extends BaseController
     }
 
     public function companyOrderList($isCompleted = 0) {
-        // print_r($_SESSION);
-        $roleId = $_SESSION["user"]["role_id"];
-        if($roleId > 2) {
-            echo "alert('Bạn không có đủ quyền để vào chức năng này')";
-            header("Location: /Project/TEST_3/User/home");
-            exit;
-        };
+        // check role
+        AuthenciationController::checkRole();
+
+        // kiểm tra còn hạn
+        $checkIsOutOfDate = "";
+        if($isCompleted == 0) {
+            $checkIsOutOfDate = 'AND created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+        }
+        if($isCompleted == 2) {
+            $checkIsOutOfDate = 'AND created_at <= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+            $isCompleted = 0;
+        }
+
         $orders = $this->orderModel->getOrder([
             'select' => '*',
             'order_by' => 'id asc',
-            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted}"
+            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}"
         ]);
 
 
@@ -96,6 +123,9 @@ class OrderController extends BaseController
     }
 
     public function addOrder() {  
+        // check role
+        AuthenciationController::checkRole();
+
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
             'select' => 'id, fullname'
@@ -109,6 +139,10 @@ class OrderController extends BaseController
     }
 
     public function updateOrder($id) {
+        // check role
+        AuthenciationController::checkRole();
+
+
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
             'select' => 'id, fullname'
