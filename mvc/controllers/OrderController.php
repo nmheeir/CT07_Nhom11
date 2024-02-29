@@ -16,18 +16,22 @@ class OrderController extends BaseController
         $newOrder = json_decode(file_get_contents("php://input"), true);
         if ($newOrder !== null) {
             // Dữ liệu đã được nhận thành công
-            $this->orderModel->saveOrder($newOrder);
+            $result = $this->orderModel->saveOrder($newOrder);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => $result->message]);
         } else {
-            // Đối với một số lý do nào đó, không thể giải mã JSON
-            echo "Failed to decode JSON data";
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'Không có dữ liệu']);
         }
     }
 
-    public function getOrder($option) {
+    public function getOrder($option)
+    {
         return $this->orderModel->getOrder($option);
     }
 
-    public function orderDetail($id) {
+    public function orderDetail($id)
+    {
         $orderDetail = $this->orderModel->getOrder([
             'where' => "id = {$id}"
         ])->data[0];
@@ -48,8 +52,9 @@ class OrderController extends BaseController
     }
 
 
-    public function userOrderList($isCompleted = 0, $shipperId = null) {
-        if(!isset($shipperId)) {
+    public function userOrderList($isCompleted = 0, $shipperId = null)
+    {
+        if (!isset($shipperId)) {
             $shipperId = $_SESSION["user"]["id"];
         }
         $orders = $this->orderModel->getOrder([
@@ -69,10 +74,11 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function companyOrderList($isCompleted = 0) {
+    public function companyOrderList($isCompleted = 0)
+    {
         // print_r($_SESSION);
         $roleId = $_SESSION["user"]["role_id"];
-        if($roleId > 2) {
+        if ($roleId > 2) {
             echo "alert('Bạn không có đủ quyền để vào chức năng này')";
             header("Location: /Project/TEST_3/User/home");
             exit;
@@ -95,7 +101,8 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function addOrder() {  
+    public function addOrder()
+    {
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
             'select' => 'id, fullname'
@@ -108,7 +115,8 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function updateOrder($id) {
+    public function updateOrder($id)
+    {
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
             'select' => 'id, fullname'
@@ -118,16 +126,14 @@ class OrderController extends BaseController
             'where' => "id = {$id}"
         ]);
 
-        if($orderDetail->isSuccess) {
+        if ($orderDetail->isSuccess) {
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => ['shipperList' => $shipperList, 'orderId' => $id, 'orderDetail' => $orderDetail->data],
                 'page' => 'orders',
                 'action' => "addOrder",
             ]);
-        }
-        else {
+        } else {
             $this->loadView("_404.php");
         }
-
     }
 }
