@@ -1,4 +1,4 @@
-<script src = "../TEST_3/public/js/fetchActiveControl.js"></script>
+<script src = "../TEST_3/public/js/fetchUser.js"></script>
 <?
   $buttons = "";
   $user = $data['user'];
@@ -10,7 +10,7 @@
       $activeControllerButton = "<button type='button' class='btn btn-secondary w-25 m-1' onclick='activeUpdate({$user['id']}, 1)'>Bỏ chặn</button>";
     }
     $buttons = "
-      <a type='button' class='btn btn-secondary w-25 m-1' href='User/deleteUser/{$user['id']}'>Sa thải</a>
+      <a type='button' class='btn btn-secondary w-25 m-1' onclick='deleteUser({$user['id']})'>Sa thải</a>
       {$activeControllerButton}
     ";
   }

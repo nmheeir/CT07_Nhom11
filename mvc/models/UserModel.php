@@ -47,8 +47,12 @@ class UserModel extends BaseModel {
         return $this->save(self::TABLE_NAME, $data);
     }
 
+    public function deleteUser($userData) {
+        return $this->delete(self::TABLE_NAME, $userData["id"]);
+    }
+
     public function login($username, $password) {
-        $user = $this->getUser([
+        $user = $this ->getUser([
             'where' => "username = '{$username}'" 
         ]);
         if ($user->isSuccess) {

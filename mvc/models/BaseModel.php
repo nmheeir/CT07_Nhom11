@@ -47,7 +47,12 @@ class BaseModel extends Database {
             $values = [];
             foreach ($data as $key => $value) {
                 if ($key !== 'id') {
-                    $values[] = "$key = '{$value}'";
+                    if($value !== NULL) {
+                        $values[] = "$key = '{$value}'";
+                    }
+                    else {
+                        $values[] = "$key = NULL";
+                    }
                 }
             }
             $sql = "UPDATE {$table}
@@ -70,7 +75,7 @@ class BaseModel extends Database {
     public function delete(string $table, $id) {
         $this->connect = $this->getConnect();
 
-        $sql = "DELETE FROM {$table} WHERE id := {$id}";
+        $sql = "DELETE FROM {$table} WHERE id = {$id}";
 
         $this->_query($this->connect, $sql);
     }
