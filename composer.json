@@ -1,5 +1,17 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+
+        "classmap": [
+           "../TEST_3/mvc/controllers",
+           "../TEST_3/mvc/core",
+           "../TEST_3/mvc/inc",
+           "../TEST_3/mvc/models"
+       ],
+       "psr-4": {
+            "App\\": "mvc/" 
+        }
     }
 }

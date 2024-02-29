@@ -1,5 +1,4 @@
 <?
-require_once "../TEST_3/mvc/controllers/BaseController.php";
 class OrderController extends BaseController
 {
     private $orderModel;
