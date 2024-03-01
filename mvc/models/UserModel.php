@@ -1,6 +1,4 @@
 <?
-
-// require_once "../TEST_3/mvc/models/BaseModel.php";
 class UserModel extends BaseModel {
     private $id;
     private $username;

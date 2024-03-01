@@ -3,7 +3,10 @@
         "phpmailer/phpmailer": "^6.9"
     },
     "autoload": {
-
+        "files": [
+            "../TEST_3/mvc/inc/send_mail.php",
+            "../TEST_3/mvc/inc/checkLogin.php"
+        ],
         "classmap": [
            "../TEST_3/mvc/controllers",
            "../TEST_3/mvc/core",
