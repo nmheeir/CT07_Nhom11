@@ -1,5 +1,4 @@
 <?
-// require_once "../TEST_3/mvc/models/BaseModel.php";
 class RoleModel extends BaseModel {
     private $role_id;
     const TABLE_NAME = "role";

@@ -1,7 +1,6 @@
-<?
-// require_once "../TEST_3/mvc/models/BaseModel.php";
-class OrderModel extends BaseModel
+<?class OrderModel extends BaseModel
 {
+    
     private $id;
     private $companyId;
     private $shipperId;

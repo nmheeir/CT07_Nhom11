@@ -1,5 +1,4 @@
 <?
-require_once "../TEST_3/mvc/inc/send_mail.php";
 class AuthenciationController extends BaseController
 {
     private $userModel;

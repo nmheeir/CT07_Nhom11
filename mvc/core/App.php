@@ -1,7 +1,4 @@
 <?
-    require_once '../TEST_3/mvc/inc/checkLogin.php'
-?>
-<?
 class App {
     const BASE_SOURCE = 'Project/TEST_3';
     private $controller = "Welcome";
