@@ -36,6 +36,8 @@ class UserController extends BaseController
     }
 
     public function companyMember() {
+        // check role
+        AuthenciationController::checkRole();
         $user = $this->userModel->getUser(
             [
                 'where' => "company_id = '{$_SESSION['user']['company_id']}'",
@@ -55,17 +57,25 @@ class UserController extends BaseController
             [
                 'where' => "id = '{$id}'"
             ]
-        )->data[0];
-        $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
-        $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
-        $orderCount = $this->orderModel->countOrder($id);
-        
-        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data'=> ['user' => $user, 'order' => $orderCount],
-            'page' => 'users',
-            'action' => "home",
-        ]);
+        )->data;
+
+        if(!isset($user[0])) {
+            $this->loadView("_404");
+        }
+        else {
+            $user = $user[0];
+            $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
+            $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
+            $orderCount = $this->orderModel->countOrder($id);
+            
+            $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+                'data'=> ['user' => $user, 'order' => $orderCount],
+                'page' => 'users',
+                'action' => "home",
+            ]);
+        }
     }
+    
 
     public function activeControl() {
         $userUpdateData = json_decode(file_get_contents("php://input"), true);
@@ -78,4 +88,16 @@ class UserController extends BaseController
         }
     }
 
+    public function deleteUser() {
+        $userData = json_decode(file_get_contents("php://input"), true);
+        if ($userData !== null) {
+            // Dữ liệu đã được nhận thành công
+            $this->userModel->deleteUser($userData);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'Không']);
+        } else {
+            // Đối với một số lý do nào đó, không thể giải mã JSON
+            echo "Failed to decode JSON data";
+        }
+    }
 }

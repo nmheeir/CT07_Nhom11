@@ -42,16 +42,16 @@
                     <li>
                         <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
                             <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng của công ty</span></a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="Order/companyOrderList/0" class="nav-link px-0"> <span class="d-none d-sm-inline">Chưa hoàn thành</span><i class="bi bi-bag-x-fill"></i></a>
-                            </li>
-                            <li class="w-100">
-                                <a href="Order/companyOrderList/1" class="nav-link px-0"> <span class="d-none d-sm-inline">Đã hoàn thành</span><i class="bi bi-bag-check-fill"></i></a>
-                            </li>
-                            <li>
-                                <a href="Order/companyOrderList/2" class="nav-link px-0"> <span class="d-none d-sm-inline">Quá hạn</span><i class="bi bi-calendar2-x"></i></a>
-                            </li>
+                            <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+                                <li class="w-100">
+                                    <a href="Order/companyOrderList/0" class="nav-link px-0"><i class="bi bi-bag-x-fill"></i> <span class="d-none d-sm-inline">Chưa hoàn thành</span></a>
+                                </li>
+                                <li class="w-100">
+                                    <a href="Order/companyOrderList/1" class="nav-link px-0"><i class="bi bi-bag-check-fill"></i> <span class="d-none d-sm-inline">Đã hoàn thành</span></a>
+                                </li>
+                                <li>
+                                    <a href="Order/companyOrderList/2" class="nav-link px-0"><i class="bi bi-calendar2-x"></i> <span class="d-none d-sm-inline">Quá hạn</span></a>
+                                </li>
                         </ul>
                     </li>
                     <li>
@@ -59,7 +59,7 @@
                             <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Chức năng</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="Order/addOrder" class="nav-link px-0"> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
+                                <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-plus-square"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
                             </li>
                             <li>
                                 <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
