@@ -21,7 +21,20 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
     );
 
     public static $classMap = array (
+        'App' => __DIR__ . '/../..' . '/mvc/core/App.php',
+        'AuthenciationController' => __DIR__ . '/../..' . '/mvc/controllers/AuthenciationController.php',
+        'BaseController' => __DIR__ . '/../..' . '/mvc/controllers/BaseController.php',
+        'BaseModel' => __DIR__ . '/../..' . '/mvc/models/BaseModel.php',
+        'CompanyModel' => __DIR__ . '/../..' . '/mvc/models/CompanyModel.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'DataView' => __DIR__ . '/../..' . '/mvc/models/DataView.php',
+        'Database' => __DIR__ . '/../..' . '/mvc/core/Database.php',
+        'OrderController' => __DIR__ . '/../..' . '/mvc/controllers/OrderController.php',
+        'OrderModel' => __DIR__ . '/../..' . '/mvc/models/OrderModel.php',
+        'RoleModel' => __DIR__ . '/../..' . '/mvc/models/RoleModel.php',
+        'UserController' => __DIR__ . '/../..' . '/mvc/controllers/UserController.php',
+        'UserModel' => __DIR__ . '/../..' . '/mvc/models/UserModel.php',
+        'WelcomeController' => __DIR__ . '/../..' . '/mvc/controllers/WelcomeController.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

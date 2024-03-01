@@ -6,5 +6,18 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App' => $baseDir . '/mvc/core/App.php',
+    'AuthenciationController' => $baseDir . '/mvc/controllers/AuthenciationController.php',
+    'BaseController' => $baseDir . '/mvc/controllers/BaseController.php',
+    'BaseModel' => $baseDir . '/mvc/models/BaseModel.php',
+    'CompanyModel' => $baseDir . '/mvc/models/CompanyModel.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'DataView' => $baseDir . '/mvc/models/DataView.php',
+    'Database' => $baseDir . '/mvc/core/Database.php',
+    'OrderController' => $baseDir . '/mvc/controllers/OrderController.php',
+    'OrderModel' => $baseDir . '/mvc/models/OrderModel.php',
+    'RoleModel' => $baseDir . '/mvc/models/RoleModel.php',
+    'UserController' => $baseDir . '/mvc/controllers/UserController.php',
+    'UserModel' => $baseDir . '/mvc/models/UserModel.php',
+    'WelcomeController' => $baseDir . '/mvc/controllers/WelcomeController.php',
 );

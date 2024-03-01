@@ -1,5 +1,5 @@
 <?
-require_once "../TEST_3/mvc/models/BaseModel.php";
+// require_once "../TEST_3/mvc/models/BaseModel.php";
 class OrderModel extends BaseModel
 {
     private $id;

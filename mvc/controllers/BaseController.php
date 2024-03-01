@@ -1,5 +1,4 @@
 <?
-
 class BaseController {
     const VIEW_FOLDER_NAME = "../TEST_3/mvc/views/";
     const MODEL_FOLDER_NAME = "../TEST_3/mvc/models/";

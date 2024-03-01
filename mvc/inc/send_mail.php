@@ -3,11 +3,11 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../TEST_3/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../TEST_3/vendor/phpmailer/phpmailer/src/Exception.php';
-require '../TEST_3/vendor/phpmailer/phpmailer/src/SMTP.php';
+// require '../TEST_3/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+// require '../TEST_3/vendor/phpmailer/phpmailer/src/Exception.php';
+// require '../TEST_3/vendor/phpmailer/phpmailer/src/SMTP.php';
 
-require_once '../TEST_3/mvc/models/BaseModel.php';
+// require_once '../TEST_3/mvc/models/BaseModel.php';
 
 function sendMail($recipient, $subject, $message)
 {

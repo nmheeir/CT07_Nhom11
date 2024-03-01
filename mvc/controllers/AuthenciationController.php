@@ -1,7 +1,5 @@
 <?
-require_once "../TEST_3/mvc/controllers/BaseController.php";
-require_once '../TEST_3/mvc/inc/send_mail.php';
-
+require_once "../TEST_3/mvc/inc/send_mail.php";
 class AuthenciationController extends BaseController
 {
     private $userModel;

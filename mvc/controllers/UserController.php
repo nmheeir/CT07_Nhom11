@@ -1,6 +1,4 @@
 <?
-require_once "../TEST_3/mvc/controllers/BaseController.php";
-require_once "../TEST_3/mvc/controllers/AuthenciationController.php";
 class UserController extends BaseController
 {
     private $userModel;

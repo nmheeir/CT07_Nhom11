@@ -1,6 +1,6 @@
 <?
-require "../TEST_3/mvc/core/Database.php";
-require "../TEST_3/mvc/models/DataView.php";
+// require "../TEST_3/mvc/core/Database.php";
+// require "../TEST_3/mvc/models/DataView.php";
 class BaseModel extends Database {
     protected $connect;
 
