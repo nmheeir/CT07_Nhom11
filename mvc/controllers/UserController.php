@@ -68,7 +68,7 @@ class UserController extends BaseController
             $user = $user[0];
             $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
             $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
-            $orderCount = $this->orderModel->countOrder($id);
+            $orderCount = $this->orderModel->countOrderByProcess($id)[0];
             
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data'=> ['user' => $user, 'order' => $orderCount],

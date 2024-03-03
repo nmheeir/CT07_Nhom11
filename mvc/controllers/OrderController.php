@@ -59,67 +59,62 @@ class OrderController extends BaseController
 
 
     public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
-        if(!isset($shipperId)) {
+        if(!isset($shipperId) && $_SESSION["user"]["role"] < 3) {
             $shipperId = $_SESSION["user"]["id"];
         }
 
         // kiểm tra còn hạn
-        $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
-            $checkIsOutOfDate = 'AND created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)';
-        }
-        if($isCompleted == 2) {
-            $checkIsOutOfDate = 'AND created_at <= DATE_SUB(NOW(), INTERVAL 1 DAY)';
-            $isCompleted = 0;
-        }
-        
-        $orders = $this->orderModel->getOrder([
-            'select' => '*',
-            'order_by' => 'id asc',
-            'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}"
-        ]);
+        $state = $isCompleted;
 
-        $data = [
-            'orders' => $orders->data,
-            'state' => $isCompleted
-        ];
-        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => $data,
-            'page' => 'orders',
-            'action' => "orderList",
-        ]);
+        $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page);
+        if($orders->isSuccess) {
+            $orders = $orders->data; 
+            $data = [
+                'orders' => $orders->data,
+                'state' => $state,
+                'action' => 'userOrderList',
+                'shipperId' => $shipperId,
+                'page' => $page,
+                'totalPage' => ceil(count($orders->data) / 10)
+            ];
+            $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+                'data' => $data,
+                'page' => 'orders',
+                'action' => "orderList",
+            ]);
+        }
+        else {
+            $this->loadView("_404");
+        }
     }
 
-    public function companyOrderList($isCompleted = 0) {
+    public function companyOrderList($isCompleted = 0, $page = 1) {
         // check role
         AuthenciationController::checkRole();
 
         // kiểm tra còn hạn
-        $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
-            $checkIsOutOfDate = 'AND created_at >= DATE_SUB(NOW(), INTERVAL 1 DAY)';
+        $state = $isCompleted;
+        $orders = $this->orderModel->getCompanyOrders($isCompleted, $page);
+        if($orders->isSuccess) {
+            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'])[0]['total_orders'];
+    
+            $data = [
+                'orders' => $orders->data,
+                'state' => $state,
+                'action' => 'companyOrderList',
+                'page' => $page,
+                'totalPage' => ceil($totalOrder / 10 - 1)
+            ];
+            $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+                'data' => $data,
+                'page' => 'orders',
+                'action' => "orderList",
+            ]);
         }
-        if($isCompleted == 2) {
-            $checkIsOutOfDate = 'AND created_at <= DATE_SUB(NOW(), INTERVAL 1 DAY)';
-            $isCompleted = 0;
+        else {
+            $this->loadView('_404');
         }
 
-        $orders = $this->orderModel->getOrder([
-            'select' => '*',
-            'order_by' => 'id asc',
-            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}"
-        ]);
-
-
-        $data = [
-            'orders' => $orders->data,
-            'state' => $isCompleted
-        ];
-        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => $data,
-            'page' => 'orders',
-            'action' => "orderList",
-        ]);
     }
 
     public function addOrder() {  

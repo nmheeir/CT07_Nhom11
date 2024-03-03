@@ -48,9 +48,6 @@ function selectSearchResult(result) {
     latitudeInput.value = selectedCoordinates.lat;
     longitudeInput.value = selectedCoordinates.lon;
 
-    console.log('Địa chỉ đã chọn:', selectedAddress);
-    console.log('Tọa độ đã chọn:', selectedCoordinates);
-
     searchResultsList.innerHTML = '';
 }
 

@@ -30,7 +30,8 @@ function updateOrder() {
         'description': document.getElementById('description').value,
         'latitude': document.getElementById('latitude').value,
         'longitude': document.getElementById('longitude').value,
-        'address': document.getElementById('searchAddress').value
+        'address': document.getElementById('searchAddress').value,
+        'deadline': document.getElementById('deadline').value
     };
     if(document.getElementById('orderId')) {
         dataToSend["id"] = document.getElementById('orderId').value

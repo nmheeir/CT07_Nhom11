@@ -34,7 +34,10 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
             ?>
         </select>
     </div>
-
+    <div class="mb-3 ">
+        <label for="deadline">Ngày phải hoàn thành:</label>
+        <input type="date" id="deadline" name="deadline"/>
+    </div>
     <div class="mb-3">
         <label for="description">Description:</label>
         <textarea id="description" name="description" required><?= isset($des) ? htmlspecialchars($des) : '' ?></textarea>
