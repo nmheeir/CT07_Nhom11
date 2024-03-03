@@ -1,7 +1,10 @@
 <?
     require_once "../TEST_3/mvc/views/frontend/orders/statusButton.php";
     $orders = $data["orders"];
-    $state = $data['state'] == 0 ? 'danger' : 'success';
+    $state = $data['state'];
+    if($state > 1) $borderType = "secondary-subtle";
+    else if($state < 1) $borderType = "danger";
+    else $borderType = "success";
 ?>
 <style>
     .title {
@@ -17,11 +20,17 @@
         overflow: hidden;
     }
 </style>
+<!-- hiện order -->
 <div style="min-height: 100vh;">
     <div class="container-lg py-4">
         <div class="row justify-content-center g-2">
             <h3 class="text-white text-center">
-                Các đơn hàng
+                Các đơn hàng 
+                <?
+                    if($state == 0) echo "chưa hoàn thành";
+                    else if($state == 1) echo "đã hoàn thành";
+                    else echo "không hoàn thành";
+                ?>
             </h3>
 
             <?php
@@ -29,7 +38,7 @@
                 foreach ($orders as $order) {
                    $statusButton = StatusButton($order);
                     echo "
-                        <div class='card col-lg-3 col-md-5 text-bg-secondary border-{$state} m-2 p-0'>
+                        <div class='card col-lg-3 col-md-5 text-bg-secondary border-{$borderType} m-2 p-0'>
                             <iframe 
                                 class='card-img-top'
                                 name='mapframe'
@@ -51,22 +60,60 @@
             }
             ?>
         </div>
+
+        <!-- Phân trang -->
+        <div class="row justify-content-center g-2">
+            <ul class="pagination flex-wrap justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <!-- Sử dụng PHP để tạo liên kết trang -->
+                <?php
+                    $totalPages = $data['totalPage']; // Số lượng trang
+                    $currentPage = $data['page']; // Trang hiện tại
+                    $visiblePages = 5; // Số lượng trang hiển thị
+
+                    $startPage = max($currentPage - floor($visiblePages / 2), 1);
+                    $endPage = min($startPage + $visiblePages - 1, $totalPages);
+
+                    $current_url = "http://localhost/Project/TEST_3/Order/" . $data['action'] . '/' . $state;
+
+                    if (isset($data['shipperId'])) {
+                        $current_url .= '/' . $data['shipperId'];
+                    }
+                    // Hiển thị liên kết cho trang đầu tiên nếu không phải trang đầu tiên
+                    if ($startPage > 2) {
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/1">1</a></li>';
+                    }
+
+                    // Hiển thị dấu '...' nếu có nhiều hơn một trang ở phía trước
+                    if ($startPage > 3) {
+                        echo '<li class="page-item"><span class="page-link">...</span></li>';
+                    }
+
+                    // Hiển thị các trang trong khoảng từ $startPage đến $endPage
+                    for ($i = $startPage; $i <= $endPage; $i++) {
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $i . '">' . $i . '</a></li>';
+                    }
+
+                    // Hiển thị dấu '...' nếu có nhiều hơn một trang ở phía sau
+                    if ($endPage < $totalPages - 1) {
+                        echo '<li class="page-item"><span class="page-link">...</span></li>';
+                    }
+
+                    // Hiển thị liên kết cho trang cuối cùng nếu không phải trang cuối cùng
+                    if ($endPage < $totalPages) {
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $totalPages . '">' . $totalPages . '</a></li>';
+                    }
+                ?>
+                <!-- Kết thúc PHP -->
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
     </div>
 </div>
+
+
 <script src="../TEST_3/public/js/fetchUpdateOrder.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const currentUrl = window.location.href;
-        const matchResult = currentUrl.match(/userOrderList\/(\d+)/);
-        const numberAfterUserOrderList = matchResult ? matchResult[1] : null;
-        const h3Element = document.querySelector("h3.text-center");
-        var header;
-        if(numberAfterUserOrderList[0] == 0) header = "cần hoàn thành"; 
-        else if (numberAfterUserOrderList[0] == 1) header = "đã hoàn thành";
-        else header = "đã quá hạn"
-        
-        if (h3Element) {
-            h3Element.textContent = `Các đơn hàng ${header}`;
-        }
-    });
-</script>
+
+
+
+

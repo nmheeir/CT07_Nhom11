@@ -46,6 +46,7 @@
         <p><strong>Thông tin về đơn hàng:</strong> <?php echo $data['order']['description']; ?></p>
         <p><strong>Địa chỉ đơn hàng:</strong> <?php echo $data['order']['address']; ?></p>
         <p><strong>Nhân viên giao hàng:</strong> <?php echo $data['order']['shipper_name']; ?></p>
+        <p><strong>Hoàn thành trước:</strong> <?php echo $data['order']['deadline']; ?></p>
         <?php echo $statusButton; ?>
         <a class="btn btn-primary w-100 mt-1" href="Order/updateOrder/<?echo $data['order']['id']?>">Chỉnh sửa đơn hàng</a>
     </div>
