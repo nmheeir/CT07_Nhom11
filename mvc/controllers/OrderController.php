@@ -20,18 +20,20 @@ class OrderController extends BaseController
             $result = $this->orderModel->saveOrder($newOrder);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['message' => $result->message]);
-        } 
-        else {
+
+        } else {
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['message' => 'Không có dữ liệu']);
         }
     }
 
-    public function getOrder($option) {
+    public function getOrder($option)
+    {
         return $this->orderModel->getOrder($option);
     }
 
-    public function orderDetail($id) {
+    public function orderDetail($id)
+    {
         $orderDetail = $this->orderModel->getOrder([
             'where' => "id = {$id}"
         ])->data;
@@ -137,7 +139,6 @@ class OrderController extends BaseController
         // check role
         AuthenciationController::checkRole();
 
-
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
             'select' => 'id, fullname'
@@ -147,16 +148,14 @@ class OrderController extends BaseController
             'where' => "id = {$id}"
         ]);
 
-        if($orderDetail->isSuccess) {
+        if ($orderDetail->isSuccess) {
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => ['shipperList' => $shipperList, 'orderId' => $id, 'orderDetail' => $orderDetail->data],
                 'page' => 'orders',
                 'action' => "addOrder",
             ]);
-        }
-        else {
+        } else {
             $this->loadView("_404.php");
         }
-
     }
 }

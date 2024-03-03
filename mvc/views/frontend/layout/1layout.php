@@ -1,29 +1,30 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../TEST_3/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/user.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css"/>
+    <link rel="stylesheet" href="../TEST_3/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
     <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .my-gradient {
             background: #0d1a25;
         }
+
         .nav-link {
             color: #6f7d88
         }
+
         .my-sidebar-bg {
             background-color: #162c3b;
         }
     </style>
 </head>
+
 <body>
 
 <div class="container-fluid">
@@ -82,23 +83,24 @@
                 <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../TEST_3/public/upload/Kiki.webp" alt="hugenerd" width="30" height="30" class="rounded-circle">
                         <span class="d-none d-sm-inline mx-1"><? echo $_SESSION["user"]["username"] ?></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="Authenciation/logout">Sign out</a></li>
-                    </ul>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="Authenciation/logout">Sign out</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col p-0 scroll my-gradient">
-            <?
-                 $this->loadView("frontend.{$page}.{$action}", [
+            <div class="col p-0 scroll my-gradient">
+                <?
+                $this->loadView("frontend.{$page}.{$action}", [
                     'data' => $data,
-                 ]);
-            ?>
+                ]);
+                ?>
+            </div>
         </div>
     </div>
-</div>
-<script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-<script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script> 
+    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
+    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

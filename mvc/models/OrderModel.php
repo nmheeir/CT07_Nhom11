@@ -56,6 +56,7 @@ class OrderModel extends BaseModel
         // cập nhật completed_at
         if (isset($data["is_completed"])) {
             if ($data["is_completed"] == 1) {
+                date_default_timezone_set('Asia/Ho_Chi_Minh');
                 $data["completed_at"] = date('Y-m-d H:i:s', time());
             } else {
                 $data["completed_at"] = NULL; // Gán giá trị NULL
