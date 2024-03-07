@@ -76,7 +76,7 @@ class AuthenciationController extends BaseController
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
         }
-        header("Location: login");
+        header("Location: /Project/TEST_3/Welcome/landing");
     }
 
     public function register()

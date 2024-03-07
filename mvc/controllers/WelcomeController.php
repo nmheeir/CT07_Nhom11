@@ -1,11 +1,14 @@
 <?
 class WelcomeController extends BaseController {
+    public function landing() {
+        $this->loadView("frontend.landing.landing");
+    }
     public function index() {
         if(checkLogin()) {
             header("Location: User/home");
         }
         else {
-            header("Location: Authenciation/login");
+            $this->loadView("frontend.landing.landing");
         }
     }
 }

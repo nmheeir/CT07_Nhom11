@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../TEST_3/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
     <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
@@ -99,8 +99,8 @@
             </div>
         </div>
     </div>
-    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
