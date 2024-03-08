@@ -18,7 +18,6 @@ class OrderController extends BaseController
             $result = $this->orderModel->saveOrder($newOrder);
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['message' => $result->message]);
-
         } else {
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['message' => 'Không có dữ liệu']);
@@ -35,18 +34,23 @@ class OrderController extends BaseController
         $orderDetail = $this->orderModel->getOrder([
             'where' => "id = {$id}"
         ])->data;
-        if(!isset($orderDetail[0])) {
+        if (!isset($orderDetail[0])) {
             $this->loadView("_404");
-        }
-        else {
+        } else {
             $orderDetail = $orderDetail[0];
             $shipperName = $this->userModel->getUser([
                 'where' => "id = {$orderDetail['shipper_id']}"
             ])->data[0]['fullname'];
+
+            $mainUser = $this->userModel->getUser([
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ])->data[0];
+
             $orderDetail["shipper_name"] = $shipperName;
 
             $data = [
-                'order' => $orderDetail
+                'order' => $orderDetail,
+                'mainUser' => $mainUser
             ];
 
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -56,8 +60,6 @@ class OrderController extends BaseController
             ]);
         }
     }
-
-
     public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
         if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
             $shipperId = $_SESSION["user"]["id"];
@@ -69,26 +71,30 @@ class OrderController extends BaseController
         $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page);
         if($orders->isSuccess) {
             $totalOrder = $this->orderModel->countUserOrder($_SESSION['user']['id'], $isCompleted)[0]['total_orders'];
+            $mainUser = $this->userModel->getUser([
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ])->data[0];
             $data = [
-                'orders' => $orders->data,
+                'orders' => $orders,
                 'state' => $state,
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10 - 1)
+                'totalPage' => ceil($totalOrder / 10 - 1),
+                'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => $data,
                 'page' => 'orders',
                 'action' => "orderList",
             ]);
-        }
-        else {
+        } else {
             $this->loadView("_404");
         }
     }
 
-    public function companyOrderList($isCompleted = 0, $page = 1) {
+    public function companyOrderList($isCompleted = 0, $page = 1)
+    {
         // check role
         AuthenciationController::checkRole();
 
@@ -97,26 +103,29 @@ class OrderController extends BaseController
         $orders = $this->orderModel->getCompanyOrders($isCompleted, $page);
         if($orders->isSuccess) {
             $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'], $isCompleted)[0]['total_orders'];
+            $mainUser = $this->userModel->getUser([
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ])->data[0];
             $data = [
                 'orders' => $orders->data,
                 'state' => $state,
                 'action' => 'companyOrderList',
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10 - 1)
+                'totalPage' => ceil($totalOrder / 10 - 1),
+                'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => $data,
                 'page' => 'orders',
                 'action' => "orderList",
             ]);
-        }
-        else {
+        } else {
             $this->loadView('_404');
         }
-
     }
 
-    public function addOrder() {  
+    public function addOrder()
+    {
         // check role
         AuthenciationController::checkRole();
 
@@ -125,14 +134,20 @@ class OrderController extends BaseController
             'select' => 'id, fullname'
         ])->data;
 
+        $mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ]
+        )->data[0];
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => ['shipperList' => $shipperList],
+            'data' => ['shipperList' => $shipperList, 'mainUser' => $mainUser],
             'page' => 'orders',
             'action' => "addOrder",
         ]);
     }
 
-    public function updateOrder($id) {
+    public function updateOrder($id)
+    {
         // check role
         AuthenciationController::checkRole();
 
@@ -144,10 +159,17 @@ class OrderController extends BaseController
             'select' => "*",
             'where' => "id = {$id}"
         ]);
+        $mainUser = $this->userModel->getUser([
+            'where' => "id = '{$_SESSION['user']['id']}'"
+        ])->data[0];
 
         if ($orderDetail->isSuccess) {
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data' => ['shipperList' => $shipperList, 'orderId' => $id, 'orderDetail' => $orderDetail->data],
+                'data' =>[  'shipperList' => $shipperList,
+                            'orderId' => $id,
+                            'orderDetail' => $orderDetail->data,
+                            'mainUser' => $mainUser
+                         ],
                 'page' => 'orders',
                 'action' => "addOrder",
             ]);

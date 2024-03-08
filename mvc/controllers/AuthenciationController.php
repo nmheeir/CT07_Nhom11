@@ -184,6 +184,8 @@ class AuthenciationController extends BaseController
 
     public function verifyEmail($userOrCompany)
     {
+        // handle error 
+        $errorMessage = "";
         if (isset($_POST['btnVerify'])) {
             $digit1 = $_POST['digit1'];
             $digit2 = $_POST['digit2'];
@@ -192,10 +194,6 @@ class AuthenciationController extends BaseController
             $digit5 = $_POST['digit5'];
             $digit6 = $_POST['digit6'];
             $verifyCode = $digit1 . $digit2 . $digit3 . $digit4 . $digit5 . $digit6;
-
-            
-            echo $verifyCode;
-
             $session_register = 'session_register_' . $userOrCompany;
             //lấy code trong bảng verify dựa vào email
             $checkCode = $this->userModel->get('verify', [
@@ -233,12 +231,16 @@ class AuthenciationController extends BaseController
                     header("Location: http://localhost/Project/TEST_3/Authenciation/login");
                     exit;
                 } else if ($time > $expiresTime) {
-                    echo "Mã quá hạn, vui lòng thử lại mã khác";
+                    $errorMessage = "Mã quá hạn, vui lòng thử lại mã khác";
                 }
             } else {
-                echo "Sai mã xác thực, vui lòng nhập lại";
+                $errorMessage = "Sai mã xác thực, vui lòng nhập lại";
             }
         }
-        $this->loadView('frontend.authenciation.verifyemail');
+        $this->loadView('frontend.authenciation.verifyemail',
+            [
+                'data' => ['error' => $errorMessage]
+            ]
+        );
     }
 }

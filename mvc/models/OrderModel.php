@@ -112,7 +112,7 @@
             'order_by' => 'id asc',
             'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",            
             'limit' => 10,
-            'offset' => $page * 10
+            'offset' => ($page - 1) * 10
         ]);
         return new DataView(true, $orders, "OK");
         }
