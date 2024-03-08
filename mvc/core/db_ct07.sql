@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 04, 2024 at 12:14 AM
--- Server version: 8.0.31
--- PHP Version: 7.4.33
+-- Máy chủ: localhost
+-- Thời gian đã tạo: Th3 08, 2024 lúc 02:21 PM
+-- Phiên bản máy phục vụ: 8.0.31
+-- Phiên bản PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_ct07`
+-- Cơ sở dữ liệu: `db_ct07`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `company`
+-- Cấu trúc bảng cho bảng `company`
 --
 
 CREATE TABLE `company` (
@@ -34,7 +34,7 @@ CREATE TABLE `company` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `company`
+-- Đang đổ dữ liệu cho bảng `company`
 --
 
 INSERT INTO `company` (`id`, `company_name`, `master_user_id`) VALUES
@@ -44,7 +44,26 @@ INSERT INTO `company` (`id`, `company_name`, `master_user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orders`
+-- Cấu trúc bảng cho bảng `complain`
+--
+
+CREATE TABLE `complain` (
+  `id` int NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `content` text COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `complain`
+--
+
+INSERT INTO `complain` (`id`, `username`, `content`) VALUES
+(1, 'giadeptrai', 'test complain mail');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `orders`
 --
 
 CREATE TABLE `orders` (
@@ -62,12 +81,12 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `orders`
+-- Đang đổ dữ liệu cho bảng `orders`
 --
 
 INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude`, `longitude`, `address`, `is_completed`, `created_at`, `completed_at`, `deadline`) VALUES
-(118, 1, 8, 'Thửu deadline', 10.7773145, 106.6999907, 'Quận 1, Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-02 07:17:10', NULL, '2024-11-30 17:00:00'),
-(122, 1, 8, 'Thửu deadđfsdf', 10.7703708, 106.5996353, 'Quận Bình Tân, Thành phố Hồ Chí Minh, 71914, Việt Nam', 0, '2024-03-02 07:21:27', NULL, '2024-11-30 17:00:00'),
+(118, 1, 8, 'Thửu deadline', 10.7773145, 106.6999907, 'Quận 1, Thành phố Hồ Chí Minh, Việt Nam', 1, '2024-03-02 07:17:10', '2024-03-06 11:21:57', '1970-01-01 01:00:00'),
+(122, 1, 8, 'Thử dead', 10.7703708, 106.5996353, 'Quận Bình Tân, Thành phố Hồ Chí Minh, 71914, Việt Nam', 0, '2024-03-02 07:21:27', NULL, '2028-11-10 17:00:00'),
 (123, 1, 8, 'Order 90', 20.670071056271038, 105.67800790367463, 'Can Tho, Vietnam', 0, '2024-03-03 13:22:28', NULL, NULL),
 (124, 1, 8, 'Order 91', 20.39863876104228, 105.70293681063032, 'Can Tho, Vietnam', 0, '2024-02-14 13:22:28', NULL, NULL),
 (125, 1, 8, 'Order 92', 20.29918476128875, 105.42873544658417, 'Can Tho, Vietnam', 0, '2024-02-25 13:22:28', NULL, NULL),
@@ -167,21 +186,32 @@ INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude
 (219, 1, 8, 'Order 6', 20.13802867488752, 106.39805864905757, 'Can Tho, Vietnam', 0, '2024-02-17 13:22:28', NULL, NULL),
 (220, 1, 8, 'Order 7', 21.383944320850024, 105.13241957419777, 'Can Tho, Vietnam', 0, '2024-02-18 13:22:28', NULL, NULL),
 (221, 1, 8, 'Order 8', 20.488773843263065, 105.34598640664107, 'Can Tho, Vietnam', 0, '2024-02-11 13:22:28', NULL, NULL),
-(222, 1, 8, 'Order 9', 20.235413195318927, 106.60358802331946, 'Can Tho, Vietnam', 0, '2024-02-10 13:22:28', NULL, NULL);
+(222, 1, 8, 'Order 9', 20.235413195318927, 106.60358802331946, 'Can Tho, Vietnam', 0, '2024-02-10 13:22:28', NULL, NULL),
+(223, 1, 8, 'giao hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:43:38', NULL, '2024-10-09 17:00:00'),
+(224, 1, 8, 'giao hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:03', NULL, '2024-10-09 17:00:00'),
+(225, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:05', NULL, '2024-10-09 17:00:00'),
+(226, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:07', NULL, '2024-10-09 17:00:00'),
+(227, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:09', NULL, '2024-10-09 17:00:00'),
+(228, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:09', NULL, '2024-10-09 17:00:00'),
+(229, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:09', NULL, '2024-10-09 17:00:00'),
+(230, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
+(231, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
+(232, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
+(233, 1, 8, 'them don hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 08:20:47', NULL, '2000-11-10 17:00:00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role`
+-- Cấu trúc bảng cho bảng `role`
 --
 
 CREATE TABLE `role` (
   `id` int NOT NULL,
-  `name` varchar(20) COLLATE utf8mb4_general_ci NOT NULL
+  `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `role`
+-- Đang đổ dữ liệu cho bảng `role`
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
@@ -192,40 +222,40 @@ INSERT INTO `role` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(256) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role_id` int NOT NULL DEFAULT '3',
   `fullname` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `company_id` int NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hash_password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `active` tinyint(1) DEFAULT '1'
+  `active` tinyint(1) DEFAULT '1',
+  `avatar` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `role_id`, `fullname`, `company_id`, `create_at`, `hash_password`, `active`) VALUES
-(1, 'Alice', 'alice@gmail.com', 'Alice123', 1, 'Alice Border', 1, '2024-01-13 00:50:56', '$2y$10$gp9F6WVLydLlFuk61jLIveS9D3bPtHMN7ksHFEBOzlQff0Kc1bD1.', 1),
-(2, 'Bob', 'bob@gmail.com\r\n', 'Bob123', 2, 'Bob Twena', 1, '2024-01-13 00:50:56', '$2y$10$X7wunNTArun1dBMelPLr3eVXpvLu7HCvJGPyxKqOJtZdH1QhsFima', 1),
-(3, 'Cobber', 'cobber@gmail.com', 'Cobber123', 2, 'Cobber Stone', 1, '2024-01-13 00:50:56', '$2y$10$tGUA.UzBsnsZhf4NfM7cHOrkuTJLZqXjB0F7qtOkVxR/bM9Pq.j8m', 1),
-(4, 'Dyan', 'dyan@gmail.com', 'Dyan123', 3, 'Dyan Lain', 1, '2024-01-13 00:50:56', '$2y$10$A5oXXrh77KxqXJSMXMpz6u5J.dxEejLe2fAu1rEAdxZkOg5vVVX4u', 0),
-(5, 'Emily', 'emily@gmail.com', 'Emily123', 3, 'Emily Absen', 1, '2024-01-13 00:50:56', '$2y$10$IGBEdUtBZGunI3MBa7RNeeHqi02cShfudc8QJzP6UZoKsTByS.glK', 1),
-(8, 'giadeptrai', 'giadeptrai@gmail.com', 'gia18112004', 3, 'Khưu Thành Gia', 1, '2024-01-17 05:06:47', '$2y$10$wu.rQxGQB49x4Ogvw8Es4.oWmDeGj186LFS1iDBz5X3UQ7juS17ci', 1),
-(30, 'testmvc', NULL, 'echo \"<br>\";', 3, 'testmvc', 1, '2024-01-27 06:23:02', '$2y$10$K9BhD0qnjYOVvi6J65hCXOpdo2U5bbfCFCndhHYpOi8efTw26FnIS', 1),
-(48, 'testmvc3', 'quangdieuisme@gmail.com', '1111111111', 3, 'test', 1, '2024-02-29 04:07:13', '$2y$10$/Bo2iFqOxZPlMna0ooYj2OF.lBewTJwXqJJHNNy9yUzrDUGEWDg5.', 1);
+INSERT INTO `users` (`id`, `username`, `email`, `phone`, `password`, `role_id`, `fullname`, `company_id`, `create_at`, `hash_password`, `active`, `avatar`) VALUES
+(1, 'Alice', 'alice@gmail.com', '12222', 'Alice123', 1, 'Alice Border', 1, '2024-01-13 00:50:56', '$2y$10$gp9F6WVLydLlFuk61jLIveS9D3bPtHMN7ksHFEBOzlQff0Kc1bD1.', 1, 'avt.jpg'),
+(2, 'Bob', 'bob@gmail.com\r\n', NULL, 'Bob123', 2, 'Bob Twena', 1, '2024-01-13 00:50:56', '$2y$10$X7wunNTArun1dBMelPLr3eVXpvLu7HCvJGPyxKqOJtZdH1QhsFima', 1, ''),
+(3, 'Cobber', 'cobber@gmail.com', NULL, 'Cobber123', 2, 'Cobber Stone', 1, '2024-01-13 00:50:56', '$2y$10$tGUA.UzBsnsZhf4NfM7cHOrkuTJLZqXjB0F7qtOkVxR/bM9Pq.j8m', 1, ''),
+(4, 'Dyan', 'dyan@gmail.com', NULL, 'Dyan123', 3, 'Dyan Lain', 1, '2024-01-13 00:50:56', '$2y$10$A5oXXrh77KxqXJSMXMpz6u5J.dxEejLe2fAu1rEAdxZkOg5vVVX4u', 1, ''),
+(5, 'Emily', 'emily@gmail.com', NULL, 'Emily123', 3, 'Emily Absen', 1, '2024-01-13 00:50:56', '$2y$10$IGBEdUtBZGunI3MBa7RNeeHqi02cShfudc8QJzP6UZoKsTByS.glK', 1, ''),
+(8, 'giadeptrai', 'giadeptrai@gmail.com', '1234', 'gia18112004', 3, 'Khưu Thành Gia', 1, '2024-01-17 05:06:47', '$2y$10$wu.rQxGQB49x4Ogvw8Es4.oWmDeGj186LFS1iDBz5X3UQ7juS17ci', 1, 'avt.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `verify`
+-- Cấu trúc bảng cho bảng `verify`
 --
 
 CREATE TABLE `verify` (
@@ -236,26 +266,38 @@ CREATE TABLE `verify` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `verify`
+-- Đang đổ dữ liệu cho bảng `verify`
 --
 
 INSERT INTO `verify` (`id`, `code`, `expires`, `email`) VALUES
 (20, 597343, '2024-02-24 14:19:04', 'gikhuu18112004@gmail.com'),
-(21, 758939, '2024-02-29 12:06:39', 'quangdieuisme@gmail.com');
+(21, 758939, '2024-02-29 12:06:39', 'quangdieuisme@gmail.com'),
+(22, 430146, '2024-03-07 10:40:15', 'accgarena7624@gmail.com'),
+(23, 818913, '2024-03-07 10:52:18', 'accgarena7624@gmail.com'),
+(24, 636989, '2024-03-07 10:52:47', 'accgarena7624@gmail.com'),
+(25, 924862, '2024-03-07 10:52:51', 'accgarena7624@gmail.com'),
+(26, 983463, '2024-03-07 10:53:16', 'accgarena7624@gmail.com'),
+(27, 232401, '2024-03-07 10:14:27', 'accgarena7624@gmail.com');
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `company`
+-- Chỉ mục cho bảng `company`
 --
 ALTER TABLE `company`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_company_master_user` (`master_user_id`);
 
 --
--- Indexes for table `orders`
+-- Chỉ mục cho bảng `complain`
+--
+ALTER TABLE `complain`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
@@ -263,13 +305,13 @@ ALTER TABLE `orders`
   ADD KEY `fk_order_company` (`company_id`);
 
 --
--- Indexes for table `role`
+-- Chỉ mục cho bảng `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -278,58 +320,64 @@ ALTER TABLE `users`
   ADD KEY `fk_user_company` (`company_id`);
 
 --
--- Indexes for table `verify`
+-- Chỉ mục cho bảng `verify`
 --
 ALTER TABLE `verify`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `company`
+-- AUTO_INCREMENT cho bảng `company`
 --
 ALTER TABLE `company`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
--- AUTO_INCREMENT for table `orders`
+-- AUTO_INCREMENT cho bảng `complain`
 --
-ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=223;
+ALTER TABLE `complain`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `verify`
+-- AUTO_INCREMENT cho bảng `verify`
 --
 ALTER TABLE `verify`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- Constraints for dumped tables
+-- Các ràng buộc cho các bảng đã đổ
 --
 
 --
--- Constraints for table `company`
+-- Các ràng buộc cho bảng `company`
 --
 ALTER TABLE `company`
   ADD CONSTRAINT `fk_company_master_user` FOREIGN KEY (`master_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `orders`
+-- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_order_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_order_shipper` FOREIGN KEY (`shipper_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `users`
+-- Các ràng buộc cho bảng `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `fk_user_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
