@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Code</title>
+    <title>Verify Your Email</title>
     <base href="http://localhost/Project/TEST_3/" />
     <link rel="stylesheet" href="../TEST_3/public/css/verifyEmail.css" />
 </head>
@@ -23,6 +23,7 @@
             </div>
             <button type="submit" name="btnVerify">Verify OTP</button>
         </form>
+        <p ><? echo $data['error'] ?></p>
     </div>
 </body>
 
