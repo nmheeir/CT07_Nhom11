@@ -2,7 +2,7 @@
 class App {
     const BASE_SOURCE = 'Project/TEST_3';
     private $controller = "Welcome";
-    private $action = "index";
+    private $action = "landing";
     private $params = [];
     public function __construct() {
         echo "<pre>";
@@ -13,7 +13,7 @@ class App {
         echo "</pre>";
         $arr = $this->processURL();
         // Kiểm tra đã đăng nhập chưa khi truy cập vào các contrlller
-        if (!checkLogin() && $arr[0] != 'Authenciation') { 
+        if (!checkLogin() && $arr[0] != 'Welcome' && $arr[0] != 'Authenciation') { 
             header("Location: /Project/TEST_3/Authenciation/login");
             exit;
         }

@@ -60,11 +60,8 @@ class OrderController extends BaseController
             ]);
         }
     }
-
-
-    public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1)
-    {
-        if (!isset($shipperId) && !$_SESSION["user"]["role_id"] < 3) {
+    public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
+        if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
             $shipperId = $_SESSION["user"]["id"];
         }
 
@@ -72,8 +69,8 @@ class OrderController extends BaseController
         $state = $isCompleted;
 
         $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page);
-        if ($orders->isSuccess) {
-            $orders = $orders->data;
+        if($orders->isSuccess) {
+            $totalOrder = $this->orderModel->countUserOrder($_SESSION['user']['id'], $isCompleted)[0]['total_orders'];
             $mainUser = $this->userModel->getUser([
                 'where' => "id = '{$_SESSION['user']['id']}'"
             ])->data[0];
@@ -83,7 +80,7 @@ class OrderController extends BaseController
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,
                 'page' => $page,
-                'totalPage' => ceil(count($orders) / 10),
+                'totalPage' => ceil($totalOrder / 10 - 1),
                 'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -104,8 +101,8 @@ class OrderController extends BaseController
         // kiểm tra còn hạn
         $state = $isCompleted;
         $orders = $this->orderModel->getCompanyOrders($isCompleted, $page);
-        if ($orders->isSuccess) {
-            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'])[0]['total_orders'];
+        if($orders->isSuccess) {
+            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'], $isCompleted)[0]['total_orders'];
             $mainUser = $this->userModel->getUser([
                 'where' => "id = '{$_SESSION['user']['id']}'"
             ])->data[0];

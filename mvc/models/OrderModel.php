@@ -92,7 +92,7 @@
             return new DataView(true, $orders, "OK");
         }
         catch (Exception $e){
-            return new DataView(true, null, "có lỗi ở getUserOrders");
+            return new DataView(false, null, "có lỗi ở getUserOrders");
         }
     }
 
@@ -133,10 +133,33 @@
         return $this->custom($sql);
     }
 
-    public function countCompanyOrder($companyId) {
+    public function countCompanyOrder($companyId, $isCompleted) {
+        $checkIsOutOfDate = "";
+        if($isCompleted == 0) {
+            $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
+        }
+        if($isCompleted == 2) {
+            $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
+            $isCompleted = 0;
+        }
         return $this->get(self::TABLE_NAME, [
             'select' => 'COUNT(*) AS total_orders',
-            'where' => 'company_id = ' . $companyId
+            'where' => 'company_id = ' . $companyId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate
+        ]);
+    }
+
+    public function countUserOrder($userId, $isCompleted) {
+        $checkIsOutOfDate = "";
+        if($isCompleted == 0) {
+            $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
+        }
+        if($isCompleted == 2) {
+            $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
+            $isCompleted = 0;
+        }
+        return $this->get(self::TABLE_NAME, [
+            'select' => 'COUNT(*) AS total_orders',
+            'where' => 'shipper_id = ' . $userId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate
         ]);
     }
 }

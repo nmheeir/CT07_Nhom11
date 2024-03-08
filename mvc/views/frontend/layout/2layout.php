@@ -5,10 +5,17 @@
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Manager</title>
     <link rel="stylesheet" href="../TEST_3/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
+=======
+    <title>Document</title>
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../TEST_3/public/css/user.css"/>
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css"/>
+>>>>>>> dacab501558ae272f58d447cb5a9d6c59706ff8a
     <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .my-gradient {
@@ -99,8 +106,14 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
     <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
     <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
+=======
+</div>
+<script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
+>>>>>>> dacab501558ae272f58d447cb5a9d6c59706ff8a
 </body>
 
 </html>
