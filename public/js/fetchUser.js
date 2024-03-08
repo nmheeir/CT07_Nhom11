@@ -1,5 +1,5 @@
 function activeUpdate(userId, activeUpdate) {
-    // Dữ liệu bạn muốn gửi lên server
+    console.log("cập nhật active")
     const dataToSend = {
         id: userId,
         active: activeUpdate
@@ -37,6 +37,7 @@ function deleteUser(userId) {
     .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
     .then(data => {
         console.log(data.message)
+        window.location.href = "http://localhost/Project/TEST_3/User/companyMember";
     })
     .catch(error => {
         console.error('Error:', error);

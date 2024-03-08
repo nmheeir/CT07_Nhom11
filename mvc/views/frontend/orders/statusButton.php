@@ -10,11 +10,12 @@
         }
         else {
             $orderDeadline = strtotime($order['deadline']);
-            $currentTime = time(); 
-            if ($orderDeadline < $currentTime) {
-                $statusButton = $undoneButton;
-            } else {
+            $currentTime = time();
+            echo $order['deadline'] == NULL;
+            if ($orderDeadline > $currentTime || $order['deadline'] == NULL) {
                 $statusButton = $doneButton;
+            } else {
+                $statusButton = $undoneButton;
             }
         }
         

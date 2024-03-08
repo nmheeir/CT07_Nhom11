@@ -9,7 +9,7 @@
     <base href="http://localhost/Project/TEST_3/" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css"/>
     <link rel="stylesheet" href="../TEST_3/public/css/login.css">
-    <link rel="stylesheet" href="../TEST_3/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
     <style>
         /* Thêm CSS cho hiển thị thông báo lỗi */
         .error-message {

@@ -1,16 +1,17 @@
 <script src = "../TEST_3/public/js/fetchUser.js"></script>
+<script src = "../TEST_3/public/js/showModal.js"></script>
 <?
   $buttons = "";
   $user = $data['user'];
   if ($_SESSION['user']['role_id'] < $user['role_id']) {
     if($user['active'] == 1) {
-      $activeControllerButton = "<button type='button' class='btn btn-secondary w-25 m-1' onclick='activeUpdate({$user['id']}, 0)'>Chặn</button>";
+      $activeControllerButton = "<button type='button' class='btn btn-secondary w-25 m-1' onclick=\"showModalWithCallBack('Bạn có chắc muốn chặn nhân viên?', activeUpdate, {$user['id']}, 0)\">Chặn</button>";
     }
     else {
-      $activeControllerButton = "<button type='button' class='btn btn-secondary w-25 m-1' onclick='activeUpdate({$user['id']}, 1)'>Bỏ chặn</button>";
+      $activeControllerButton = "<button type='button' class='btn btn-secondary w-25 m-1' onclick=\"showModalWithCallBack('Bạn có chắc muốn bỏ chặn nhân viên?', activeUpdate, {$user['id']}, 1)\">Bỏ chặn</button>";
     }
     $buttons = "
-      <a type='button' class='btn btn-secondary w-25 m-1' onclick='deleteUser({$user['id']})'>Sa thải</a>
+      <a type='button' class='btn btn-secondary w-25 m-1' onclick=\"showModalWithCallBack('Bạn có chắc muốn sa thải nhân viên?', deleteUser, {$user['id']})\">Sa thải</a>
       {$activeControllerButton}
     ";
   }

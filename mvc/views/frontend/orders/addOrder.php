@@ -12,6 +12,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 <script src="../TEST_3/public/js/fetchAddOrder.js"></script>
 <script src="../TEST_3/public/js/showToast.js"></script>
 <script src="../TEST_3/public/js/clearInput.js"></script>
+<script src="../TEST_3/public/js/showModal.js"></script>
 <div class="container p-2">
     <h3 class="text-white text-center">
         Thêm đơn hàng
@@ -48,12 +49,13 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
     <?php endif; ?>
 
     <?
-    if (!isset($data["orderId"])) {
-        echo "<button class='btn btn-primary w-100' onclick='fetchAddOrder()'>Add Order</button>";
-    } else {
-        echo "<button class='btn btn-primary w-100' onclick='updateOrder()'>Update Order</button>";
-    }
+        if (!isset($data["orderId"])) {
+            echo "<button class='btn btn-primary w-100' onclick='fetchAddOrder()'>Add Order</button>";
+        } else {
+            echo "<button class='btn btn-primary w-100' onclick=\"showModalWithCallBack('Bạn có muốn cập nhật đơn hàng?', updateOrder)\">Update Order</button>";
+        }
     ?>
+
 </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="../TEST_3/public/js/fetchAddressAndCoordinate.js"></script>
