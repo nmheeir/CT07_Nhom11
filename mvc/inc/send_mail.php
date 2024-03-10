@@ -3,12 +3,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-// require '../TEST_3/vendor/phpmailer/phpmailer/src/PHPMailer.php';
-// require '../TEST_3/vendor/phpmailer/phpmailer/src/Exception.php';
-// require '../TEST_3/vendor/phpmailer/phpmailer/src/SMTP.php';
-
-// require_once '../TEST_3/mvc/models/BaseModel.php';
-
 function sendMail($recipient, $subject, $message)
 {
     $mail = new PHPMailer();
@@ -50,9 +44,22 @@ function sendVerifyCode($mail) {
     $message = 'Your verification code is: ' . $verifyCode;
 
     $sql = "INSERT INTO verify (code, expires, email) 
-                            VALUES ({$verifyCode}, DATE_ADD(NOW(), INTERVAL 60 MINUTE), '{$mail}');";
+                            VALUES ({$verifyCode}, DATE_ADD(NOW(), INTERVAL 15 MINUTE), '{$mail}');";
 
     $baseModel->custom($sql);
 
+    sendMail($mail, $subject, $message);
+}
+
+function sendComplainMail($_message, $user) {
+    $baseModel = new BaseModel;
+
+    $mail = "nmhgame001@gmail.com";
+    $subject = "Complain Email";
+    $message = "From " . $user . ". Message: " . $_message;
+    $baseModel->save('complain', [
+        'username' => $user,
+        'content' => $_message
+    ]);
     sendMail($mail, $subject, $message);
 }

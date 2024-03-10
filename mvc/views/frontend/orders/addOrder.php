@@ -1,5 +1,7 @@
 <?
+$title = "Add Order";
 if (isset($data['orderId']) && isset($data['orderDetail'])) {
+    $title = "Update Order";
     $address = $data['orderDetail'][0]['address'];
     $des = $data['orderDetail'][0]['description'];
     $latitude = $data['orderDetail'][0]['latitude'];
@@ -15,7 +17,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 <script src="../TEST_3/public/js/showModal.js"></script>
 <div class="container p-2">
     <h3 class="text-white text-center">
-        Thêm đơn hàng
+        <?echo $title?>
     </h3>
     <div class="mb-3 searchAddressContainer">
         <label for="searchAddress">Nhập Địa Chỉ:</label>

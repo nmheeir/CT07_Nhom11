@@ -5,7 +5,8 @@
     "autoload": {
         "files": [
             "../TEST_3/mvc/inc/send_mail.php",
-            "../TEST_3/mvc/inc/checkLogin.php"
+            "../TEST_3/mvc/inc/checkLogin.php",
+            "../TEST_3/mvc/inc/checkUploadFile.php"
         ],
         "classmap": [
            "../TEST_3/mvc/controllers",

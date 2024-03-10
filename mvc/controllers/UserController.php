@@ -18,7 +18,7 @@ class UserController extends BaseController
         $this->orderModel = new OrderModel;
     }
 
-    public function home() 
+    public function home()
     {
         $id = $_SESSION["user"]["id"];
         $user = $this->userModel->getUser(
@@ -29,45 +29,72 @@ class UserController extends BaseController
         $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
         $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data'=> ['user' => $user],
+            'data' => ['user' => $user, 'mainUser' => $user],
             'page' => 'users',
             'action' => "home",
         ]);
     }
 
-    public function companyMember() {
-        $user = $this->userModel->getUser(
+    public function update()
+    {
+        $user = $this->userModel->getUser([
+            'where' => "id = '{$_SESSION['user']['id']}'"
+        ])->data;
+        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+            'data' => ['user' => $user, 'mainUser' => $user[0]],
+            'page' => 'users',
+            'action' => 'update'
+        ]);
+    }
+    public function companyMember()
+    {
+        // check role
+        AuthenciationController::checkRole();
+        $allUser = $this->userModel->getUser(
             [
                 'where' => "company_id = '{$_SESSION['user']['company_id']}'",
             ]
         )->data;
 
+        $mainId = $_SESSION['user']['id'];
+        $mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = '{$mainId}'"
+            ]
+        )->data[0];
+
+
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data'=> $user,
+            'data' => ['user' => $allUser, 'mainUser' => $mainUser],
             'page' => 'users',
             'action' => "companyMember",
         ]);
     }
 
-    public function detail($id) 
+    public function detail($id)
     {
         $user = $this->userModel->getUser(
             [
                 'where' => "id = '{$id}'"
             ]
         )->data;
+        
+        $mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ]
+        )->data[0];
 
-        if(!isset($user[0])) {
+        if (!isset($user[0])) {
             $this->loadView("_404");
-        }
-        else {
+        } else {
             $user = $user[0];
             $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
             $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
             $orderCount = $this->orderModel->countOrderByProcess($id)[0];
-            
+
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data'=> ['user' => $user, 'order' => $orderCount],
+                'data' => ['user' => $user, 'mainUser' => $mainUser, 'order' => $orderCount],
                 'page' => 'users',
                 'action' => "home",
             ]);
@@ -101,6 +128,7 @@ class UserController extends BaseController
         }
     }
 
+
     public function updateRole() {
         // if()
         AuthenciationController::checkRoleIsMaster();
@@ -115,5 +143,42 @@ class UserController extends BaseController
             header('Content-Type: application/json; charset=utf-8');
             echo json_encode(['message' => 'có lỗi']);
         }
+    }
+}
+    public function sendComplainMail() {
+        $mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ]
+        )->data[0];
+
+        if (isset($_POST['btnSendComplainMail'])) {
+            $message = $_POST['complainMail'];
+            sendComplainMail($message, $_SESSION['user']['username']);
+        }
+
+        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+            'data' => ['mainUser' => $mainUser],
+            'page' => 'users',
+            'action' => 'sendComplainMail'
+        ]);
+    }
+
+    public function getMail() {
+        AuthenciationController::checkRole();
+
+        $mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = '{$_SESSION['user']['id']}'"
+            ]
+        )->data[0];
+
+        $listMail = $this->userModel->get('complain');
+
+        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+            'data' => ['mainUser' => $mainUser, 'mail' => $listMail],
+            'page' => 'users',
+            'action' => "getMail"
+        ]);
     }
 }
