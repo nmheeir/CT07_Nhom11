@@ -14,7 +14,6 @@ if (isset($data)) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +59,7 @@ if (isset($data)) {
         }
     </style>
     <script src="../TEST_3/public/js/fetchUser.js"></script>
+    <script src="../TEST_3/public/js/showModal.js"></script>
 </head>
 
 <body>
@@ -92,3 +92,4 @@ if (isset($_POST['submit'])) {
     checkImageFile("avatar", "avatars", $username);
 }
 ?>
+

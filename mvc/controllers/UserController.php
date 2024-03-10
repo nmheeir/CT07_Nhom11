@@ -49,7 +49,7 @@ class UserController extends BaseController
     public function companyMember()
     {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
         $allUser = $this->userModel->getUser(
             [
                 'where' => "company_id = '{$_SESSION['user']['company_id']}'",
@@ -144,7 +144,18 @@ class UserController extends BaseController
             echo json_encode(['message' => 'có lỗi']);
         }
     }
-}
+
+    public function updateUser() 
+    {
+        $userUpdateData = json_decode(file_get_contents("php://input"), true);
+        if ($userUpdateData !== null) {
+            // Dữ liệu đã được nhận thành công
+            $this->userModel->saveUser($userUpdateData);
+        } else {
+            // Đối với một số lý do nào đó, không thể giải mã JSON
+            echo "Failed to decode JSON data";
+        }
+    }
     public function sendComplainMail() {
         $mainUser = $this->userModel->getUser(
             [
@@ -165,7 +176,7 @@ class UserController extends BaseController
     }
 
     public function getMail() {
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $mainUser = $this->userModel->getUser(
             [

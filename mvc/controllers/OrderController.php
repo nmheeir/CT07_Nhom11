@@ -80,7 +80,7 @@ class OrderController extends BaseController
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10)
+                'totalPage' => ceil($totalOrder / 10),
                 'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -111,7 +111,7 @@ class OrderController extends BaseController
                 'state' => $state,
                 'action' => 'companyOrderList',
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10)
+                'totalPage' => ceil($totalOrder / 10),
                 'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [

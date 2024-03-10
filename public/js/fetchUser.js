@@ -86,14 +86,13 @@ function updateUser() {
     // avatar: "ok"
   };
 
-  fetch(`http://localhost/Project/TEST_3/User/activeControl`, {
+  fetch(`http://localhost/Project/TEST_3/User/updateUser`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(dataToSend),
   }).then(() => {
-    location.reload();
   });
   console.log("Oke").catch((error) => {
     console.error("Error:", error);

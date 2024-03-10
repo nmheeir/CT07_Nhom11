@@ -27,15 +27,14 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="text-center">
-                    <div class="avatar">
                         <?
                         if (!empty($user['avatar'])) {
-                            echo "<img src=\"../TEST_3/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' style='height: 100px; width: 100px'>";
+                            echo "<img src=\"../TEST_3/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' style='width: 150px; height: 210px; object-fit: cover;' class='rounded-circle img-fluid'>";
                         } else {
-                            echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' style='height: 100px; width: 100px'>";
+                            echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' style='width: 150px; height: 210px' class='rounded-circle img-fluid'>";
                         }
                         ?>
-                    </div>
+                                    
                     <h5 class="mt-3 text-white"><? echo $user["fullname"] ?></h5>
                     <p class="text-white mb-3">@<? echo $user["username"] ?></p>
                     <div class="row justify-content-center">
