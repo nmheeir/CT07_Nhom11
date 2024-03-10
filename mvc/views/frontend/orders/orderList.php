@@ -64,20 +64,22 @@
         <!-- Phân trang -->
         <div class="row justify-content-center g-2">
             <ul class="pagination flex-wrap justify-content-center">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <!-- Sử dụng PHP để tạo liên kết trang -->
                 <?php
                     $totalPages = $data['totalPage']; // Số lượng trang
                     $currentPage = $data['page']; // Trang hiện tại
                     $visiblePages = 5; // Số lượng trang hiển thị
-
+                    
                     $startPage = max($currentPage - floor($visiblePages / 2), 1);
                     $endPage = min($startPage + $visiblePages - 1, $totalPages);
-
+                    
                     $current_url = "http://localhost/Project/TEST_3/Order/" . $data['action'] . '/' . $state;
-
+                    
                     if (isset($data['shipperId'])) {
                         $current_url .= '/' . $data['shipperId'];
+                    }
+                    //Hiền thị nút preivious
+                    if($totalPages > 1 && $currentPage > 1) {
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage - 1).'">Previous</a></li>';
                     }
                     // Hiển thị liên kết cho trang đầu tiên nếu không phải trang đầu tiên
                     if ($startPage > 2) {
@@ -103,9 +105,12 @@
                     if ($endPage < $totalPages) {
                         echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $totalPages . '">' . $totalPages . '</a></li>';
                     }
+
+                    // Hiển thị nút next
+                    if($totalPages > 1 && $currentPage < $totalPages)  {
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage + 1).'">Next</a></li>';
+                    }
                 ?>
-                <!-- Kết thúc PHP -->
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
             </ul>
         </div>
     </div>

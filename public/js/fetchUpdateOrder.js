@@ -48,9 +48,12 @@ function updateOrder() {
     .then((data) => {
       showToast(data.message);
     })
-    .catch((error) => {
-      showToast(
-        "Có lỗi, hãy đảm bảo đã điền đủ thông tin và chọn địa chỉ ở phần gợi ý."
-      );
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        showModalWithoutCallBack(data.message)
+    })
+    .catch(error => {
+        showModalWithoutCallBack("Có lỗi, hãy đảm bảo đã điền đủ thông tin và chọn địa chỉ ở phần gợi ý.");
+
     });
 }

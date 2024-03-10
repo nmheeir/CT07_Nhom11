@@ -31,7 +31,6 @@ $mainUser = $data['mainUser'];
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row flex-nowrap fixed">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 my-sidebar-bg">

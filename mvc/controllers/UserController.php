@@ -102,8 +102,8 @@ class UserController extends BaseController
     }
     
 
-    public function activeControl()
-    {
+    public function activeControl() {
+        AuthenciationController::checkRoleIsManager();
         $userUpdateData = json_decode(file_get_contents("php://input"), true);
         if ($userUpdateData !== null) {
             // Dữ liệu đã được nhận thành công
@@ -114,8 +114,8 @@ class UserController extends BaseController
         }
     }
 
-    public function deleteUser()
-    {
+    public function deleteUser() {
+        AuthenciationController::checkRoleIsManager();
         $userData = json_decode(file_get_contents("php://input"), true);
         if ($userData !== null) {
             // Dữ liệu đã được nhận thành công
@@ -128,6 +128,23 @@ class UserController extends BaseController
         }
     }
 
+
+    public function updateRole() {
+        // if()
+        AuthenciationController::checkRoleIsMaster();
+        $userData = json_decode(file_get_contents("php://input"), true);
+        if ($userData !== null) {
+            // // Dữ liệu đã được nhận thành công
+            $this->userModel->updateRole($userData["id"]);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'đã cập nhật chức vụ nhân viên' ]);
+        } else {
+            // Đối với một số lý do nào đó, không thể giải mã JSON
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'có lỗi']);
+        }
+    }
+}
     public function sendComplainMail() {
         $mainUser = $this->userModel->getUser(
             [

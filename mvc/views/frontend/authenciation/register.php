@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="http://localhost/Project/TEST_3/" />
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/login.css">
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
     <title>Register</title>
-    <link rel="stylesheet" href="../public/css/base.css" />
-    <link rel="stylesheet" href="../public/css/login.css">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
     <style>
         /* Thêm CSS cho hiển thị thông báo lỗi */
         .error-message {
