@@ -49,6 +49,19 @@ class UserModel extends BaseModel {
         return $this->delete(self::TABLE_NAME, $userData["id"]);
     }
 
+    public function updateRole($id) {
+        $user = $this->getUser([
+            'where' => "id = " . $id
+        ]);
+        if(isset($user)) {
+            $updatedRole = $user->data[0]['role_id'] == 3 ? 2 : 3;
+            $this->save(self::TABLE_NAME, [
+                'id' => $id,
+                'role_id' => $updatedRole
+            ]);
+        }
+    }
+
     public function login($username, $password) {
         $user = $this ->getUser([
             'where' => "username = '{$username}'" 
@@ -108,5 +121,6 @@ class UserModel extends BaseModel {
         $newUserId = $this->save(self::TABLE_NAME, $newUser);
         return new DataView(true, $newUserId, "Ok");
     }
+     
 
 }

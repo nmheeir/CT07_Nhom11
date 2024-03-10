@@ -32,6 +32,12 @@
             <div class="row justify-content-center">
               <? echo $buttons ?>
             </div>
+            <?
+              if($_SESSION['user']['role_id'] == 1 && $_SESSION['user']['role_id'] <  $user['role_id']) {
+                echo "<button type='button' class='btn btn-secondary w-50 m-1' onclick=\"showModalWithCallBack('Bạn có chắc muốn sa thải nhân viên?', updateRole, {$user['id']})\">Thay đổi chức vụ</button>";
+              }
+            ?>
+            
           </div>
         </div>
       <div class="col-lg-8 text-white">

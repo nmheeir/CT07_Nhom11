@@ -1,5 +1,5 @@
-var myModal; // Khai báo biến myModal ở phạm vi toàn cục để nó có thể được truy cập từ mọi hàm
 
+var myModal; // Khai báo biến myModal ở phạm vi toàn cục để nó có thể được truy cập từ mọi hàm
 function showModalWithCallBack(message, callback, ...params) {
     var container = document.querySelector('.container');
     var modal = document.createElement('div');
@@ -28,6 +28,7 @@ function showModalWithCallBack(message, callback, ...params) {
         closeModal(); // Đóng modal
         callback(...params); // Gọi callback
     });
+    console.log("chạy show")
 }
 
 
@@ -64,4 +65,5 @@ function closeModal() {
         modalElement.parentNode.removeChild(modalElement);
     }
 }
+
 

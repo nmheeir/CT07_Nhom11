@@ -90,7 +90,7 @@ class OrderController extends BaseController
 
     public function companyOrderList($isCompleted = 0, $page = 1) {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         // kiểm tra còn hạn
         $state = $isCompleted;
@@ -118,7 +118,7 @@ class OrderController extends BaseController
 
     public function addOrder() {  
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
@@ -134,7 +134,7 @@ class OrderController extends BaseController
 
     public function updateOrder($id) {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",

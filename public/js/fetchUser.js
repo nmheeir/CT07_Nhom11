@@ -43,3 +43,26 @@ function deleteUser(userId) {
         console.error('Error:', error);
     });
 }
+
+function updateRole(userId) {
+    console.log(userId);
+    const dataToSend = {
+        id: userId
+    };
+    // Sử dụng Fetch API để thực hiện PUT request
+    fetch(`http://localhost/Project/TEST_3/User/updateRole`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataToSend),
+    })
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        console.log(data.message)
+        showModalWithoutCallBack("Đã thay đổi chức vụ thành công")
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
