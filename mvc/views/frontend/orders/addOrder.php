@@ -10,6 +10,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 ?>
 
 <link rel='stylesheet' href="../TEST_3/public/css/addOrder.css" />
+<link rel='stylesheet' href="../TEST_3/public/css/dateInput.css" />
 <script src="../TEST_3/public/js/fetchUpdateOrder.js"></script>
 <script src="../TEST_3/public/js/fetchAddOrder.js"></script>
 <script src="../TEST_3/public/js/showToast.js"></script>

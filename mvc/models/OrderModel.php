@@ -71,7 +71,7 @@
         return new DataView(true, $data, "Thêm/chỉnh sửa đơn hàng đã thực hiện thành công");
     }
 
-    public function getUserOrders($isCompleted = 0, $shipperId = null, $page = 1) {
+    public function getUserOrders($isCompleted = 0, $shipperId = null, $page = 1, $created_at_timestamp, $deadline_timestamp) {
         try {
             $checkIsOutOfDate = "";
             if($isCompleted == 0) {
@@ -81,10 +81,14 @@
                 $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
                 $isCompleted = 0;
             }
+
+            // kiểm tra lọc
+            $filterCreatedAt = is_null($created_at_timestamp) ? "" : " AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
+            $filterDeadline = is_null($deadline_timestamp) ? "" : " AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
             $orders = $this->get(self::TABLE_NAME,[
                 'select' => '*',
                 'order_by' => 'id asc',
-                'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",
+                'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}" . $filterCreatedAt . $filterDeadline,
                 'limit' => 10,
                 'offset' => ($page-1)  * 10
             ]);
@@ -96,8 +100,9 @@
         }
     }
 
-    public function getCompanyOrders($isCompleted = 0, $page = 1) {
+    public function getCompanyOrders($isCompleted = 0, $page = 1, $created_at_timestamp, $deadline_timestamp) {
         try {
+        // chọn loại order
         $checkIsOutOfDate = "";
         if($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
@@ -107,17 +112,20 @@
             $isCompleted = 0;
         }
 
+        // lọc order
+        $filterCreatedAt = is_null($created_at_timestamp) ? "" : " AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
+        $filterDeadline = is_null($deadline_timestamp) ? "" : " AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
         $orders = $this->get(self::TABLE_NAME ,[
             'select' => '*',
             'order_by' => 'id asc',
-            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",            
+            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}" . $filterCreatedAt . $filterDeadline,            
             'limit' => 10,
             'offset' => ($page-1) * 10
         ]);
         return new DataView(true, $orders, "OK");
         }
         catch (Exception $e){
-            return new DataView(true, $orders, "có lỗi ở getCompanyOrder");
+            return new DataView(true, null, "có lỗi ở getCompanyOrder");
         }
     }
     public function countOrderByProcess($id)
@@ -133,7 +141,7 @@
         return $this->custom($sql);
     }
 
-    public function countCompanyOrder($companyId, $isCompleted) {
+    public function countCompanyOrder($companyId, $isCompleted, $created_at_timestamp, $deadline_timestamp) {
         $checkIsOutOfDate = "";
         if($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
@@ -142,13 +150,18 @@
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }
+
+        // lọc order
+        $filterCreatedAt = is_null($created_at_timestamp) ? "" : "AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
+        $filterDeadline = is_null($deadline_timestamp) ? "" : "AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
+
         return $this->get(self::TABLE_NAME, [
             'select' => 'COUNT(*) AS total_orders',
-            'where' => 'company_id = ' . $companyId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate
+            'where' => 'company_id = ' . $companyId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate . $filterCreatedAt . $filterDeadline
         ]);
     }
 
-    public function countUserOrder($userId, $isCompleted) {
+    public function countUserOrder($userId, $isCompleted, $created_at_timestamp, $deadline_timestamp) {
         $checkIsOutOfDate = "";
         if($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
@@ -157,9 +170,14 @@
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }
+
+        // kiêm tra lọc
+        $filterCreatedAt = is_null($created_at_timestamp) ? "" : " AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
+        $filterDeadline = is_null($deadline_timestamp) ? "" : " AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
+
         return $this->get(self::TABLE_NAME, [
             'select' => 'COUNT(*) AS total_orders',
-            'where' => 'shipper_id = ' . $userId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate
+            'where' => 'shipper_id = ' . $userId . ' AND is_completed = ' . $isCompleted . ' ' . $checkIsOutOfDate . $filterCreatedAt . $filterDeadline
         ]);
     }
 }

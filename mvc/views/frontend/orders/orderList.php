@@ -6,6 +6,7 @@
     else if($state < 1) $borderType = "danger";
     else $borderType = "success";
 ?>
+<link rel='stylesheet' href="../TEST_3/public/css/dateInput.css" />
 <style>
     .title {
         display: -webkit-box;
@@ -18,6 +19,12 @@
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+    label {
+        color: var(--text-color);
+    }
+    input[type="date"]{
+        padding: 0 4px;
     }
 </style>
 <!-- hiện order -->
@@ -33,6 +40,19 @@
                 ?>
             </h3>
 
+            <!-- lọc order -->
+            <form method="get" class="d-lg-flex d-md-block align-items-center justify-content-center">
+                <div class="user-box m-2">
+                    <label class="fs-4">Ngày khởi tạo</label>
+                    <input type="date" name="created_at">
+                </div>
+                <div class="user-box m-2">
+                    <label class="fs-4">Ngày hết hạn</label>
+                    <input type="date" name="deadline">
+                </div>
+                <button type="submit" name="btnSubmit" class="btn btn-info text-white m-2">Lọc đơn hàng</button>
+            </form>
+            <!-- các order -->
             <?php
             if (count($orders) > 0) {
                 foreach ($orders as $order) {
@@ -65,6 +85,7 @@
         <div class="row justify-content-center g-2">
             <ul class="pagination flex-wrap justify-content-center">
                 <?php
+                    $queryString = strstr($_SERVER['REQUEST_URI'], '?');
                     $totalPages = $data['totalPage']; // Số lượng trang
                     $currentPage = $data['page']; // Trang hiện tại
                     $visiblePages = 5; // Số lượng trang hiển thị
@@ -79,11 +100,11 @@
                     }
                     //Hiền thị nút preivious
                     if($totalPages > 1 && $currentPage > 1) {
-                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage - 1).'">Previous</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage - 1). $queryString .'">Previous</a></li>';
                     }
                     // Hiển thị liên kết cho trang đầu tiên nếu không phải trang đầu tiên
                     if ($startPage > 2) {
-                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/1">1</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . $queryString . '/1">1</a></li>';
                     }
 
                     // Hiển thị dấu '...' nếu có nhiều hơn một trang ở phía trước
@@ -93,7 +114,7 @@
 
                     // Hiển thị các trang trong khoảng từ $startPage đến $endPage
                     for ($i = $startPage; $i <= $endPage; $i++) {
-                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $i . '">' . $i . '</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $i . $queryString .'">' . $i . '</a></li>';
                     }
 
                     // Hiển thị dấu '...' nếu có nhiều hơn một trang ở phía sau
@@ -103,12 +124,12 @@
 
                     // Hiển thị liên kết cho trang cuối cùng nếu không phải trang cuối cùng
                     if ($endPage < $totalPages) {
-                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $totalPages . '">' . $totalPages . '</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url . '/' . $totalPages . $queryString .'">' . $totalPages . '</a></li>';
                     }
 
                     // Hiển thị nút next
                     if($totalPages > 1 && $currentPage < $totalPages)  {
-                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage + 1).'">Next</a></li>';
+                        echo '<li class="page-item"><a class="page-link" href="' . $current_url .'/'. ($currentPage + 1). $queryString . '">Next</a></li>';
                     }
                 ?>
             </ul>

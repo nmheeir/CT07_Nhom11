@@ -65,17 +65,27 @@ class OrderController extends BaseController
             $shipperId = $_SESSION["user"]["id"];
         }
 
+        // kiểm tra bộ lọc
+        $created_at_timestamp = null;
+        $deadline_timestamp = null;
+        if(isset($_GET['btnSubmit'])) {
+            $created_at = $_GET['created_at'];
+            $deadline = $_GET['deadline'];
+            $created_at_timestamp = $created_at == "" ? null : strtotime($created_at);
+            $deadline_timestamp = $deadline == "" ? null : strtotime($deadline);
+        }
+
         // kiểm tra còn hạn
         $state = $isCompleted;
 
-        $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page);
+        $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page, $created_at_timestamp, $deadline_timestamp);
         if($orders->isSuccess) {
-            $totalOrder = $this->orderModel->countUserOrder($_SESSION['user']['id'], $isCompleted)[0]['total_orders'];
+            $totalOrder = $this->orderModel->countUserOrder($shipperId, $isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
             $mainUser = $this->userModel->getUser([
                 'where' => "id = '{$_SESSION['user']['id']}'"
             ])->data[0];
             $data = [
-                'orders' => $orders,
+                'orders' => $orders->data,
                 'state' => $state,
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,
@@ -97,14 +107,24 @@ class OrderController extends BaseController
     {
         // check role
         AuthenciationController::checkRoleIsManager();
-
+        
+        // kiểm tra bộ lọc
+        $created_at_timestamp = null;
+        $deadline_timestamp = null;
+        if(isset($_GET['btnSubmit'])) {
+            $created_at = $_GET['created_at'];
+            $deadline = $_GET['deadline'];
+            $created_at_timestamp = $created_at == "" ? null : strtotime($created_at);
+            $deadline_timestamp = $deadline == "" ? null : strtotime($deadline);
+        }
+        
         // kiểm tra còn hạn
         $state = $isCompleted;
-        $orders = $this->orderModel->getCompanyOrders($isCompleted, $page);
+        $orders = $this->orderModel->getCompanyOrders($isCompleted, $page, $created_at_timestamp, $deadline_timestamp);
         if($orders->isSuccess) {
-            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'], $isCompleted)[0]['total_orders'];
+            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'], $isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
             $mainUser = $this->userModel->getUser([
-                'where' => "id = '{$_SESSION['user']['id']}'"
+                'where' => "id = '{$_SESSION['user']['id']}'" 
             ])->data[0];
             $data = [
                 'orders' => $orders->data,
