@@ -136,8 +136,9 @@ class UserController extends BaseController
         )->data[0];
 
         if (isset($_POST['btnSendComplainMail'])) {
+            $type = $_POST['type'];
             $message = $_POST['complainMail'];
-            sendComplainMail($message, $_SESSION['user']['username']);
+            sendComplainMail($type ,$message, $_SESSION['user']['username']);
         }
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -156,12 +157,25 @@ class UserController extends BaseController
             ]
         )->data[0];
 
-        $listMail = $this->userModel->get('complain');
+        $listMail = $this->userModel->get('complain', [
+            'order_by' => 'complain_time desc'
+        ]);
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
             'data' => ['mainUser' => $mainUser, 'mail' => $listMail],
             'page' => 'users',
             'action' => "getMail"
         ]);
+    }
+
+    function fetchMailByType() {
+        $typeMail = json_decode(file_get_contents("php://input"), true);
+
+        $listTypeMail = $this->userModel->get('complain', [
+            'where' => "type = {$typeMail}"
+        ]);
+
+        json_encode($listTypeMail);
+        header('Content-Type: application/json');
     }
 }

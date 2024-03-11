@@ -1,6 +1,6 @@
-<?class OrderModel extends BaseModel
+<? class OrderModel extends BaseModel
 {
-    
+
     private $id;
     private $companyId;
     private $shipperId;
@@ -71,52 +71,52 @@
         return new DataView(true, $data, "Thêm/chỉnh sửa đơn hàng đã thực hiện thành công");
     }
 
-    public function getUserOrders($isCompleted = 0, $shipperId = null, $page = 1) {
+    public function getUserOrders($isCompleted = 0, $shipperId = null, $page = 1)
+    {
         try {
             $checkIsOutOfDate = "";
-            if($isCompleted == 0) {
+            if ($isCompleted == 0) {
                 $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
             }
-            if($isCompleted == 2) {
+            if ($isCompleted == 2) {
                 $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
                 $isCompleted = 0;
             }
-            $orders = $this->get(self::TABLE_NAME,[
+            $orders = $this->get(self::TABLE_NAME, [
                 'select' => '*',
                 'order_by' => 'id asc',
                 'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",
                 'limit' => 10,
                 'offset' => $page * 10
             ]);
-    
+
             return new DataView(true, $orders, "OK");
-        }
-        catch (Exception $e){
+        } catch (Exception $e) {
             return new DataView(false, null, "có lỗi ở getUserOrders");
         }
     }
 
-    public function getCompanyOrders($isCompleted = 0, $page = 1) {
+    public function getCompanyOrders($isCompleted = 0, $page = 1)
+    {
         try {
-        $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
-            $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
-        }
-        if($isCompleted == 2) {
-            $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
-            $isCompleted = 0;
-        }
+            $checkIsOutOfDate = "";
+            if ($isCompleted == 0) {
+                $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
+            }
+            if ($isCompleted == 2) {
+                $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
+                $isCompleted = 0;
+            }
 
-        $orders = $this->get(self::TABLE_NAME ,[
-            'select' => '*',
-            'order_by' => 'id asc',
-            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",            
-            'limit' => 10,
-            'offset' => ($page - 1) * 10
-        ]);
-        return new DataView(true, $orders, "OK");
-        }
-        catch (Exception $e){
+            $orders = $this->get(self::TABLE_NAME, [
+                'select' => '*',
+                'order_by' => 'id asc',
+                'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",
+                'limit' => 10,
+                'offset' => ($page - 1) * 10
+            ]);
+            return new DataView(true, $orders, "OK");
+        } catch (Exception $e) {
             return new DataView(true, $orders, "có lỗi ở getCompanyOrder");
         }
     }
@@ -133,12 +133,13 @@
         return $this->custom($sql);
     }
 
-    public function countCompanyOrder($companyId, $isCompleted) {
+    public function countCompanyOrder($companyId, $isCompleted)
+    {
         $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
+        if ($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
         }
-        if($isCompleted == 2) {
+        if ($isCompleted == 2) {
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }
@@ -148,12 +149,13 @@
         ]);
     }
 
-    public function countUserOrder($userId, $isCompleted) {
+    public function countUserOrder($userId, $isCompleted)
+    {
         $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
+        if ($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
         }
-        if($isCompleted == 2) {
+        if ($isCompleted == 2) {
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }

@@ -64,7 +64,7 @@ class OrderController extends BaseController
         if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
             $shipperId = $_SESSION["user"]["id"];
         }
-
+        
         // kiểm tra còn hạn
         $state = $isCompleted;
 
@@ -75,7 +75,7 @@ class OrderController extends BaseController
                 'where' => "id = '{$_SESSION['user']['id']}'"
             ])->data[0];
             $data = [
-                'orders' => $orders,
+                'orders' => $orders->data,
                 'state' => $state,
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,

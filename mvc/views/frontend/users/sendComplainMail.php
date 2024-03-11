@@ -49,6 +49,11 @@
     <div class="wrapper">
         <h3 class="text-white text-center">Send Complain Mail</h3>
         <form method="post">
+            <select name="type" class="form-select">
+                <option value="1">Wesite</option>
+                <option value="2">Đơn hàng</option>
+                <option value="3">Dịch vụ</option>
+            </select>
             <textarea class="form-control" spellcheck="false" placeholder="Type something here..." name="complainMail" required></textarea>
             <button type="submit" class="btn btn-primary mt-3" name="btnSendComplainMail">Send</button>
         </form>

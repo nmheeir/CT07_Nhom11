@@ -112,14 +112,9 @@ $fn = convertToReadableString($action);
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
-=======
 </div>
 <script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
 <script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
->>>>>>> dacab501558ae272f58d447cb5a9d6c59706ff8a
 </body>
 
 </html>

@@ -26,7 +26,6 @@ function sendMail($recipient, $subject, $message)
         if (!$mail->Send()) {
             throw new Exception("Error while sending Email.");
         } else {
-            echo "Email sent successfully";
             return true;
         }
     } catch (Exception $e) {
@@ -51,13 +50,14 @@ function sendVerifyCode($mail) {
     sendMail($mail, $subject, $message);
 }
 
-function sendComplainMail($_message, $user) {
+function sendComplainMail($type, $_message, $user) {
     $baseModel = new BaseModel;
 
     $mail = "nmhgame001@gmail.com";
     $subject = "Complain Email";
     $message = "From " . $user . ". Message: " . $_message;
     $baseModel->save('complain', [
+        'type' => $type,
         'username' => $user,
         'content' => $_message
     ]);

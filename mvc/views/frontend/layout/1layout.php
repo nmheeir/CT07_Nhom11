@@ -1,6 +1,11 @@
 <?
 
 $mainUser = $data['mainUser'];
+
+echo "<pre>";
+echo "data";
+print_r($data);
+echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +15,7 @@ $mainUser = $data['mainUser'];
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Master | <? echo convertToReadableString($action) ?> </title>
     <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
@@ -36,7 +41,7 @@ $mainUser = $data['mainUser'];
         <div class="row flex-nowrap fixed">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 my-sidebar-bg">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <a href="User/Home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -47,7 +52,7 @@ $mainUser = $data['mainUser'];
                         </li>
                         <li>
                             <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng của công ty</span></a>
+                                <i class="fs-4 bi-bag"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng của công ty</span></a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
                                 <li class="w-100">
                                     <a href="Order/companyOrderList/0" class="nav-link px-0"><i class="bi bi-bag-x-fill"></i> <span class="d-none d-sm-inline">Chưa hoàn thành</span></a>
@@ -65,7 +70,7 @@ $mainUser = $data['mainUser'];
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Chức năng</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-plus-square"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
+                                    <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-bag-plus"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
                                 </li>
                                 <li>
                                     <a href="User/update" class="nav-link px-0"><i class="bi bi-person-fill-gear"></i> <span class="d-none d-sm-inline">Chỉnh sửa thông tin</span></a>
