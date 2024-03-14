@@ -71,7 +71,7 @@
             </div>
         </form>
     </div>
-    <script src="../public/js/registerValidate.js"></script>
+    <script src="../TEST_3/public/js/registerValidate.js"></script>
 </body>
 
 </html>

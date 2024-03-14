@@ -9,4 +9,5 @@ return array(
     '6f516910e17e0de102242da458ae603c' => $baseDir . '/mvc/inc/send_mail.php',
     'd16a88821dce0f2c4fd08568c18c136a' => $baseDir . '/mvc/inc/checkLogin.php',
     '85032b7cf8b4f412cb606d8ef77550b6' => $baseDir . '/mvc/inc/checkUploadFile.php',
+    '83e8a017afe4539a7859b314a54f2349' => $baseDir . '/mvc/inc/action_process.php',
 );

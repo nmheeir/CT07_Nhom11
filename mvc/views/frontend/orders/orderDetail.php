@@ -70,8 +70,13 @@
         <div>
             <strong>Hoàn thành trước:</strong> 
             <br>
-            <?php echo $data['order']['deadline']; ?>
+            <?php if (isset($data['order']['deadline'])) {
+                echo $data['order']['deadline'];
+            } else {
+                echo "Không có thời hạn";
+            } ?>
         </div>
+
         <?php echo $statusButton; ?>
         <a class="btn btn-primary w-100 mt-1" href="Order/updateOrder/<?echo $data['order']['id']?>">Chỉnh sửa đơn hàng</a>
     </div>

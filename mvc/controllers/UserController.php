@@ -43,7 +43,7 @@ class UserController extends BaseController
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
             'data' => ['user' => $user, 'mainUser' => $user[0]],
             'page' => 'users',
-            'action' => 'update'
+            'action' => 'updateInformation'
         ]);
     }
     public function companyMember($page = 1)
@@ -63,6 +63,7 @@ class UserController extends BaseController
                         'where' => "company_id = '{$_SESSION['user']['company_id']}'",
                         'limit' => 10,
                         'offset' => $page - 1
+                        'order_by' => 'role_id asc'
                     ]
                 )->data;
             }
@@ -174,8 +175,9 @@ class UserController extends BaseController
         )->data[0];
 
         if (isset($_POST['btnSendComplainMail'])) {
+            $type = $_POST['type'];
             $message = $_POST['complainMail'];
-            sendComplainMail($message, $_SESSION['user']['username']);
+            sendComplainMail($type ,$message, $_SESSION['user']['username']);
         }
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -194,12 +196,30 @@ class UserController extends BaseController
             ]
         )->data[0];
 
-        $listMail = $this->userModel->get('complain');
+        $listMail = $this->userModel->get('complain', [
+            'order_by' => 'complain_time desc'
+        ]);
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
             'data' => ['mainUser' => $mainUser, 'mail' => $listMail],
             'page' => 'users',
-            'action' => "getMail"
+            'action' => "mail"
         ]);
+    }
+    function fetchMailByType($type) {
+        $company_id = $_SESSION['user']['company_id'];
+        if ($type == 0) {
+            $list = $this->userModel->get('complain', [
+                'where' => "company_id = $company_id"
+            ]);
+        }
+        else {
+            $list = $this->userModel->get('complain', [
+                'where' => "type = $type AND company_id = $company_id"
+            ]);
+        }
+        
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($list);
     }
 }

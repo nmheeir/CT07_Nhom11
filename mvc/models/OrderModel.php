@@ -1,6 +1,6 @@
-<?class OrderModel extends BaseModel
+<? class OrderModel extends BaseModel
 {
-    
+
     private $id;
     private $companyId;
     private $shipperId;
@@ -65,6 +65,7 @@
         // chuyển dạng deadline
         $dateString = $data["deadline"];
         $timestamp = strtotime($dateString);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $data["deadline"] = date('Y-m-d H:i:s', $timestamp);
 
         $this->save(self::TABLE_NAME, $data);
@@ -74,10 +75,10 @@
     public function getUserOrders($isCompleted = 0, $shipperId = null, $page = 1, $created_at_timestamp, $deadline_timestamp) {
         try {
             $checkIsOutOfDate = "";
-            if($isCompleted == 0) {
+            if ($isCompleted == 0) {
                 $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
             }
-            if($isCompleted == 2) {
+            if ($isCompleted == 2) {
                 $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
                 $isCompleted = 0;
             }
@@ -92,10 +93,9 @@
                 'limit' => 10,
                 'offset' => ($page-1)  * 10
             ]);
-    
+
             return new DataView(true, $orders, "OK");
-        }
-        catch (Exception $e){
+        } catch (Exception $e) {
             return new DataView(false, null, "có lỗi ở getUserOrders");
         }
     }
@@ -143,10 +143,10 @@
 
     public function countCompanyOrder($companyId, $isCompleted, $created_at_timestamp, $deadline_timestamp) {
         $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
+        if ($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
         }
-        if($isCompleted == 2) {
+        if ($isCompleted == 2) {
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }
@@ -163,10 +163,10 @@
 
     public function countUserOrder($userId, $isCompleted, $created_at_timestamp, $deadline_timestamp) {
         $checkIsOutOfDate = "";
-        if($isCompleted == 0) {
+        if ($isCompleted == 0) {
             $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
         }
-        if($isCompleted == 2) {
+        if ($isCompleted == 2) {
             $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
             $isCompleted = 0;
         }
