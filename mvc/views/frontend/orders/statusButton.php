@@ -11,7 +11,6 @@
         else {
             $orderDeadline = strtotime($order['deadline']);
             $currentTime = time();
-            echo $order['deadline'] == NULL;
             if ($orderDeadline > $currentTime || $order['deadline'] == NULL) {
                 $statusButton = $doneButton;
             } else {

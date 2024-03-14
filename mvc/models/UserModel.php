@@ -87,7 +87,7 @@ class UserModel extends BaseModel {
             return new DataView(true, $checkIsExistUsername , "USERNAME đã tồn tại");
         }
         else {
-            return new DataView(false, null , "USERNAME không tồn tại");
+            return new DataView(false, $checkIsExistUsername , "USERNAME không tồn tại");
         }
     }
 

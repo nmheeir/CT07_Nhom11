@@ -18,6 +18,7 @@ class BaseModel extends Database {
         $limit = isset($options['offset']) && isset($options['limit']) ? 'LIMIT ' . $options['offset'] . ',' . $options['limit'] : '';
 
         $sql = "SELECT $select FROM `$table` $where $order_by $limit $group_by";
+        // echo $sql;
         $query = $this->_query($this->connect, $sql);
         $data = [];
 

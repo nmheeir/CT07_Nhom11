@@ -4,6 +4,17 @@
     <div class="row">
         <div class="col-lg-12">
             <h2 class="h3 text-center text-white pb-3">Các thành viên trong công ty của bạn</h2>
+
+            <!-- tìm kiếm -->
+            <form method="get" class="w-100 m-2">
+                <label for="username" class="d-block text-white bold">Tìm kiếm nhân viên</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input type="text" class="form-control" placeholder="Nhập username của nhân viên..." aria-label="Username" aria-describedby="basic-addon1" name="username">
+                    <button class="btn btn-outline-secondary" type="submit" name="btnSubmit"><i class="bi bi-search"></i></button>
+                </div>
+            </form>
+
             <?
             foreach ($data['user'] as $user) {
                 $style = '';

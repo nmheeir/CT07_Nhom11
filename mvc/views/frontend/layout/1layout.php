@@ -87,6 +87,9 @@ $mainUser = $data['mainUser'];
                                 <li>
                                     <a href="User/getMail" class="nav-link px-0"><i class="bi bi-envelope"></i> <span class="d-none d-sm-inline">Mail</span></a>
                                 </li>
+                                <li>
+                                    <a href="User/findUser" class="nav-link px-0"> <span class="d-none d-sm-inline">Tìm nhân viên</span> 4</a>
+                                </li>
                             </ul>
                         </li>
                         <li>

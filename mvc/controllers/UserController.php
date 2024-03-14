@@ -50,26 +50,31 @@ class UserController extends BaseController
     {
         // check role
         AuthenciationController::checkRoleIsManager();
-        $allUser = $this->userModel->getUser(
-            [
-                'where' => "company_id = '{$_SESSION['user']['company_id']}'",
-                'order_by' => 'role_id asc'
-            ]
-        )->data;
-
-        $mainId = $_SESSION['user']['id'];
-        $mainUser = $this->userModel->getUser(
-            [
-                'where' => "id = '{$mainId}'"
-            ]
-        )->data[0];
-
-
-        $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => ['user' => $allUser, 'mainUser' => $mainUser],
-            'page' => 'users',
-            'action' => "companyMember",
-        ]);
+            // Xử lí phần tìm kiếm
+            if(isset($_GET['btnSubmit'])) {
+                $usernameSearch = $_GET['username'];
+                $allUser = $this->userModel->getUserByUsername($usernameSearch)->data->data;
+            }
+            else {
+                $allUser = $this->userModel->getUser(
+                    [
+                        'where' => "company_id = '{$_SESSION['user']['company_id']}'",
+                    ]
+                )->data;
+            }
+    
+            $mainId = $_SESSION['user']['id'];
+            $mainUser = $this->userModel->getUser(
+                [
+                    'where' => "id = '{$mainId}'"
+                ]
+            )->data[0];
+            $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
+                'data' => ['user' => $allUser, 'mainUser' => $mainUser],
+                'page' => 'users',
+                'action' => "companyMember",
+            ]);
+        
     }
 
     public function detail($id)
