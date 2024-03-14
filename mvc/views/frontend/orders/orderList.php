@@ -28,7 +28,7 @@
     }
 </style>
 <!-- hiện order -->
-<div style="min-height: 100vh;">
+<div class="container" style="min-height: 100vh;">
     <div class="container-lg py-4">
         <div class="row justify-content-center g-2">
             <h3 class="text-white text-center">

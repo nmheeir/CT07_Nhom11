@@ -19,7 +19,6 @@ class App {
         else {
             include "../TEST_3/mvc/views/_404.php";
         }
-        require_once "../TEST_3/mvc/controllers/" . $this->controller . "Controller.php";
         $controllerName = $this->controller . "Controller";
         $this->controller = new $controllerName;
 
@@ -30,13 +29,13 @@ class App {
             }
             else {
                 include "../TEST_3/mvc/views/_404.php";
+                exit();
             }
             unset($arr[1]);
         }
 
         $this->params = $arr ? array_values($arr) : [];
         call_user_func_array([$this->controller, $this->action], $this->params);
-        // Params
     }
 
     private function processURL() {

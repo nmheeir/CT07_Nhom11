@@ -65,6 +65,7 @@ function updateRole(userId) {
     .then(data => {
         console.log(data.message)
         showModalWithoutCallBack("Đã thay đổi chức vụ thành công")
+        location.reload();
     })
     .catch(error => {
         console.error('Error:', error);
@@ -83,7 +84,6 @@ function updateUser() {
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
     avatar: "avt" + "." + fileType,
-    // avatar: "ok"
   };
 
   fetch(`http://localhost/Project/TEST_3/User/updateUser`, {

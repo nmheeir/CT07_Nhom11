@@ -67,9 +67,9 @@
                 <a href="http://localhost/Project/TEST_3/Authenciation/login" class="link-info">Đăng nhập</a>
             </div>
         </form>
-        <p>Thông tin tài khoản bạn đã đăng kí cũng chính là tài khoản master của công ty</p>
+        <p class="text-center">Thông tin tài khoản bạn đã đăng kí cũng chính là tài khoản master của công ty</p>
     </div>
-    <script src="../public/js/registerValidate.js"></script>
+    <script src="../TEST_3/public/js/registerValidate.js"></script>
 </body>
 
 </html>

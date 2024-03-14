@@ -3,12 +3,6 @@
 
 $mainUser = $data['mainUser'];
 
-echo "<pre>";
-echo 'data';
-print_r($data);
-echo "</pre>";
-
-require_once "../TEST_3/mvc/inc/action_process.php";
 $fn = convertToReadableString($action);
 ?>
 
@@ -19,10 +13,10 @@ $fn = convertToReadableString($action);
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/user.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css"/>
+    <title>Shipper | <? echo $fn ?></title>
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
     <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .my-gradient {
@@ -59,13 +53,13 @@ $fn = convertToReadableString($action);
                                 <i class="bi bi-car-front"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng của bạn</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Order/userOrderList/0" class="nav-link px-0"> <span class="d-none d-sm-inline">Chưa hoàn thành</span><i class="bi bi-bag-x-fill"></i></a>
+                                    <a href="Order/userOrderList/0" class="nav-link px-0"><i class="bi bi-bag-x-fill"></i> <span class="d-none d-sm-inline">Chưa hoàn thành</span></a>
                                 </li>
                                 <li>
-                                    <a href="Order/userOrderList/1" class="nav-link px-0"> <span class="d-none d-sm-inline">Đã hoàn thành</span><i class="bi bi-bag-check-fill"></i></a>
+                                    <a href="Order/userOrderList/1" class="nav-link px-0"><i class="bi bi-bag-check-fill"></i> <span class="d-none d-sm-inline">Đã hoàn thành</span></a>
                                 </li>
                                 <li>
-                                    <a href="Order/userOrderList/2" class="nav-link px-0"> <span class="d-none d-sm-inline">Quá hạn</span><i class="bi bi-calendar2-x"></i></a>
+                                    <a href="Order/userOrderList/2" class="nav-link px-0"><i class="bi bi-calendar2-x"></i> <span class="d-none d-sm-inline">Quá hạn</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -78,9 +72,6 @@ $fn = convertToReadableString($action);
                                 </li>
                                 <li>
                                     <a href="User/sendComplainMail" class="nav-link px-0"><i class="bi bi-envelope"></i> <span class="d-none d-sm-inline">Gửi mail khiếu nại</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
                                 </li>
                             </ul>
                         </li>
@@ -112,14 +103,9 @@ $fn = convertToReadableString($action);
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
-=======
-</div>
-<script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
->>>>>>> dacab501558ae272f58d447cb5a9d6c59706ff8a
+    </div>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

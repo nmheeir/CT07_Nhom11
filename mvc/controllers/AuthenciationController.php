@@ -15,8 +15,7 @@ class AuthenciationController extends BaseController
     public static function checkRoleIsMaster() {
         $roleId = $_SESSION["user"]["role_id"];
         if($roleId > 1) {
-            echo "alert('Bạn không có đủ quyền để vào chức năng này')";
-            BaseController::loadView('_404');
+            $this->loadView('_404');
             exit;
         };
     }

@@ -28,12 +28,12 @@ function showModalWithCallBack(message, callback, ...params) {
         closeModal(); // Đóng modal
         callback(...params); // Gọi callback
     });
-    console.log("chạy show")
+    console.log("chạy show modal")
 }
 
 
 function showModalWithoutCallBack(message) {
-    console.log("cc")
+    console.log("chạy show modalWithoutCallback")
     var container = document.querySelector('.container');
     var modal = document.createElement('div');
     modal.classList.add('modalContainer')
