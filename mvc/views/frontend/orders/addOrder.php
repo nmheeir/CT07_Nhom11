@@ -31,7 +31,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
         <div class="mb-3">
             <label for="shipper_id">Người giao hàng:</label>
             <select aria-label="Chọn người giao hàng" id="shipper_id" name="shipper_id">
-                <option selected>Open this select menu</option>
+                <option disabled selected hidden>Chọn nhân viên giao hàng</option>
                 <?php
                 foreach ($data['shipperList'] as $shipper) {
                     echo "<option value='{$shipper['id']}'>{$shipper['fullname']}</option>";

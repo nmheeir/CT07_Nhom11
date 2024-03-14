@@ -59,6 +59,7 @@ class UserController extends BaseController
                 $allUser = $this->userModel->getUser(
                     [
                         'where' => "company_id = '{$_SESSION['user']['company_id']}'",
+                        'order_by' => 'role_id asc'
                     ]
                 )->data;
             }

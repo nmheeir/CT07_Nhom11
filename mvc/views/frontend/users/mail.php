@@ -19,7 +19,7 @@ $complainMail = $data['mail'];
     <div class="m-3 xl">
         <form method="post">
             <select class="form-select mb-5" value="0" name="type" id="selectType" style="width: auto" onchange="fetchMailByType(this.value)">
-                <option disabled selected hidden>Option</option>
+                <option disabled selected hidden>Lựa chọn</option>
                 <option value="0">Tất cả</option>
                 <option value="1">Website</option>
                 <option value="2">Đơn hàng</option>

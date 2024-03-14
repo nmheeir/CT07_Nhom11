@@ -2,12 +2,12 @@
 
 $mainUser = $data['mainUser'];
 
-// echo "<pre>";
-// echo "data";
-// print_r($data);
-// print_r($_SESSION);
-// print_r($action);
-// echo "</pre>";
+$fn = $action;
+if (isset($data['orderId']) && isset($data['orderDetail'])) {
+    $fn = "Update Order";
+} else {
+    $fn = convertToReadableString($fn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +18,7 @@ $mainUser = $data['mainUser'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Master |
-        <? if (isset($data['orderId']) && isset($data['orderDetail'])) {
-            echo "Update Order";
-        }
-        else {
-            echo convertToReadableString($action);
-        }
-        ?> </title>
+        Master | <? echo $fn; ?> </title>
     <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
@@ -86,9 +79,6 @@ $mainUser = $data['mainUser'];
                                 </li>
                                 <li>
                                     <a href="User/getMail" class="nav-link px-0"><i class="bi bi-envelope"></i> <span class="d-none d-sm-inline">Mail</span></a>
-                                </li>
-                                <li>
-                                    <a href="User/findUser" class="nav-link px-0"> <span class="d-none d-sm-inline">Tìm nhân viên</span> 4</a>
                                 </li>
                             </ul>
                         </li>

@@ -1,5 +1,12 @@
 <?
 $mainUser = $data['mainUser'];
+
+$fn = $action;
+if (isset($data['orderId']) && isset($data['orderDetail'])) {
+    $fn = "Update Order";
+} else {
+    $fn = convertToReadableString($fn);
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,14 +17,7 @@ $mainUser = $data['mainUser'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        Manager |
-        <? if (isset($data['orderId']) && isset($data['orderDetail'])) {
-            echo "Update Order";
-        } else {
-            echo convertToReadableString($action);
-        }
-        ?>
-    </title>
+        Manager | <? echo $fn ?></title>
     <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />

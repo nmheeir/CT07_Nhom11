@@ -65,6 +65,7 @@ function updateRole(userId) {
     .then(data => {
         console.log(data.message)
         showModalWithoutCallBack("Đã thay đổi chức vụ thành công")
+        location.reload();
     })
     .catch(error => {
         console.error('Error:', error);
