@@ -62,7 +62,7 @@ class UserController extends BaseController
                     [
                         'where' => "company_id = '{$_SESSION['user']['company_id']}'",
                         'limit' => 10,
-                        'offset' => $page - 1
+                        'offset' => $page - 1,
                         'order_by' => 'role_id asc'
                     ]
                 )->data;
