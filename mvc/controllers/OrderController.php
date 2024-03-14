@@ -80,7 +80,7 @@ class OrderController extends BaseController
                 'action' => 'userOrderList',
                 'shipperId' => $shipperId,
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10 - 1),
+                'totalPage' => ceil($totalOrder / 10),
                 'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -96,7 +96,7 @@ class OrderController extends BaseController
     public function companyOrderList($isCompleted = 0, $page = 1)
     {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         // kiểm tra còn hạn
         $state = $isCompleted;
@@ -111,7 +111,7 @@ class OrderController extends BaseController
                 'state' => $state,
                 'action' => 'companyOrderList',
                 'page' => $page,
-                'totalPage' => ceil($totalOrder / 10 - 1),
+                'totalPage' => ceil($totalOrder / 10),
                 'mainUser' => $mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -127,7 +127,7 @@ class OrderController extends BaseController
     public function addOrder()
     {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",
@@ -149,7 +149,7 @@ class OrderController extends BaseController
     public function updateOrder($id)
     {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $shipperList = $this->userModel->getUser([
             'where' => "role_id = 3 AND company_id = 1",

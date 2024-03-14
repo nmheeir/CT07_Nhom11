@@ -12,23 +12,23 @@ class AuthenciationController extends BaseController
         $this->companyModel = new CompanyModel;
     }
 
-    public static function checkRole() {
+    public static function checkRoleIsMaster() {
         $roleId = $_SESSION["user"]["role_id"];
-        if($roleId > 2) {
-            echo "alert('Bạn không có đủ quyền để vào chức năng này')";
-            header("Location: /Project/TEST_3/User/home");
+        if($roleId > 1) {
+            $this->loadView('_404');
             exit;
         };
     }
 
-    public static function checkIsMaster() {
+    public static function checkRoleIsManager() {
         $roleId = $_SESSION["user"]["role_id"];
-        if($roleId != 1) {
+        if($roleId > 2) {
             echo "alert('Bạn không có đủ quyền để vào chức năng này')";
-            header("Location: /Project/TEST_3/User/home");
+            BaseController::loadView('_404');
             exit;
         };
     }
+
 
     public function login()
     {

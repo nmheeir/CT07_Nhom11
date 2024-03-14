@@ -23,7 +23,7 @@
             </div>
             <button type="submit" name="btnVerify">Verify OTP</button>
         </form>
-        <p ><? echo $data['error'] ?></p>
+        <p><? echo $data['error'] ?></p>
     </div>
 </body>
 
@@ -80,4 +80,31 @@
 
     //focus the first input which index is 0 on window load
     window.addEventListener("load", () => inputs[0].focus());
+
+    //Ngăn người dùng nhấn nút Enter khi chưa nhập xong
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputs = document.querySelectorAll("input");
+
+        // Lặp qua tất cả các ô nhập
+        inputs.forEach(input => {
+            input.addEventListener("keydown", function(event) {
+                // Nếu người dùng nhấn nút Enter
+                if (event.key === "Enter") {
+                    // Kiểm tra xem có ô nhập nào không được điền không
+                    let isAnyInputEmpty = false;
+                    inputs.forEach(input => {
+                        if (input.value === "") {
+                            isAnyInputEmpty = true;
+                        }
+                    });
+
+                    // Nếu có ô nhập nào chưa được điền, ngăn chặn hành động mặc định của nút Enter
+                    if (isAnyInputEmpty) {
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+            });
+        });
+    });
 </script>

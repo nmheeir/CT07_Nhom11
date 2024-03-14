@@ -43,16 +43,17 @@ class UserController extends BaseController
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
             'data' => ['user' => $user, 'mainUser' => $user[0]],
             'page' => 'users',
-            'action' => 'update'
+            'action' => 'updateInformation'
         ]);
     }
     public function companyMember()
     {
         // check role
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
         $allUser = $this->userModel->getUser(
             [
                 'where' => "company_id = '{$_SESSION['user']['company_id']}'",
+                'order_by' => 'role_id asc'
             ]
         )->data;
 
@@ -102,8 +103,8 @@ class UserController extends BaseController
     }
     
 
-    public function activeControl()
-    {
+    public function activeControl() {
+        AuthenciationController::checkRoleIsManager();
         $userUpdateData = json_decode(file_get_contents("php://input"), true);
         if ($userUpdateData !== null) {
             // Dữ liệu đã được nhận thành công
@@ -114,8 +115,8 @@ class UserController extends BaseController
         }
     }
 
-    public function deleteUser()
-    {
+    public function deleteUser() {
+        AuthenciationController::checkRoleIsManager();
         $userData = json_decode(file_get_contents("php://input"), true);
         if ($userData !== null) {
             // Dữ liệu đã được nhận thành công
@@ -128,6 +129,34 @@ class UserController extends BaseController
         }
     }
 
+
+    public function updateRole() {
+        // if()
+        AuthenciationController::checkRoleIsMaster();
+        $userData = json_decode(file_get_contents("php://input"), true);
+        if ($userData !== null) {
+            // // Dữ liệu đã được nhận thành công
+            $this->userModel->updateRole($userData["id"]);
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'đã cập nhật chức vụ nhân viên' ]);
+        } else {
+            // Đối với một số lý do nào đó, không thể giải mã JSON
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['message' => 'có lỗi']);
+        }
+    }
+
+    public function updateUser() 
+    {
+        $userUpdateData = json_decode(file_get_contents("php://input"), true);
+        if ($userUpdateData !== null) {
+            // Dữ liệu đã được nhận thành công
+            $this->userModel->saveUser($userUpdateData);
+        } else {
+            // Đối với một số lý do nào đó, không thể giải mã JSON
+            echo "Failed to decode JSON data";
+        }
+    }
     public function sendComplainMail() {
         $mainUser = $this->userModel->getUser(
             [
@@ -149,7 +178,7 @@ class UserController extends BaseController
     }
 
     public function getMail() {
-        AuthenciationController::checkRole();
+        AuthenciationController::checkRoleIsManager();
 
         $mainUser = $this->userModel->getUser(
             [
@@ -164,18 +193,23 @@ class UserController extends BaseController
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
             'data' => ['mainUser' => $mainUser, 'mail' => $listMail],
             'page' => 'users',
-            'action' => "getMail"
+            'action' => "mail"
         ]);
     }
-
-    function fetchMailByType() {
-        $typeMail = json_decode(file_get_contents("php://input"), true);
-
-        $listTypeMail = $this->userModel->get('complain', [
-            'where' => "type = {$typeMail}"
-        ]);
-
-        json_encode($listTypeMail);
-        header('Content-Type: application/json');
+    function fetchMailByType($type) {
+        $company_id = $_SESSION['user']['company_id'];
+        if ($type == 0) {
+            $list = $this->userModel->get('complain', [
+                'where' => "company_id = $company_id"
+            ]);
+        }
+        else {
+            $list = $this->userModel->get('complain', [
+                'where' => "type = $type AND company_id = $company_id"
+            ]);
+        }
+        
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($list);
     }
 }

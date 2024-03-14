@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="http://localhost/Project/TEST_3/" />
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/login.css">
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <title>Company Register</title>
-    <link rel="stylesheet" href="../public/css/base.css" />
-    <link rel="stylesheet" href="../public/css/login.css">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" />
     <style>
         /* Thêm CSS cho hiển thị thông báo lỗi */
         .error-message {
@@ -66,9 +67,9 @@
                 <a href="http://localhost/Project/TEST_3/Authenciation/login" class="link-info">Đăng nhập</a>
             </div>
         </form>
-        <p>Thông tin tài khoản bạn đã đăng kí cũng chính là tài khoản master của công ty</p>
+        <p class="text-center">Thông tin tài khoản bạn đã đăng kí cũng chính là tài khoản master của công ty</p>
     </div>
-    <script src="../public/js/registerValidate.js"></script>
+    <script src="../TEST_3/public/js/registerValidate.js"></script>
 </body>
 
 </html>

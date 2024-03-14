@@ -12,8 +12,7 @@
     <div class="denied__wrapper">
         <h1>404</h1>
         <h3>
-            LOST IN <span>SPACE</span> App-Name? Hmm, looks like that page doesn't
-            exist.
+            Có chắc là truy cập đúng link chưa ?
         </h3>
         <img id="astronaut" src="../TEST_3/public/upload/astronaut.svg" />
         <img id="planet" src="../TEST_3/public/upload/planet.svg" />

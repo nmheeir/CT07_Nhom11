@@ -1,12 +1,13 @@
 function activeUpdate(userId, activeUpdate) {
-  // Dữ liệu bạn muốn gửi lên server
-  const dataToSend = {
-    id: userId,
-    active: activeUpdate,
-  };
-  // Sử dụng Fetch API để thực hiện PUT request
-  fetch(`http://localhost/Project/TEST_3/User/activeControl`, {
-    method: "PUT",
+
+    console.log("cập nhật active")
+    const dataToSend = {
+        id: userId,
+        active: activeUpdate
+    };
+    // Sử dụng Fetch API để thực hiện PUT request
+    fetch(`http://localhost/Project/TEST_3/User/activeControl`, {
+    method: 'PUT',
     headers: {
       "Content-Type": "application/json",
     },
@@ -37,8 +38,36 @@ function deleteUser(userId) {
     .then((data) => {
       console.log(data.message);
     })
-    .catch((error) => {
-      console.error("Error:", error);
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        console.log(data.message)
+        window.location.href = "http://localhost/Project/TEST_3/User/companyMember";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function updateRole(userId) {
+    console.log(userId);
+    const dataToSend = {
+        id: userId
+    };
+    // Sử dụng Fetch API để thực hiện PUT request
+    fetch(`http://localhost/Project/TEST_3/User/updateRole`, {
+    method: 'PUT',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(dataToSend),
+    })
+    .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
+    .then(data => {
+        console.log(data.message)
+        showModalWithoutCallBack("Đã thay đổi chức vụ thành công")
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 }
 
@@ -54,17 +83,15 @@ function updateUser() {
     email: document.getElementById("email").value,
     phone: document.getElementById("phone").value,
     avatar: "avt" + "." + fileType,
-    // avatar: "ok"
   };
 
-  fetch(`http://localhost/Project/TEST_3/User/activeControl`, {
+  fetch(`http://localhost/Project/TEST_3/User/updateUser`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(dataToSend),
   }).then(() => {
-    location.reload();
   });
   console.log("Oke").catch((error) => {
     console.error("Error:", error);

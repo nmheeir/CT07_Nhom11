@@ -47,9 +47,10 @@ function updateOrder() {
     .then((response) => response.json()) // Chuyển đổi phản hồi sang JSON
     .then((data) => {
       showToast(data.message);
+      showModalWithoutCallBack(data.message); // Chỉ xử lý một lần ở đây
     })
     .catch((error) => {
-      showToast(
+      showModalWithoutCallBack(
         "Có lỗi, hãy đảm bảo đã điền đủ thông tin và chọn địa chỉ ở phần gợi ý."
       );
     });

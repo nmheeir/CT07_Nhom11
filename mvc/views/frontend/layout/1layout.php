@@ -2,10 +2,12 @@
 
 $mainUser = $data['mainUser'];
 
-echo "<pre>";
-echo "data";
-print_r($data);
-echo "</pre>";
+// echo "<pre>";
+// echo "data";
+// print_r($data);
+// print_r($_SESSION);
+// print_r($action);
+// echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +17,15 @@ echo "</pre>";
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master | <? echo convertToReadableString($action) ?> </title>
+    <title>
+        Master |
+        <? if (isset($data['orderId']) && isset($data['orderDetail'])) {
+            echo "Update Order";
+        }
+        else {
+            echo convertToReadableString($action);
+        }
+        ?> </title>
     <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
     <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
@@ -36,7 +46,6 @@ echo "</pre>";
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row flex-nowrap fixed">
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 my-sidebar-bg">
@@ -69,7 +78,7 @@ echo "</pre>";
                             <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Chức năng</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                                <li class="w-100">
+                                <li>
                                     <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-bag-plus"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
                                 </li>
                                 <li>
@@ -77,9 +86,6 @@ echo "</pre>";
                                 </li>
                                 <li>
                                     <a href="User/getMail" class="nav-link px-0"><i class="bi bi-envelope"></i> <span class="d-none d-sm-inline">Mail</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
                                 </li>
                             </ul>
                         </li>

@@ -58,6 +58,7 @@ function sendComplainMail($type, $_message, $user) {
     $message = "From " . $user . ". Message: " . $_message;
     $baseModel->save('complain', [
         'type' => $type,
+        'company_id' => $_SESSION['user']['company_id'],
         'username' => $user,
         'content' => $_message
     ]);

@@ -1,3 +1,7 @@
+<?
+$mainUser = $data['mainUser'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +9,18 @@
     <base href="http://localhost/Project/TEST_3/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/user.css"/>
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css"/>
+    <title>
+        Manager |
+        <? if (isset($data['orderId']) && isset($data['orderDetail'])) {
+            echo "Update Order";
+        } else {
+            echo convertToReadableString($action);
+        }
+        ?>
+    </title>
+    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
+    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
     <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .my-gradient {
@@ -60,16 +72,10 @@
                                 <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Chức năng</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-plus-square"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
+                                    <a href="Order/addOrder" class="nav-link px-0"><i class="bi bi-bag-plus"></i> <span class="d-none d-sm-inline">Thêm đơn hàng</span></a>
                                 </li>
                                 <li>
                                     <a href="User/update" class="nav-link px-0"> <i class="bi bi-person-fill-gear"></i> <span class="d-none d-sm-inline">Chỉnh sửa thông tin</span></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
                                 </li>
                             </ul>
                         </li>
@@ -81,8 +87,14 @@
                     <hr>
                     <div class="dropdown pb-4">
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="../TEST_3/public/upload/Kiki.webp" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1"><? echo $_SESSION["user"]["username"] ?></span>
+                            <?
+                            if (!empty($mainUser['avatar'])) {
+                                echo "<img src=\"../TEST_3/public/upload/avatars/{$mainUser['username']}/{$mainUser['avatar']}\" alt='...' width='30' height='30' class='rounded-circle'>";
+                            } else {
+                                echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' width='30' height='30' class='rounded-circle'>";
+                            }
+                            ?>
+                            <span class="d-none d-sm-inline mx-1"><? echo $_SESSION["user"]["username"]; ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                             <li><a class="dropdown-item" href="Authenciation/logout">Sign out</a></li>
@@ -99,14 +111,9 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
-    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
-=======
-</div>
-<script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
-<script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> 
->>>>>>> dacab501558ae272f58d447cb5a9d6c59706ff8a
+    </div>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

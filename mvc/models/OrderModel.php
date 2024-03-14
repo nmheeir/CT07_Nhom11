@@ -65,6 +65,7 @@
         // chuyển dạng deadline
         $dateString = $data["deadline"];
         $timestamp = strtotime($dateString);
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
         $data["deadline"] = date('Y-m-d H:i:s', $timestamp);
 
         $this->save(self::TABLE_NAME, $data);
@@ -87,7 +88,7 @@
                 'order_by' => 'id asc',
                 'where' => "shipper_id = {$shipperId} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",
                 'limit' => 10,
-                'offset' => $page * 10
+                'offset' => ($page-1)  * 10
             ]);
 
             return new DataView(true, $orders, "OK");
@@ -108,15 +109,16 @@
                 $isCompleted = 0;
             }
 
-            $orders = $this->get(self::TABLE_NAME, [
-                'select' => '*',
-                'order_by' => 'id asc',
-                'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",
-                'limit' => 10,
-                'offset' => ($page - 1) * 10
-            ]);
-            return new DataView(true, $orders, "OK");
-        } catch (Exception $e) {
+        $orders = $this->get(self::TABLE_NAME ,[
+            'select' => '*',
+            'order_by' => 'id asc',
+            'where' => "company_id = {$_SESSION['user']['company_id']} AND is_completed = {$isCompleted} {$checkIsOutOfDate}",            
+            'limit' => 10,
+            'offset' => ($page-1) * 10
+        ]);
+        return new DataView(true, $orders, "OK");
+        }
+        catch (Exception $e){
             return new DataView(true, $orders, "có lỗi ở getCompanyOrder");
         }
     }

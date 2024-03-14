@@ -1,26 +1,26 @@
-function fetchMailByType() {
-  var selectedValue = document.getElementById("selectType").value;
-  // Dữ liệu bạn muốn gửi lên server
-  const dataToSend = {
-    type: selectedValue,
-  };
+function fetchMailByType(type) {
 
-  // Sử dụng Fetch API để thực hiện POST request
-  fetch("http://localhost/Project/TEST_3/User/fetchMailByType", {
-    method: "POST",
+  var selectedValue = type;
+
+  var url =
+    "http://localhost/Project/TEST_3/User/fetchMailByType/" +
+    encodeURIComponent(selectedValue);
+
+  // Sử dụng Fetch API để thực hiện GET request
+  fetch(url, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(dataToSend),
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log("Truy vấn thành công");
       // Xử lý dữ liệu trả về, có thể là hiển thị trong bảng
       displayData(data);
     })
-    .catch((error, data) => {
+    .catch((error) => {
       console.error("Error:", error);
-      console.log(data);
       // Xử lý lỗi (nếu cần)
     });
 }
@@ -34,13 +34,13 @@ function displayData(data) {
   data.forEach((mail) => {
     let style = "";
     switch (mail.type) {
-      case 1:
+      case "1":
         style = "table-primary";
         break;
-      case 2:
+      case "2":
         style = "table-secondary";
         break;
-      case 3:
+      case "3":
         style = "table-warning";
         break;
       default:
@@ -59,4 +59,17 @@ function displayData(data) {
     // Thêm dòng vào tbody của bảng
     tableBody.innerHTML += row;
   });
+}
+
+function getTypeName(type) {
+  switch (type) {
+    case "1":
+      return "Website";
+    case "2":
+      return "Đơn hàng";
+    case "3":
+      return "Dịch vụ";
+    default:
+      return "Không xác định";
+  }
 }
