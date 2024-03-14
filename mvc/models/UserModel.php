@@ -29,6 +29,13 @@ class UserModel extends BaseModel {
         }
     }
 
+    public function countUserOfCompany($company_id)  {
+        return $this->get(self::TABLE_NAME, [
+            'select' => 'COUNT(*) AS total_users',
+            'where' => 'company_id = ' . $company_id
+        ]); 
+    }
+
     //get array role
     public function getRole($role_id) {
         if ($this->roleId < $role_id) {
