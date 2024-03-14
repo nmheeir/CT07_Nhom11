@@ -6,7 +6,7 @@
             <h2 class="h3 text-center text-white pb-3">Các thành viên trong công ty của bạn</h2>
 
             <!-- tìm kiếm -->
-            <form method="get" class="w-100 m-2">
+            <form method="get" class="w-100 m-2 pe-2">
                 <label for="username" class="d-block text-white bold">Tìm kiếm nhân viên</label>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">@</span>
@@ -53,6 +53,15 @@
             }
             ?>
 
+            <?
+                 $this->loadView("frontend.component.paging",
+                 [
+                     'page' => $data['page'],
+                     'totalPage' => $data['totalPage'],
+                     'url' => "http://localhost/Project/TEST_3/User/companyMember" 
+                 ]
+             );
+            ?>
         </div>
     </div>
 </div>

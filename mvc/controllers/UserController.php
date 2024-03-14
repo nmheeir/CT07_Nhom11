@@ -46,19 +46,23 @@ class UserController extends BaseController
             'action' => 'update'
         ]);
     }
-    public function companyMember()
+    public function companyMember($page = 1)
     {
         // check role
         AuthenciationController::checkRoleIsManager();
+        $userCount = 1;
             // Xử lí phần tìm kiếm
             if(isset($_GET['btnSubmit'])) {
                 $usernameSearch = $_GET['username'];
                 $allUser = $this->userModel->getUserByUsername($usernameSearch)->data->data;
             }
             else {
+                $userCount = $this->userModel->countUserOfCompany($_SESSION['user']['company_id'])[0]['total_users'];
                 $allUser = $this->userModel->getUser(
                     [
                         'where' => "company_id = '{$_SESSION['user']['company_id']}'",
+                        'limit' => 10,
+                        'offset' => $page - 1
                     ]
                 )->data;
             }
@@ -70,7 +74,7 @@ class UserController extends BaseController
                 ]
             )->data[0];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data' => ['user' => $allUser, 'mainUser' => $mainUser],
+                'data' => ['user' => $allUser, 'mainUser' => $mainUser, 'totalPage' => ceil($userCount / 10), 'page' => $page],
                 'page' => 'users',
                 'action' => "companyMember",
             ]);

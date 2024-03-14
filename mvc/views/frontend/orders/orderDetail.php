@@ -6,11 +6,11 @@
    $statusButton = StatusButton($data['order']);
 ?>
 
-<div class="d-flex flex-column flex-md-row">
+<div class="d-flex flex-column flex-md-row p-2">
     <!-- Phần trái (bản đồ) -->
-    <div class="col-md-6 col-12 d-md-flex vh-100 -50">
+    <div class="col-md-6 col-12 d-md-flex vh-100 ">
     <iframe 
-        name="mapframe" style="width: 100%; height: 100%; padding: 25px"
+        name="mapframe" style="width: 100%; height:100%"
         src="https://www.google.com/maps?z=15&saddr=&output=embed&f=d&z=15&daddr=<?php echo "{$latitude},{$longitude}"; ?>">
     </iframe>
 
@@ -39,14 +39,39 @@
     </div>
 
     <!-- Phần phải (Thông tin chi tiết) -->
-    <div class="col-md-6 col-12 h-50 text-white p-4">
+    
+    <div class="col-md-6 col-12 text-white p-4 ps-3">
         <h2>Thông tin chi tiết</h2>
-        <p><strong>Latitude:</strong> <?php echo $latitude; ?></p>
-        <p><strong>Longitude:</strong> <?php echo $longitude; ?></p>
-        <p><strong>Thông tin về đơn hàng:</strong> <?php echo $data['order']['description']; ?></p>
-        <p><strong>Địa chỉ đơn hàng:</strong> <?php echo $data['order']['address']; ?></p>
-        <p><strong>Nhân viên giao hàng:</strong> <?php echo $data['order']['shipper_name']; ?></p>
-        <p><strong>Hoàn thành trước:</strong> <?php echo $data['order']['deadline']; ?></p>
+        <div class="">
+            <strong>Latitude:</strong> 
+            <br>
+            <?php echo $latitude; ?>
+        </div>
+        <div>
+            <strong>Longitude:</strong> 
+            <br>
+            <?php echo $longitude; ?>
+        </div>
+        <div>
+            <strong>Thông tin về đơn hàng:</strong> 
+            <br>
+            <?php echo $data['order']['description']; ?>
+        </div>
+        <div>
+            <strong>Địa chỉ đơn hàng:</strong> 
+            <br>
+            <?php echo $data['order']['address']; ?>
+        </div>
+        <div>
+            <strong>Nhân viên giao hàng:</strong> 
+            <br>
+            <?php echo $data['order']['shipper_name']; ?>
+        </div>
+        <div>
+            <strong>Hoàn thành trước:</strong> 
+            <br>
+            <?php echo $data['order']['deadline']; ?>
+        </div>
         <?php echo $statusButton; ?>
         <a class="btn btn-primary w-100 mt-1" href="Order/updateOrder/<?echo $data['order']['id']?>">Chỉnh sửa đơn hàng</a>
     </div>
