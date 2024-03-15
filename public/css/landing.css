@@ -567,7 +567,8 @@ section {
 
 #about .about-container .background {
   min-height: 300px;
-  background: url(../upload/landingPage/about-img.jpg) center top no-repeat;
+  background: url(../upload/landingPage/about-team.png) center;
+
   margin-bottom: 10px;
 }
 
