@@ -23,7 +23,7 @@
         <h2>Đăng nhập</h2>
         <form method="post" action="http://localhost/Project/TEST_3/Authenciation/login">
             <div class="user-box">
-                <input type="text" autocomplete="on" name="username" required <? if (isset($_SESSION["session_login"])) echo "value={$_SESSION['session_login']['username']}" ?>>
+                <input type="text" autocomplete="off" name="username" required <? if (isset($_SESSION["session_login"])) echo "value={$_SESSION['session_login']['username']}" ?>>
                 <label>Username</label>
             </div>
             <div class="user-box">

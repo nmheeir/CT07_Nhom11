@@ -1,7 +1,7 @@
 <?
-$title = "Add Order";
+$title = "Thêm đơn hàng";
 if (isset($data['orderId']) && isset($data['orderDetail'])) {
-    $title = "Update Order";
+    $title = "Cập nhật đơn hàng";
     $address = $data['orderDetail'][0]['address'];
     $des = $data['orderDetail'][0]['description'];
     $latitude = $data['orderDetail'][0]['latitude'];
