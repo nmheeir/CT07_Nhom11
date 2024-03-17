@@ -4,8 +4,8 @@ class UserController extends BaseController
     private $userModel;
     private $companyModel;
     private $roleModel;
-
     private $orderModel;
+    private $mainUser;
     public function __construct()
     {
         $this->loadModel('UserModel');
@@ -16,6 +16,12 @@ class UserController extends BaseController
         $this->companyModel = new CompanyModel;
         $this->roleModel = new RoleModel;
         $this->orderModel = new OrderModel;
+
+        $this->mainUser = $this->userModel->getUser(
+            [
+                'where' => "id = " . $_SESSION['user']['id'] . ""
+            ]
+        )->data[0];
     }
 
     public function home()
@@ -67,15 +73,8 @@ class UserController extends BaseController
                     ]
                 )->data;
             }
-    
-            $mainId = $_SESSION['user']['id'];
-            $mainUser = $this->userModel->getUser(
-                [
-                    'where' => "id = '{$mainId}'"
-                ]
-            )->data[0];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data' => ['user' => $allUser, 'mainUser' => $mainUser, 'totalPage' => ceil($userCount / 10), 'page' => $page],
+                'data' => ['user' => $allUser, 'mainUser' => $this->mainUser, 'totalPage' => ceil($userCount / 10), 'page' => $page],
                 'page' => 'users',
                 'action' => "companyMember",
             ]);
@@ -88,24 +87,18 @@ class UserController extends BaseController
             [
                 'where' => "id = '{$id}'"
             ]
-        )->data;
-        
-        $mainUser = $this->userModel->getUser(
-            [
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ]
-        )->data[0];
+        );
 
-        if (!isset($user[0])) {
+        if (!$user->isSuccess) {
             $this->loadView("_404");
         } else {
-            $user = $user[0];
+            $user = $user->data[0];
             $user["role"] = $this->roleModel->getRoleName($user["role_id"])->data;
             $user["company"] = $this->companyModel->getCompanyInfo($user["company_id"])->data["company_name"];
             $orderCount = $this->orderModel->countOrderByProcess($id)[0];
 
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data' => ['user' => $user, 'mainUser' => $mainUser, 'order' => $orderCount],
+                'data' => ['user' => $user, 'mainUser' => $this->mainUser, 'order' => $orderCount],
                 'page' => 'users',
                 'action' => "home",
             ]);
@@ -168,11 +161,6 @@ class UserController extends BaseController
         }
     }
     public function sendComplainMail() {
-        $mainUser = $this->userModel->getUser(
-            [
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ]
-        )->data[0];
 
         if (isset($_POST['btnSendComplainMail'])) {
             $type = $_POST['type'];
@@ -181,7 +169,7 @@ class UserController extends BaseController
         }
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => ['mainUser' => $mainUser],
+            'data' => ['mainUser' => $this->mainUser],
             'page' => 'users',
             'action' => 'sendComplainMail'
         ]);
@@ -190,18 +178,12 @@ class UserController extends BaseController
     public function getMail() {
         AuthenciationController::checkRoleIsManager();
 
-        $mainUser = $this->userModel->getUser(
-            [
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ]
-        )->data[0];
-
         $listMail = $this->userModel->get('complain', [
             'order_by' => 'complain_time desc'
         ]);
 
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => ['mainUser' => $mainUser, 'mail' => $listMail],
+            'data' => ['mainUser' => $this->mainUser, 'mail' => $listMail],
             'page' => 'users',
             'action' => "mail"
         ]);

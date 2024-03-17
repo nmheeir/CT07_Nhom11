@@ -3,12 +3,17 @@ class OrderController extends BaseController
 {
     private $orderModel;
     private $userModel;
+    private $mainUser;
     public function __construct()
     {
         $this->loadModel('OrderModel');
         $this->loadModel('UserModel');
         $this->orderModel = new OrderModel;
         $this->userModel = new UserModel;
+
+        $this->mainUser = $this->userModel->getUser([
+            'where' => "id = '{$_SESSION['user']['id']}'"
+        ])->data[0];
     }
     public function save()
     {
@@ -24,33 +29,17 @@ class OrderController extends BaseController
         }
     }
 
-    public function getOrder($option)
-    {
-        return $this->orderModel->getOrder($option);
-    }
 
     public function orderDetail($id)
     {
-        $orderDetail = $this->orderModel->getOrder([
-            'where' => "id = {$id}"
-        ])->data;
-        if (!isset($orderDetail[0])) {
+        $orderDetail = $this->orderModel->getOrderDetail($id);
+        if (!$orderDetail->isSuccess) {
             $this->loadView("_404");
-        } else {
-            $orderDetail = $orderDetail[0];
-            $shipperName = $this->userModel->getUser([
-                'where' => "id = {$orderDetail['shipper_id']}"
-            ])->data[0]['fullname'];
-
-            $mainUser = $this->userModel->getUser([
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ])->data[0];
-
-            $orderDetail["shipper_name"] = $shipperName;
-
+        } else {       
+            $orderDetail = $orderDetail->data[0];
             $data = [
                 'order' => $orderDetail,
-                'mainUser' => $mainUser
+                'mainUser' => $this->mainUser
             ];
 
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
@@ -60,6 +49,7 @@ class OrderController extends BaseController
             ]);
         }
     }
+
     public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
         if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
             $shipperId = $_SESSION["user"]["id"];
@@ -78,12 +68,9 @@ class OrderController extends BaseController
         // kiểm tra còn hạn
         $state = $isCompleted;
 
-        $orders = $this->orderModel->getUserOrders($isCompleted, $shipperId, $page, $created_at_timestamp, $deadline_timestamp);
+        $orders = $this->orderModel->getOrderListWithCondition($isCompleted, $shipperId, $page, $created_at_timestamp, $deadline_timestamp);
         if($orders->isSuccess) {
-            $totalOrder = $this->orderModel->countUserOrder($shipperId, $isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
-            $mainUser = $this->userModel->getUser([
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ])->data[0];
+            $totalOrder = $this->orderModel->countOrderWithCondition($_SESSION['user']['company_id'], $shipperId, $isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
             $data = [
                 'orders' => $orders->data,
                 'state' => $state,
@@ -91,7 +78,7 @@ class OrderController extends BaseController
                 'shipperId' => $shipperId,
                 'page' => $page,
                 'totalPage' => ceil($totalOrder / 10),
-                'mainUser' => $mainUser
+                'mainUser' => $this->mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => $data,
@@ -120,19 +107,16 @@ class OrderController extends BaseController
         
         // kiểm tra còn hạn
         $state = $isCompleted;
-        $orders = $this->orderModel->getCompanyOrders($isCompleted, $page, $created_at_timestamp, $deadline_timestamp);
+        $orders = $this->orderModel->getOrderListWithCondition($isCompleted, null , $page, $created_at_timestamp, $deadline_timestamp);
         if($orders->isSuccess) {
-            $totalOrder = $this->orderModel->countCompanyOrder($_SESSION['user']['company_id'], $isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
-            $mainUser = $this->userModel->getUser([
-                'where' => "id = '{$_SESSION['user']['id']}'" 
-            ])->data[0];
+            $totalOrder = $this->orderModel->countOrderWithCondition($_SESSION['user']['company_id'], null,$isCompleted, $created_at_timestamp, $deadline_timestamp)[0]['total_orders'];
             $data = [
                 'orders' => $orders->data,
                 'state' => $state,
                 'action' => 'companyOrderList',
                 'page' => $page,
                 'totalPage' => ceil($totalOrder / 10),
-                'mainUser' => $mainUser
+                'mainUser' => $this->mainUser
             ];
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
                 'data' => $data,
@@ -154,13 +138,8 @@ class OrderController extends BaseController
             'select' => 'id, fullname'
         ])->data;
 
-        $mainUser = $this->userModel->getUser(
-            [
-                'where' => "id = '{$_SESSION['user']['id']}'"
-            ]
-        )->data[0];
         $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-            'data' => ['shipperList' => $shipperList, 'mainUser' => $mainUser],
+            'data' => ['shipperList' => $shipperList, 'mainUser' => $this->mainUser],
             'page' => 'orders',
             'action' => "addOrder",
         ]);
@@ -172,24 +151,19 @@ class OrderController extends BaseController
         AuthenciationController::checkRoleIsManager();
 
         $shipperList = $this->userModel->getUser([
-            'where' => "role_id = 3 AND company_id = 1",
+            'where' => "role_id = 3 AND company_id = " . $_SESSION["user"]["company_id"] . "",
             'select' => 'id, fullname'
         ])->data;
-        $orderDetail = $this->orderModel->getOrder([
-            'select' => "*",
-            'where' => "id = {$id}"
-        ]);
-        $mainUser = $this->userModel->getUser([
-            'where' => "id = '{$_SESSION['user']['id']}'"
-        ])->data[0];
+        $orderDetail = $this->orderModel->getOrderDetail($id);
 
         if ($orderDetail->isSuccess) {
             $this->loadView("frontend.layout.{$_SESSION['user']['role_id']}layout", [
-                'data' =>[  'shipperList' => $shipperList,
-                            'orderId' => $id,
-                            'orderDetail' => $orderDetail->data,
-                            'mainUser' => $mainUser
-                         ],
+                'data' =>[  
+                    'shipperList' => $shipperList,
+                    'orderId' => $id,
+                    'orderDetail' => $orderDetail->data,
+                    'mainUser' => $this->mainUser
+                ],
                 'page' => 'orders',
                 'action' => "addOrder",
             ]);

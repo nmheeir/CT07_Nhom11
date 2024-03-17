@@ -15,7 +15,7 @@ class AuthenciationController extends BaseController
     public static function checkRoleIsMaster() {
         $roleId = $_SESSION["user"]["role_id"];
         if($roleId > 1) {
-            $this->loadView('_404');
+            BaseController::loadView('_404');
             exit;
         };
     }
