@@ -15,7 +15,9 @@ class AuthenciationController extends BaseController
     public static function checkRoleIsMaster() {
         $roleId = $_SESSION["user"]["role_id"];
         if($roleId > 1) {
-            BaseController::loadView('_404');
+            BaseController::loadView('_404', [
+                "message" => "Bạn không có quyền vào chức năng này."
+            ]);
             exit;
         };
     }
@@ -23,8 +25,9 @@ class AuthenciationController extends BaseController
     public static function checkRoleIsManager() {
         $roleId = $_SESSION["user"]["role_id"];
         if($roleId > 2) {
-            echo "alert('Bạn không có đủ quyền để vào chức năng này')";
-            BaseController::loadView('_404');
+            BaseController::loadView('_404', [
+                "message" => "Bạn không có quyền vào chức năng này."
+            ]);
             exit;
         };
     }
@@ -184,6 +187,12 @@ class AuthenciationController extends BaseController
 
     public function verifyEmail($userOrCompany)
     {
+        // nếu không có session đăng kí thì cút
+        if(!isset($_SESSION['session_register_' . $userOrCompany])) {
+            header("Location: http://localhost/Project/TEST_3/Authenciation/login");
+            exit;
+        }
+
         // handle error 
         $errorMessage = "";
         if (isset($_POST['btnVerify'])) {
@@ -195,6 +204,8 @@ class AuthenciationController extends BaseController
             $digit6 = $_POST['digit6'];
             $verifyCode = $digit1 . $digit2 . $digit3 . $digit4 . $digit5 . $digit6;
             $session_register = 'session_register_' . $userOrCompany;
+
+
             //lấy code trong bảng verify dựa vào email
             $checkCode = $this->userModel->get('verify', [
                 'select' => '*',

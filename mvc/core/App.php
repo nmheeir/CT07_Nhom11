@@ -2,7 +2,7 @@
 class App {
     const BASE_SOURCE = 'Project/TEST_3';
     private $controller = "Welcome";
-    private $action = "landing";
+    private $action = "index";
     private $params = [];
     public function __construct() {
         $arr = $this->processURL();

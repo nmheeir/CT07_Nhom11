@@ -2,9 +2,9 @@
     require_once "../TEST_3/mvc/views/frontend/orders/statusButton.php";
     $orders = $data["orders"];
     $state = $data['state'];
-    if($state > 1) $borderType = "secondary-subtle";
-    else if($state < 1) $borderType = "danger";
-    else $borderType = "success";
+    if($state > 1) $badge = ["type" => "danger", "text" => "Đã quá hạn"];
+    else if($state < 1) $badge = ["type" => "warning", "text" => "Chưa hoàn thành"];
+    else $badge = ["type" => "success", "text" => "Đã hoàn thành"];;
 ?>
 <link rel='stylesheet' href="../TEST_3/public/css/dateInput.css" />
 <style>
@@ -21,10 +21,18 @@
         overflow: hidden;
     }
     label {
-        color: var(--text-color);
+        color: #fff;
     }
     input[type="date"]{
         padding: 0 4px;
+    }
+    .card{
+        background-color: transparent;
+    }
+
+    .card-body {
+        background-color: #24323e;
+        color: #fff;
     }
 </style>
 <!-- hiện order -->
@@ -44,33 +52,37 @@
             <form method="get" class="d-lg-flex d-md-block align-items-center justify-content-center">
                 <div class="user-box m-2">
                     <label class="fs-4">Ngày khởi tạo</label>
-                    <input type="date" name="created_at">
+                    <input type="date" name="created_at" value=<? if(isset($_GET['created_at'])) echo $_GET['created_at']; ?>>
                 </div>
                 <div class="user-box m-2">
                     <label class="fs-4">Ngày hết hạn</label>
-                    <input type="date" name="deadline">
+                    <input type="date" name="deadline" value=<? if(isset($_GET['deadline'])) echo $_GET['deadline']; ?>>
                 </div>
                 <button type="submit" name="btnSubmit" class="btn btn-info text-white m-2">Lọc đơn hàng</button>
             </form>
             <!-- các order -->
+            <div class="row">
             <?php
             if (count($orders) > 0) {
                 foreach ($orders as $order) {
                    $statusButton = StatusButton($order);
                     echo "
-                        <div class='card col-lg-3 col-md-5 text-bg-secondary border-{$borderType} m-2 p-0'>
-                            <iframe 
-                                class='card-img-top'
-                                name='mapframe'
-                                src='http://maps.google.com/maps?q={$order['latitude']},{$order['longitude']}&z=15&output=embed'>
-                            </iframe>
-                            <div class='card-body align-self-stretch' style='height: 150px'>
-                                <h5 class='card-title title'>{$order['address']}</h5>
-                                <p class='card-text des'>{$order['description']}</p>
-                            </div>
-                            <div class='card-body'>
-                                <a href='Order/orderDetail/{$order['id']}' class='btn btn-primary w-100 mb-1' tabindex='-1' role='button' aria-disabled='true'>Chi tiết</a>
-                                {$statusButton}
+                        <div class='card col-xl-3 col-lg-4 col-md-6 p-0'>
+                            <div class='p-1'>
+                                <iframe 
+                                    class='card-img-top'
+                                    name='mapframe'
+                                    src='http://maps.google.com/maps?q={$order['latitude']},{$order['longitude']}&z=15&output=embed'>
+                                </iframe>
+                                <div class='card-body align-self-stretch' style='height: 150px'>
+                                    <h5 class='card-title title'>{$order['address']}</h5>
+                                    <span class='badge text-bg-" . $badge["type"] . "'>". $badge['text'] ."</span>
+                                    <p class='card-text des'>{$order['description']}</p>
+                                </div>
+                                <div class='card-body'>
+                                    <a href='Order/orderDetail/{$order['id']}' class='btn btn-primary w-100 mb-1' tabindex='-1' role='button' aria-disabled='true'>Chi tiết</a>
+                                    {$statusButton}
+                                </div>
                             </div>
                         </div>
                     ";
@@ -79,9 +91,8 @@
                 echo "<p class='text-white text-center'>Bạn không có đơn hàng nào trong mục này.</p>";
             }
             ?>
+            </div>
         </div>
-
-
         <?
             $this->loadView("frontend.component.paging",
                 [

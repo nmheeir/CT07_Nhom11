@@ -24,6 +24,10 @@ class UserController extends BaseController
         )->data[0];
     }
 
+    public function index() {
+        header("Location: home");
+    }
+
     public function home()
     {
         $id = $_SESSION["user"]["id"];

@@ -46,12 +46,14 @@ function validateForm() {
     validateUsername();
     validatePassword();
     validateConfirmPassword();
+    validateEmail();
 
     var usernameError = document.getElementById('usernameError').innerHTML;
     var passwordError = document.getElementById('passwordError').innerHTML;
     var confirmPasswordError = document.getElementById('confirmPasswordError').innerHTML;
+    var emailError = document.getElementById('emailError').innerHTML;
 
-    if (usernameError || passwordError || confirmPasswordError) {
+    if (usernameError || passwordError || confirmPasswordError || emailError) {
         return false; // Form không hợp lệ
     }
 
