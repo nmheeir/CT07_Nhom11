@@ -1,26 +1,50 @@
-<div class="row row-cols-1 row-cols-md-3 p-2">
-  <div class="col">
-    <div class="card bg-transparent text-white border border-3 border-white">
-      <div class="card-body">
-        <h5 class="card-title">Số đơn đang làm</h5>
-        <a class="card-text" href= <?echo "Order/userOrderList/0/{$data['shipper_id']}"?> >Xem tổng số <? echo ($data['order']['is_processing']) ?> đơn hàng nhân viên này đang làm</a>
+<div class="row p-2 equal">
+    <div class="col-xl-4 col-md-6 mt-4">
+      <div class="card bg-transparent text-white border border-3 border-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h2><?php echo ($data['order']['is_processing']) ?></h2>
+              <h5>Số đơn đang làm</h5>
+              <a href="<?php echo "Order/userOrderList/0/{$data['shipper_id']}" ?>">Xem tất cả</a>
+            </div>
+            <div class="col-auto fs-2">
+              <i class="bi bi-bag-x-fill"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="card bg-transparent text-white border border-3 border-white">
-      <div class="card-body">
-        <h5 class="card-title">Số đơn đã làm</h5>
-        <a class="card-text" href=<?echo "Order/userOrderList/1/{$data['shipper_id']}"?>>Xem tổng số <? echo ($data['order']['is_completed']) ?> đơn hàng nhân viên này đã làm</a>
+    <div class="col-xl-4 col-md-6 mt-4">
+      <div class="card bg-transparent text-white border border-3 border-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h2><?php echo ($data['order']['is_completed']) ?></h2>
+              <h5>Số đơn đã làm</h5>
+              <a href="<?php echo "Order/userOrderList/1/{$data['shipper_id']}" ?>">Xem tất cả</a>
+            </div>
+            <div class="col-auto fs-2">
+              <i class="bi bi-bag-check-fill"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="card bg-transparent text-white border border-3 border-white">
-      <div class="card-body">
-        <h5 class="card-title">Các đơn không hoàn thành.</h5>
-        <a class="card-text" href=<?echo "Order/userOrderList/2/{$data['shipper_id']}"?>>Xem tổng số <? echo ($data['order']['not_completed']) ?> đơn hàng quá hạn của nhân viên</a>
+    <div class="col-xl-4 col-md-6 mt-4">
+      <div class="card bg-transparent text-white border border-3 border-white">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <h2><?php echo ($data['order']['not_completed']) ?></h2>
+              <h5>Các đơn không hoàn thành.</h5>
+              <a href="<?php echo "Order/userOrderList/2/{$data['shipper_id']}" ?>">Xem tất cả</a>           
+            </div>
+            <div class="col-auto fs-2">
+              <i class="bi bi-bag-x"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 </div>

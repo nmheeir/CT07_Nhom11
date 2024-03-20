@@ -41,7 +41,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 <body>
     <div class="container-fluid">
         <div class="row flex-nowrap fixed">
-            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 my-sidebar-bg">
+            <div class="col-auto col-lg-3 col-xl-2 px-sm-2 px-0 my-sidebar-bg">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                     <a href="User/Home" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Menu</span>
@@ -105,7 +105,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
                     </div>
                 </div>
             </div>
-            <div class="col p-0 scroll my-gradient">
+            <div class="col p-0 scroll my-gradient content-container">
                 <?
                 $this->loadView("frontend.{$page}.{$action}", [
                     'data' => $data,

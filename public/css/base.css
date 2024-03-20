@@ -1,3 +1,7 @@
 :root {
     --text-color: #60f2e6;
   }
+
+.content-container::-webkit-scrollbar {
+  display: none;
+}

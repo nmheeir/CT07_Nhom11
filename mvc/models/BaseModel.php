@@ -65,7 +65,7 @@ class BaseModel extends Database {
             $columns = implode(',', array_keys($data));
             $sql = "INSERT INTO {$table} ({$columns}) VALUES (" . implode(',', $values) . ")";
         }
-
+        // echo $sql;
         $this->_query($this->connect, $sql);
         return $this->connect->lastInsertId();
     }

@@ -52,7 +52,7 @@
 
     public function getOrderDetail($orderId) {
         $data = $this->custom("
-            SELECT o.*, u.fullname as shipper_name
+            SELECT o.*, u.fullname, u.username, u.avatar, u.id as shipper_id
             FROM orders o
             JOIN users u ON o.shipper_id = u.id
             WHERE o.id = ". $orderId . "
@@ -95,13 +95,13 @@
 
             // kiểm tra lọc
             $filterCreatedAt = is_null($created_at_timestamp) ? "" : " AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
-            $filterDeadline = is_null($deadline_timestamp) ? "" : " AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
+            $filterDeadline = is_null($deadline_timestamp) ? "" : " AND (deadline <= FROM_UNIXTIME(" . $deadline_timestamp . ") OR deadline is NULL)";
             $shipperCheck = is_null($shipperId) ? "" : " AND shipper_id = " . $shipperId;
             $orders = $this->get(self::TABLE_NAME,[
                 'select' => '*',
                 'order_by' => 'id asc',
                 'where' => "is_completed = {$isCompleted} {$checkIsOutOfDate} AND company_id = " . $_SESSION['user']['company_id'] . "" . $filterCreatedAt . $filterDeadline . $shipperCheck,
-                'limit' => 10,
+                'limit' => 12,
                 'offset' => ($page-1)  * 10
             ]);
 
@@ -135,7 +135,7 @@
 
         // lọc order
         $filterCreatedAt = is_null($created_at_timestamp) ? "" : "AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
-        $filterDeadline = is_null($deadline_timestamp) ? "" : "AND deadline >= FROM_UNIXTIME(" . $deadline_timestamp . ")";
+        $filterDeadline = is_null($deadline_timestamp) ? "" : "AND (deadline <= FROM_UNIXTIME(" . $deadline_timestamp . ")  OR deadline is NULL)";
         $shipperCheck = is_null($shipperId) ? "" : " AND shipper_id = " . $shipperId;
 
         return $this->get(self::TABLE_NAME, [
