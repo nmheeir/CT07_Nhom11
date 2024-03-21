@@ -182,7 +182,7 @@
         <section id="team">
             <div class="container" data-aos="fade-up">
                 <div class="section-header">
-                    <h3 class="section-title">Team</h3>
+                    <h3 class="section-title">Nhóm</h3>
                     <p class="section-description">Chúng tôi chỉ đơn giản là hai chàng hiệp sĩ mộng mơ</p>
                 </div>
                 <div class="row justify-content-center text-center">

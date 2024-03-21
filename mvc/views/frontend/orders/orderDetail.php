@@ -43,12 +43,12 @@
     <div class="col-md-6 col-12 text-white p-4 ps-3">
         <h2>Thông tin chi tiết</h2>
         <div class="">
-            <strong>Latitude:</strong> 
+            <strong>Vĩ độ:</strong> 
             <br>
             <?php echo $latitude; ?>
         </div>
         <div>
-            <strong>Longitude:</strong> 
+            <strong>Kinh độ:</strong> 
             <br>
             <?php echo $longitude; ?>
         </div>

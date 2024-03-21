@@ -46,8 +46,8 @@
 </head>
 
 <body>
+    <h3 class="text-white text-center">Gửi mail khiếu nại</h3>
     <div class="wrapper">
-        <h3 class="text-white text-center">Send Complain Mail</h3>
         <form method="post">
             <select name="type" class="form-select">
                 <option value="1">Wesite</option>
