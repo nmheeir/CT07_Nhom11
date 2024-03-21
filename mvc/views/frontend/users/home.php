@@ -1,4 +1,6 @@
 
+
+
 <script src = "../TEST_3/public/js/fetchUser.js"></script>
 <script src = "../TEST_3/public/js/showModal.js"></script>
 <?
@@ -99,8 +101,14 @@
                     <div class="col-sm-3">
                         <p class="mb-0">Công ty</p>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-9 d-flex">
                         <p class="text-white mb-0"><? echo $user["company"] ?></p>
+                        <?php
+                            if ($_SESSION['user']['role_id'] < 3) {
+                                echo "<button class='ms-auto btn btn-primary' onclick='showModalWithoutCallBack(\"Mã công ty của bạn là " . $_SESSION['user']['company_id'] . "\")'>Lấy mã công ty</button>";
+                            }
+                        ?>
+
                     </div>
                 </div>
             </div>

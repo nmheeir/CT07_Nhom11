@@ -15,6 +15,18 @@ class OrderController extends BaseController
             'where' => "id = '{$_SESSION['user']['id']}'"
         ])->data[0];
     }
+
+    public function index() {
+        if($_SESSION["user"]["role_id"] < 3) {
+            header("Location: Order/companyOrderList");
+            exit;
+        }
+        else {
+            header("Location: Order/userOrderList");
+            exit;
+        }
+    }
+
     public function save()
     {
         $newOrder = json_decode(file_get_contents("php://input"), true);
