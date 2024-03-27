@@ -9,8 +9,8 @@ $complainMail = $data['mail'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/Project/TEST_3/" />
-    <script src="../TEST_3/public/js/fetchGetMail.js"></script>
+    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <script src="../CT07_Nhom11/public/js/fetchGetMail.js"></script>
 </head>
 
 <body>
@@ -31,7 +31,7 @@ $complainMail = $data['mail'];
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Loại</th>
-                    <th scope="col">Tên người dùng</th>
+                    <th scope="col">Tên người gửi</th>
                     <th scope="col">Nội dung</th>
                     <th scope="col">Thời gian</th>
                 </tr>

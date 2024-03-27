@@ -5,7 +5,7 @@ function completedOrderUpdate(orderId, isCompleted) {
     is_completed: isCompleted == 0 ? 1 : 0,
   };
   // Sử dụng Fetch API để thực hiện PUT request
-  fetch(`http://localhost/Project/TEST_3/Order/save`, {
+  fetch(`http://localhost/Project/CT07_Nhom11/Order/save`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +37,7 @@ function updateOrder() {
   }
   console.log(dataToSend);
   // Sử dụng Fetch API để thực hiện PUT request
-  fetch(`http://localhost/Project/TEST_3/Order/save`, {
+  fetch(`http://localhost/Project/CT07_Nhom11/Order/save`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

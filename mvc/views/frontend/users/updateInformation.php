@@ -58,8 +58,8 @@ if (isset($data)) {
             background-color: #45a049;
         }
     </style>
-    <script src="../TEST_3/public/js/fetchUser.js"></script>
-    <script src="../TEST_3/public/js/showModal.js"></script>
+    <script src="../CT07_Nhom11/public/js/fetchUser.js"></script>
+    <script src="../CT07_Nhom11/public/js/showModal.js"></script>
 </head>
 
 <body>
@@ -77,10 +77,10 @@ if (isset($data)) {
 
             <label for="number">Điện thoại di động:</label>
             <input type="text" id="phone" name="phone" value="<? if (isset($phone)) echo $phone ?>">
-            <label for="avatar">Avatar</label>
+            <label for="avatar">Ảnh đại diện</label>
             <input type="file" id="avatar" name="avatar">
 
-            <button name='submit' onclick="updateUser(); return false">Submit</button>
+            <button name='submit' onclick="updateUser(); return false">Chỉnh sửa</button>
         </form>
     </div>
 </body>

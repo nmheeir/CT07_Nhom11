@@ -36,9 +36,9 @@
                 echo "<div style='{$style}' class='d-flex align-items-center m-2 p-2'>";
 
                 if (!empty($user['avatar'])) {
-                    echo "<img src=\"../TEST_3/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' class='rounded-circle' style='height: 60px; width: 60px'>";
+                    echo "<img src=\"../CT07_Nhom11/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' class='rounded-circle' style='height: 60px; width: 60px'>";
                 } else {
-                    echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' class='rounded-circle' style='height: 60px; width: 60px;'>";
+                    echo "<img src='../CT07_Nhom11/public/upload/Kiki.webp' alt='Default Avatar' class='rounded-circle' style='height: 60px; width: 60px;'>";
                 }
             echo "
                     <div class='text' style='margin-left: 24px'>
@@ -58,7 +58,7 @@
                  [
                      'page' => $data['page'],
                      'totalPage' => $data['totalPage'],
-                     'url' => "http://localhost/Project/TEST_3/User/companyMember" 
+                     'url' => "http://localhost/Project/CT07_Nhom11/User/companyMember" 
                  ]
              );
             ?>

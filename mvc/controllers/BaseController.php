@@ -1,7 +1,7 @@
 <?
 class BaseController {
-    const VIEW_FOLDER_NAME = "../TEST_3/mvc/views/";
-    const MODEL_FOLDER_NAME = "../TEST_3/mvc/models/";
+    const VIEW_FOLDER_NAME = "../CT07_Nhom11/mvc/views/";
+    const MODEL_FOLDER_NAME = "../CT07_Nhom11/mvc/models/";
 
     protected function loadView($path, array $data = []) {
         foreach ($data as $key => $value) {

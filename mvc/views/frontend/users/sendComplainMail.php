@@ -54,8 +54,8 @@
                 <option value="2">Đơn hàng</option>
                 <option value="3">Dịch vụ</option>
             </select>
-            <textarea class="form-control" spellcheck="false" placeholder="Type something here..." name="complainMail" required></textarea>
-            <button type="submit" class="btn btn-primary mt-3" name="btnSendComplainMail">Send</button>
+            <textarea class="form-control" spellcheck="false" placeholder="Nhập nội dung bạn muốn gửi..." name="complainMail" required></textarea>
+            <button type="submit" class="btn btn-primary mt-3" name="btnSendComplainMail">Gửi</button>
         </form>
     </div>
 </body>

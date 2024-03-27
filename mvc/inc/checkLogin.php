@@ -9,7 +9,7 @@ function checkLogin() {
             }
             else {
                 $userModel = (function() {
-                    require('../TEST_3/mvc/models/UserModel.php');
+                    require('../CT07_Nhom11/mvc/models/UserModel.php');
                     return new UserModel();
                 })();
                 $data = $userModel->getUser([

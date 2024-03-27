@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/Project/TEST_3/" />
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
-    <link rel="stylesheet" href="../TEST_3/public/css/login.css">
-    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css"/>
+    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/base.css" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/login.css">
+    <link rel="stylesheet" href="../CT07_Nhom11/vendor/bootstrap/css/bootstrap.css" />
     <title>Register</title>
     <style>
         /* Thêm CSS cho hiển thị thông báo lỗi */
@@ -21,7 +21,7 @@
 <body>
     <div class="login-box">
         <h2>Đăng kí</h2>
-        <form method="post" action="http://localhost/Project/TEST_3/Authenciation/register">
+        <form method="post" action="http://localhost/Project/CT07_Nhom11/Authenciation/register">
             <div class="user-box">
                 <input type="text" name="username" required oninput="validateUsername()" <? if (isset($_SESSION["session_register_user"])) echo "value={$_SESSION['session_register_user']['username']}" ?>>
                 <label>Username</label>
@@ -62,16 +62,16 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    Submit
+                    Đăng kí
                 </button>
-                <a href="http://localhost/Project/TEST_3/Authenciation/login" class="link-info">Đăng nhập</a>
+                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/login" class="link-info">Đăng nhập</a>
             </div>
             <div class="d-flex justify-content-around align-items-center mt-2">
-                <a href="http://localhost/Project/TEST_3/Authenciation/registerCompany" class="link-info">Đăng kí công ty của bạn</a>
+                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/registerCompany" class="link-info">Đăng kí công ty của bạn</a>
             </div>
         </form>
     </div>
-    <script src="../TEST_3/public/js/registerValidate.js"></script>
+    <script src="../CT07_Nhom11/public/js/registerValidate.js"></script>
 </body>
 
 </html>

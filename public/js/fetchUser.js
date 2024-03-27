@@ -6,7 +6,7 @@ function activeUpdate(userId, activeUpdate) {
         active: activeUpdate
     };
     // Sử dụng Fetch API để thực hiện PUT request
-    fetch(`http://localhost/Project/TEST_3/User/activeControl`, {
+    fetch(`http://localhost/Project/CT07_Nhom11/User/activeControl`, {
     method: 'PUT',
     headers: {
       "Content-Type": "application/json",
@@ -27,7 +27,7 @@ function deleteUser(userId) {
     id: userId,
   };
   // Sử dụng Fetch API để thực hiện PUT request
-  fetch(`http://localhost/Project/TEST_3/User/deleteUser`, {
+  fetch(`http://localhost/Project/CT07_Nhom11/User/deleteUser`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ function deleteUser(userId) {
     .then(response => response.json()) // Chuyển đổi phản hồi sang JSON
     .then(data => {
         console.log(data.message)
-        window.location.href = "http://localhost/Project/TEST_3/User/companyMember";
+        window.location.href = "http://localhost/Project/CT07_Nhom11/User/companyMember";
     })
     .catch(error => {
         console.error('Error:', error);
@@ -54,7 +54,7 @@ function updateRole(userId) {
         id: userId
     };
     // Sử dụng Fetch API để thực hiện PUT request
-    fetch(`http://localhost/Project/TEST_3/User/updateRole`, {
+    fetch(`http://localhost/Project/CT07_Nhom11/User/updateRole`, {
     method: 'PUT',
     headers: {
         'Content-Type': 'application/json',
@@ -86,13 +86,14 @@ function updateUser() {
     avatar: "avt" + "." + fileType,
   };
 
-  fetch(`http://localhost/Project/TEST_3/User/updateUser`, {
+  fetch(`http://localhost/Project/CT07_Nhom11/User/updateUser`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(dataToSend),
   }).then(() => {
+    window.location.reload()
   });
   console.log("Oke").catch((error) => {
     console.error("Error:", error);

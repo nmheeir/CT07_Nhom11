@@ -7,10 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
 {
     public static $files = array (
-        '6f516910e17e0de102242da458ae603c' => __DIR__ . '/../..' . '/mvc/inc/send_mail.php',
-        'd16a88821dce0f2c4fd08568c18c136a' => __DIR__ . '/../..' . '/mvc/inc/checkLogin.php',
-        '85032b7cf8b4f412cb606d8ef77550b6' => __DIR__ . '/../..' . '/mvc/inc/checkUploadFile.php',
-        '83e8a017afe4539a7859b314a54f2349' => __DIR__ . '/../..' . '/mvc/inc/action_process.php',
+        'be43101381e4f729bb962d59338ac321' => __DIR__ . '/../..' . '/mvc/inc/send_mail.php',
+        '6010b0617deb5493e00140327c393272' => __DIR__ . '/../..' . '/mvc/inc/checkLogin.php',
+        '3a037d1e5fcbec7c2f5b5c475c846d0b' => __DIR__ . '/../..' . '/mvc/inc/checkUploadFile.php',
+        '59e7e780856baceac5112e806aa0b0d3' => __DIR__ . '/../..' . '/mvc/inc/action_process.php',
     );
 
     public static $prefixLengthsPsr4 = array (

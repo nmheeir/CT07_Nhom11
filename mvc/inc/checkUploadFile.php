@@ -8,7 +8,7 @@
  */
 function checkImageFile($fileName, $folder, $username)
 {
-    $folderDir = "../TEST_3/public/upload/{$folder}/{$username}/";
+    $folderDir = "../CT07_Nhom11/public/upload/{$folder}/{$username}/";
     // makeDir($username, $folder);
     if (!file_exists($folderDir)) {
         mkdir($folderDir);
