@@ -53,13 +53,13 @@ $fn = convertToReadableString($action);
                                 <i class="fs-4 bi-bag"></i> <span class="ms-1 d-none d-sm-inline">Đơn hàng của bạn</span> </a>
                             <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
                                 <li class="w-100">
-                                    <a href="Order/userOrderList/0" class="nav-link px-0"><i class="bi bi-bag-x-fill"></i> <span class="d-none d-sm-inline">Chưa hoàn thành</span></a>
+                                    <a href="Order/userOrderList/0/<?echo $_SESSION["user"]["id"]?>" class="nav-link px-0"><i class="bi bi-bag-x-fill"></i> <span class="d-none d-sm-inline">Chưa hoàn thành</span></a>
                                 </li>
                                 <li>
-                                    <a href="Order/userOrderList/1" class="nav-link px-0"><i class="bi bi-bag-check-fill"></i> <span class="d-none d-sm-inline">Đã hoàn thành</span></a>
+                                    <a href="Order/userOrderList/1/<?echo $_SESSION["user"]["id"]?>" class="nav-link px-0"><i class="bi bi-bag-check-fill"></i> <span class="d-none d-sm-inline">Đã hoàn thành</span></a>
                                 </li>
                                 <li>
-                                    <a href="Order/userOrderList/2" class="nav-link px-0"><i class="bi bi-calendar2-x"></i> <span class="d-none d-sm-inline">Quá hạn</span></a>
+                                    <a href="Order/userOrderList/2/<?echo $_SESSION["user"]["id"]?>" class="nav-link px-0"><i class="bi bi-calendar2-x"></i> <span class="d-none d-sm-inline">Quá hạn</span></a>
                                 </li>
                             </ul>
                         </li>
@@ -94,7 +94,7 @@ $fn = convertToReadableString($action);
                     </div>
                 </div>
             </div>
-            <div class="col p-0 scroll my-gradient">
+            <div class="col p-0 scroll my-gradient content-container">
                 <?
                 $this->loadView("frontend.{$page}.{$action}", [
                     'data' => $data,

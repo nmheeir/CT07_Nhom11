@@ -62,10 +62,7 @@ class OrderController extends BaseController
         }
     }
 
-    public function userOrderList($isCompleted = 0, $page = 1) {
-        if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
-            $shipperId = $_SESSION["user"]["id"];
-        }
+    public function userOrderList($isCompleted = 0, $shipperId = null , $page = 1) {
 
         // kiểm tra bộ lọc
         $created_at_timestamp = null;
