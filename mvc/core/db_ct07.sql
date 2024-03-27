@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th3 08, 2024 lúc 02:21 PM
+-- Thời gian đã tạo: Th3 27, 2024 lúc 03:26 AM
 -- Phiên bản máy phục vụ: 8.0.31
 -- Phiên bản PHP: 7.4.33
 
@@ -39,7 +39,7 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`id`, `company_name`, `master_user_id`) VALUES
 (1, 'Công ty Giao hàng xuyên quốc gia', 1),
-(22, 'TESTCOMPANY', NULL);
+(23, 'Công ty vận chuyển đơn hàng của bạn', 50);
 
 -- --------------------------------------------------------
 
@@ -49,16 +49,31 @@ INSERT INTO `company` (`id`, `company_name`, `master_user_id`) VALUES
 
 CREATE TABLE `complain` (
   `id` int NOT NULL,
+  `type` int NOT NULL,
+  `company_id` int NOT NULL,
   `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `content` text COLLATE utf8mb4_general_ci NOT NULL
+  `content` text COLLATE utf8mb4_general_ci NOT NULL,
+  `complain_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `complain`
 --
 
-INSERT INTO `complain` (`id`, `username`, `content`) VALUES
-(1, 'giadeptrai', 'test complain mail');
+INSERT INTO `complain` (`id`, `type`, `company_id`, `username`, `content`, `complain_time`) VALUES
+(16, 2, 23, 'giadeptrai', 'giao nham hang roi', '2024-03-11 14:23:06'),
+(29, 1, 1, 'giadeptrai', 'Dịch vụ kém chất lượng trên website', '2024-03-21 10:15:59'),
+(30, 2, 1, 'giadeptrai', 'Sản phẩm không đúng mẫu mã quảng cáo trong đơn hàng', '2024-03-21 10:15:59'),
+(31, 1, 1, 'giadeptrai', 'Giao hàng chậm trễ trên website', '2024-03-21 10:15:59'),
+(32, 3, 1, 'giadeptrai', 'Dịch vụ bị hỏng khi nhận', '2024-03-21 10:15:59'),
+(33, 2, 1, 'giadeptrai', 'Không có phản hồi từ bộ phận hỗ trợ trong đơn hàng', '2024-03-21 10:15:59'),
+(34, 1, 1, 'giadeptrai', 'Đóng gói sản phẩm kém chắc chắn trên website', '2024-03-21 10:15:59'),
+(35, 3, 1, 'giadeptrai', 'Giao hàng không đúng địa chỉ', '2024-03-21 10:15:59'),
+(36, 2, 1, 'giadeptrai', 'Sản phẩm không tương thích với thiết bị trong đơn hàng', '2024-03-21 10:15:59'),
+(37, 1, 1, 'giadeptrai', 'Dịch vụ khách hàng không hài lòng trên website', '2024-03-21 10:15:59'),
+(38, 3, 1, 'giadeptrai', 'Sản phẩm không đúng mô tả', '2024-03-21 10:15:59'),
+(39, 2, 1, 'giadeptrai', 'kkuhkhkhkhkh', '2024-03-21 11:12:19'),
+(41, 1, 1, 'giadeptrai', 'không có vấn đề gì', '2024-03-27 10:12:38');
 
 -- --------------------------------------------------------
 
@@ -86,18 +101,18 @@ CREATE TABLE `orders` (
 
 INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude`, `longitude`, `address`, `is_completed`, `created_at`, `completed_at`, `deadline`) VALUES
 (118, 1, 8, 'Thửu deadline', 10.7773145, 106.6999907, 'Quận 1, Thành phố Hồ Chí Minh, Việt Nam', 1, '2024-03-02 07:17:10', '2024-03-06 11:21:57', '1970-01-01 01:00:00'),
-(122, 1, 8, 'Thử dead', 10.7703708, 106.5996353, 'Quận Bình Tân, Thành phố Hồ Chí Minh, 71914, Việt Nam', 0, '2024-03-02 07:21:27', NULL, '2028-11-10 17:00:00'),
-(123, 1, 8, 'Order 90', 20.670071056271038, 105.67800790367463, 'Can Tho, Vietnam', 0, '2024-03-03 13:22:28', NULL, NULL),
-(124, 1, 8, 'Order 91', 20.39863876104228, 105.70293681063032, 'Can Tho, Vietnam', 0, '2024-02-14 13:22:28', NULL, NULL),
-(125, 1, 8, 'Order 92', 20.29918476128875, 105.42873544658417, 'Can Tho, Vietnam', 0, '2024-02-25 13:22:28', NULL, NULL),
-(126, 1, 8, 'Order 93', 21.171536752182558, 105.31954583508852, 'Can Tho, Vietnam', 0, '2024-02-24 13:22:28', NULL, NULL),
-(127, 1, 8, 'Order 94', 20.144954017032827, 106.48781374468264, 'Can Tho, Vietnam', 0, '2024-02-12 13:22:28', NULL, NULL),
-(128, 1, 8, 'Order 95', 20.964831450921327, 105.39736602259555, 'Can Tho, Vietnam', 0, '2024-02-07 13:22:28', NULL, NULL),
-(129, 1, 8, 'Order 96', 21.272760011044106, 106.61831469658605, 'Can Tho, Vietnam', 0, '2024-02-12 13:22:28', NULL, NULL),
-(130, 1, 8, 'Order 97', 20.77035410587709, 106.23629711217833, 'Can Tho, Vietnam', 0, '2024-02-05 13:22:28', NULL, NULL),
-(131, 1, 8, 'Order 98', 20.263810569200487, 105.20927616181716, 'Can Tho, Vietnam', 0, '2024-02-06 13:22:28', NULL, NULL),
-(132, 1, 8, 'Order 99', 20.305287074581987, 105.8620749119316, 'Can Tho, Vietnam', 0, '2024-02-29 13:22:28', NULL, NULL),
-(133, 1, 8, 'Order 80', 20.800082995370108, 105.81554058083849, 'Can Tho, Vietnam', 0, '2024-03-03 13:22:28', NULL, NULL),
+(122, 1, 8, 'Thử dead', 10.7703708, 106.5996353, 'Quận Bình Tân, Thành phố Hồ Chí Minh, 71914, Việt Nam', 1, '2024-03-02 07:21:27', '2024-03-09 17:26:17', '1970-01-01 01:00:00'),
+(123, 1, 8, 'Order 90', 20.670071056271038, 105.67800790367463, 'Can Tho, Vietnam', 1, '2024-03-03 13:22:28', '2024-03-09 17:36:30', '1970-01-01 01:00:00'),
+(124, 1, 8, 'Order 91', 20.39863876104228, 105.70293681063032, 'Can Tho, Vietnam', 1, '2024-02-14 13:22:28', '2024-03-11 02:13:39', '1970-01-01 01:00:00'),
+(125, 1, 8, 'Order 92', 20.29918476128875, 105.42873544658417, 'Can Tho, Vietnam', 1, '2024-02-25 13:22:28', '2024-03-11 02:13:39', '1970-01-01 01:00:00'),
+(126, 1, 8, 'Order 93', 21.171536752182558, 105.31954583508852, 'Can Tho, Vietnam', 1, '2024-02-24 13:22:28', '2024-03-11 02:13:40', '1970-01-01 01:00:00'),
+(127, 1, 8, 'Order 94', 20.144954017032827, 106.48781374468264, 'Can Tho, Vietnam', 1, '2024-02-12 13:22:28', '2024-03-11 14:07:10', '1970-01-01 01:00:00'),
+(128, 1, 8, 'Order 95', 20.964831450921327, 105.39736602259555, 'Can Tho, Vietnam', 1, '2024-02-07 13:22:28', '2024-03-11 14:07:21', '1970-01-01 01:00:00'),
+(129, 1, 8, 'Order 96', 21.272760011044106, 106.61831469658605, 'Can Tho, Vietnam', 1, '2024-02-12 13:22:28', '2024-03-11 14:07:27', '1970-01-01 01:00:00'),
+(130, 1, 8, 'Order 97', 20.77035410587709, 106.23629711217833, 'Can Tho, Vietnam', 1, '2024-02-05 13:22:28', '2024-03-13 08:24:37', '1970-01-01 01:00:00'),
+(131, 1, 8, 'Order 98', 20.263810569200487, 105.20927616181716, 'Can Tho, Vietnam', 0, '2024-02-06 13:22:28', NULL, '2024-03-12 08:24:57'),
+(132, 1, 8, 'Order 99', 20.305287074581987, 105.8620749119316, 'Can Tho, Vietnam', 1, '2024-02-29 13:22:28', '2024-03-14 13:26:22', '1970-01-01 01:00:00'),
+(133, 1, 8, 'Thử đổi order 1', 10.7563816, 106.5916968, 'Tỉnh lộ 10, Phường Tân Tạo A, Quận Bình Tân, Thành phố Hồ Chí Minh, 73118, Việt Nam', 0, '2024-03-03 13:22:28', NULL, '2024-03-27 00:00:00'),
 (134, 1, 8, 'Order 81', 20.263891013119267, 106.96722784029993, 'Can Tho, Vietnam', 0, '2024-02-20 13:22:28', NULL, NULL),
 (135, 1, 8, 'Order 82', 21.00904257177286, 105.35863553672903, 'Can Tho, Vietnam', 0, '2024-02-12 13:22:28', NULL, NULL),
 (136, 1, 8, 'Order 83', 20.098350784832938, 105.57569524559723, 'Can Tho, Vietnam', 0, '2024-02-04 13:22:28', NULL, NULL),
@@ -197,7 +212,9 @@ INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude
 (230, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
 (231, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
 (232, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
-(233, 1, 8, 'them don hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 08:20:47', NULL, '2000-11-10 17:00:00');
+(233, 1, 8, 'them don hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 08:20:47', NULL, '2000-11-10 17:00:00'),
+(236, 1, 8, 'giao hàng đi', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 1, '2024-03-27 03:04:13', '2024-03-27 03:07:45', '1970-01-01 01:00:00'),
+(237, 1, 56, 'them don hang', 10.8677621, 106.7660348, 'Thủ Đức, Phường Linh Trung, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 00848, Việt Nam', 1, '2024-03-27 03:11:06', '2024-03-27 03:11:18', '1970-01-01 01:00:00');
 
 -- --------------------------------------------------------
 
@@ -215,9 +232,9 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
-(1, 'master'),
-(2, 'manager'),
-(3, 'shipper');
+(1, 'Chủ công ty'),
+(2, 'Quản lí'),
+(3, 'Nhân viên giao hàng');
 
 -- --------------------------------------------------------
 
@@ -228,7 +245,7 @@ INSERT INTO `role` (`id`, `name`) VALUES
 CREATE TABLE `users` (
   `id` int NOT NULL,
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `phone` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `role_id` int NOT NULL DEFAULT '3',
@@ -237,7 +254,7 @@ CREATE TABLE `users` (
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hash_password` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `active` tinyint(1) DEFAULT '1',
-  `avatar` text COLLATE utf8mb4_general_ci NOT NULL
+  `avatar` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -246,11 +263,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `email`, `phone`, `password`, `role_id`, `fullname`, `company_id`, `create_at`, `hash_password`, `active`, `avatar`) VALUES
 (1, 'Alice', 'alice@gmail.com', '12222', 'Alice123', 1, 'Alice Border', 1, '2024-01-13 00:50:56', '$2y$10$gp9F6WVLydLlFuk61jLIveS9D3bPtHMN7ksHFEBOzlQff0Kc1bD1.', 1, 'avt.jpg'),
-(2, 'Bob', 'bob@gmail.com\r\n', NULL, 'Bob123', 2, 'Bob Twena', 1, '2024-01-13 00:50:56', '$2y$10$X7wunNTArun1dBMelPLr3eVXpvLu7HCvJGPyxKqOJtZdH1QhsFima', 1, ''),
-(3, 'Cobber', 'cobber@gmail.com', NULL, 'Cobber123', 2, 'Cobber Stone', 1, '2024-01-13 00:50:56', '$2y$10$tGUA.UzBsnsZhf4NfM7cHOrkuTJLZqXjB0F7qtOkVxR/bM9Pq.j8m', 1, ''),
-(4, 'Dyan', 'dyan@gmail.com', NULL, 'Dyan123', 3, 'Dyan Lain', 1, '2024-01-13 00:50:56', '$2y$10$A5oXXrh77KxqXJSMXMpz6u5J.dxEejLe2fAu1rEAdxZkOg5vVVX4u', 1, ''),
+(3, 'Cobber', 'cobber@gmail.com', '123456789', 'Cobber123', 2, 'Cobber Stone', 1, '2024-01-13 00:50:56', '$2y$10$tGUA.UzBsnsZhf4NfM7cHOrkuTJLZqXjB0F7qtOkVxR/bM9Pq.j8m', 1, 'avt.jpg'),
 (5, 'Emily', 'emily@gmail.com', NULL, 'Emily123', 3, 'Emily Absen', 1, '2024-01-13 00:50:56', '$2y$10$IGBEdUtBZGunI3MBa7RNeeHqi02cShfudc8QJzP6UZoKsTByS.glK', 1, ''),
-(8, 'giadeptrai', 'giadeptrai@gmail.com', '1234', 'gia18112004', 3, 'Khưu Thành Gia', 1, '2024-01-17 05:06:47', '$2y$10$wu.rQxGQB49x4Ogvw8Es4.oWmDeGj186LFS1iDBz5X3UQ7juS17ci', 1, 'avt.jpg');
+(8, 'giadeptrai', 'giadeptrai@gmail.com', '188181', 'gia18112004', 3, 'Khưu Thành Gia', 1, '2024-01-17 05:06:47', '$2y$10$wu.rQxGQB49x4Ogvw8Es4.oWmDeGj186LFS1iDBz5X3UQ7juS17ci', 1, 'avt.jpg'),
+(50, 'test_company', 'abc@123.1', NULL, '11111111', 1, 'Test Company', 23, '2024-03-09 18:51:23', '$2y$10$Vs4CiPU3vsuxH6y9VvmpFeBNBbycA7jlN8jIyxYpwr4Vvaru5JRVS', 1, NULL),
+(51, 'test_user_company', 'accgarena7624@gmail.com', NULL, '11111111', 3, 'test_user_company', 23, '2024-03-11 17:08:58', '$2y$10$NVsmOao9dv8ddkzJpBVAPeTCjrjwgIlAo6GVZ6nRZHYWgdTfq3flq', 1, NULL),
+(56, 'haixautinh', 'root@cc.ccc', NULL, '11111111', 3, 'haixautinh', 1, '2024-03-21 02:46:29', '$2y$10$buBr2y3heFnFAVPbenRdAOIIa2iQhH.6hPObbPnJibAWm6e4tpXuy', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -270,14 +288,8 @@ CREATE TABLE `verify` (
 --
 
 INSERT INTO `verify` (`id`, `code`, `expires`, `email`) VALUES
-(20, 597343, '2024-02-24 14:19:04', 'gikhuu18112004@gmail.com'),
-(21, 758939, '2024-02-29 12:06:39', 'quangdieuisme@gmail.com'),
-(22, 430146, '2024-03-07 10:40:15', 'accgarena7624@gmail.com'),
-(23, 818913, '2024-03-07 10:52:18', 'accgarena7624@gmail.com'),
-(24, 636989, '2024-03-07 10:52:47', 'accgarena7624@gmail.com'),
-(25, 924862, '2024-03-07 10:52:51', 'accgarena7624@gmail.com'),
-(26, 983463, '2024-03-07 10:53:16', 'accgarena7624@gmail.com'),
-(27, 232401, '2024-03-07 10:14:27', 'accgarena7624@gmail.com');
+(28, 757803, '2024-03-10 02:00:39', 'accgarena7624@gmail.com'),
+(34, 316893, '2024-03-21 10:00:18', 'root@cc.ccc');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -294,7 +306,9 @@ ALTER TABLE `company`
 -- Chỉ mục cho bảng `complain`
 --
 ALTER TABLE `complain`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_companyid_complain` (`company_id`),
+  ADD KEY `fk_username_complain` (`username`);
 
 --
 -- Chỉ mục cho bảng `orders`
@@ -317,13 +331,15 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`),
   ADD KEY `fk_user_role` (`role_id`),
-  ADD KEY `fk_user_company` (`company_id`);
+  ADD KEY `fk_user_company` (`company_id`),
+  ADD KEY `email` (`email`);
 
 --
 -- Chỉ mục cho bảng `verify`
 --
 ALTER TABLE `verify`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_email` (`email`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -333,31 +349,31 @@ ALTER TABLE `verify`
 -- AUTO_INCREMENT cho bảng `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `complain`
 --
 ALTER TABLE `complain`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT cho bảng `verify`
 --
 ALTER TABLE `verify`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -370,11 +386,18 @@ ALTER TABLE `company`
   ADD CONSTRAINT `fk_company_master_user` FOREIGN KEY (`master_user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
+-- Các ràng buộc cho bảng `complain`
+--
+ALTER TABLE `complain`
+  ADD CONSTRAINT `fk_companyid_complain` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_username_complain` FOREIGN KEY (`username`) REFERENCES `users` (`username`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `fk_order_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_order_shipper` FOREIGN KEY (`shipper_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_order_shipper` FOREIGN KEY (`shipper_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Các ràng buộc cho bảng `users`
