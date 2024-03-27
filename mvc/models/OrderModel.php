@@ -137,8 +137,8 @@
         }
 
         // lọc order
-        $filterCreatedAt = is_null($created_at_timestamp) ? "" : "AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
-        $filterDeadline = is_null($deadline_timestamp) ? "" : "AND (deadline <= FROM_UNIXTIME(" . $deadline_timestamp . ")  OR deadline is NULL)";
+        $filterCreatedAt = is_null($created_at_timestamp) ? "" : " AND created_at >= FROM_UNIXTIME(" . $created_at_timestamp . ")";
+        $filterDeadline = is_null($deadline_timestamp) ? "" : " AND (deadline <= FROM_UNIXTIME(" . $deadline_timestamp . ")  OR deadline is NULL)";
         $shipperCheck = is_null($shipperId) ? "" : " AND shipper_id = " . $shipperId;
 
         return $this->get(self::TABLE_NAME, [
