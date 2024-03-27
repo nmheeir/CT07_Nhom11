@@ -2,16 +2,16 @@
    $latitude = $data['order']['latitude'];
    $longitude = $data['order']['longitude'];
 
-   require_once "../TEST_3/mvc/views/frontend/orders/statusButton.php";
+   require_once "../CT07_Nhom11/mvc/views/frontend/orders/statusButton.php";
    $statusButton = StatusButton($data['order']);
 ?>
-<link rel="stylesheet" href="../TEST_3/public/css/orderDetail.css">
+<link rel="stylesheet" href="../CT07_Nhom11/public/css/orderDetail.css">
 
 <div class="d-flex flex-column flex-md-row h-100">
     <!-- Phần trái (bản đồ) -->
     <div class="col-md-6 col-12 d-md-flex">
     <iframe 
-        name="mapframe" style="width: 100%; height:100%"
+        name="mapframe" style="padding: 12px; width: 100%; height:100%"
         src="https://www.google.com/maps?z=15&saddr=&output=embed&f=d&z=15&daddr=<?php echo "{$latitude},{$longitude}"; ?>">
     </iframe>
 
@@ -46,13 +46,13 @@
         <div class="row">
             <div class="col p-2">
                 <div class="border border-1 p-1 rounded my-bg">
-                    <strong><i class="bi bi-geo"></i>Latitude:</strong> <br>
+                    <strong><i class="bi bi-geo"></i> Latitude:</strong> <br>
                     <p><?php echo $latitude; ?></p>
                 </div>
             </div>
             <div class="col p-2">
                 <div class="border border-1 p-1 rounded my-bg">
-                    <strong><i class="bi bi-geo"></i>Longitude:</strong> <br>
+                    <strong><i class="bi bi-geo"></i> Longitude:</strong> <br>
                     <p><?php echo $longitude; ?></p>
                 </div>
             </div>
@@ -62,9 +62,9 @@
         <div class="row">
             <div class="col p-2">
                 <div class="border border-1 rounded my-bg p-1">
-                    <strong><i class="bi bi-info-circle-fill"></i>Thông tin về đơn hàng:</strong> 
+                    <strong><i class="bi bi-info-circle-fill"></i> Thông tin về đơn hàng:</strong> 
                     <p><?php echo $data['order']['description']; ?></p>
-                    <strong><i class="bi bi-globe-americas"></i>Địa chỉ đơn hàng:</strong> 
+                    <strong><i class="bi bi-globe-americas"></i> Địa chỉ đơn hàng:</strong> 
                     <p><?php echo $data['order']['address']; ?></p> 
                 </div>
             </div>
@@ -72,14 +72,14 @@
         <div class="row">
             <div class="col p-2">
                 <div class="border border-1 p-1 rounded my-bg">
-                    <strong><i class="bi bi-calendar2-check"></i>Ngày khởi tạo:</strong> 
+                    <strong><i class="bi bi-calendar2-check"></i> Ngày khởi tạo:</strong> 
                     <br>
                     <?php echo $data['order']['created_at']; ?>
                 </div>
             </div>
             <div class="col p-2">
                 <div class="border border-1 p-1 rounded my-bg">
-                    <strong><i class="bi bi-calendar-check-fill"></i>Hoàn thành trước:</strong> 
+                    <strong><i class="bi bi-calendar-check-fill"></i> Hoàn thành trước:</strong> 
                     <br>
                     <?php if (isset($data['order']['deadline'])) {
                         echo $data['order']['deadline'];
@@ -95,13 +95,13 @@
                 <div style='background-color: rgba(71, 79, 122, 0.4); color: #fff; border-radius: 10px;' class='d-flex align-items-center p-1 border border-1'>
                         <?
                         if (!empty($data['order']['avatar'])) {
-                            echo "<img src=\"../TEST_3/public/upload/avatars/{$data['order']['username']}/{$data['order']['avatar']}\" alt='...' class='rounded-circle' style='height: 60px; width: 60px'>";
+                            echo "<img src=\"../CT07_Nhom11/public/upload/avatars/{$data['order']['username']}/{$data['order']['avatar']}\" alt='...' class='rounded-circle' style='height: 60px; width: 60px'>";
                         } else {
-                            echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' class='rounded-circle' style='height: 60px; width: 60px;'>";
+                            echo "<img src='../CT07_Nhom11/public/upload/Kiki.webp' alt='Default Avatar' class='rounded-circle' style='height: 60px; width: 60px;'>";
                         }
                         ?>
                         <div class='text' style='margin-left: 24px'>
-                            <a href='/Project/TEST_3/User/detail/<?echo $data['order']['shipper_id']?>' class='text-decoration-none link'>
+                            <a href='/Project/CT07_Nhom11/User/detail/<?echo $data['order']['shipper_id']?>' class='text-decoration-none link'>
                                 <h3 class='h5'><? echo $data["order"]["fullname"] ?></h3>
         
                             </a>
@@ -123,5 +123,5 @@
 
 
 
-<script src="../TEST_3/public/js/fetchUpdateOrder.js">
+<script src="../CT07_Nhom11/public/js/fetchUpdateOrder.js">
 

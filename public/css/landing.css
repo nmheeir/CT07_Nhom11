@@ -567,9 +567,14 @@ section {
 
 #about .about-container .background {
   min-height: 300px;
-  background: url(../upload/landingPage/about-team.png) center;
-
+  /* background: url(../upload/landingPage/about-team.jpg) center; */
+  object-fit: fill;
   margin-bottom: 10px;
+}
+
+#about .about-container .background img {
+  object-fit:cover;
+  max-height:100%; max-width:100%;
 }
 
 
@@ -782,6 +787,7 @@ section {
 }
 
 #team .member .pic img {
+  object-fit: cover;
   max-width: 100%;
 }
 

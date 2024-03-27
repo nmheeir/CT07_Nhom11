@@ -1,8 +1,8 @@
 
 
 
-<script src = "../TEST_3/public/js/fetchUser.js"></script>
-<script src = "../TEST_3/public/js/showModal.js"></script>
+<script src = "../CT07_Nhom11/public/js/fetchUser.js"></script>
+<script src = "../CT07_Nhom11/public/js/showModal.js"></script>
 <?
   $buttons = "";
   $user = $data['user'];
@@ -31,9 +31,9 @@
                 <div class="text-center">
                         <?
                         if (!empty($user['avatar'])) {
-                            echo "<img src=\"../TEST_3/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' style='width: 150px; height: 210px; object-fit: cover;' class='rounded-circle img-fluid'>";
+                            echo "<img src=\"../CT07_Nhom11/public/upload/avatars/{$user['username']}/{$user['avatar']}\" alt='...' style='width: 150px; height: 210px; object-fit: cover;' class='rounded-circle img-fluid'>";
                         } else {
-                            echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' style='width: 150px; height: 210px' class='rounded-circle img-fluid'>";
+                            echo "<img src='../CT07_Nhom11/public/upload/Kiki.webp' alt='Default Avatar' style='width: 150px; height: 210px' class='rounded-circle img-fluid'>";
                         }
                         ?>
                                     
@@ -82,7 +82,7 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <p class="mb-0">Mobile</p>
+                        <p class="mb-0">Số điện thoại</p>
                     </div>
                     <div class="col-sm-9">
                         <p class="text-white mb-0">
@@ -90,7 +90,7 @@
                                 if (isset($user['phone'])) {
                                     echo $user['phone'];
                                 } else {
-                                    echo "No phone number";
+                                    echo "Không có";
                                 }
                             ?>
                         </p>

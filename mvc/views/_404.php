@@ -3,8 +3,8 @@
 
 <head>
     <title>404 | Not Found</title>
-    <base href="http://localhost/Project/TEST_3/" />
-    <link rel="stylesheet" href="../TEST_3/public/css/404.css" />
+    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/404.css" />
 </head>
 
 <body class="permission_denied">
@@ -15,8 +15,8 @@
         <h3> 
             Có chắc là truy cập đúng link chưa ?
         </h3>
-        <img id="astronaut" src="../TEST_3/public/upload/astronaut.svg" />
-        <img id="planet" src="../TEST_3/public/upload/planet.svg" />
+        <img id="astronaut" src="../CT07_Nhom11/public/upload/astronaut.svg" />
+        <img id="planet" src="../CT07_Nhom11/public/upload/planet.svg" />
         <a href="#"><button class="denied__link">Go Home</button></a>
     </div>
 

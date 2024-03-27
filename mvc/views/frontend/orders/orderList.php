@@ -1,12 +1,12 @@
 <?
-    require_once "../TEST_3/mvc/views/frontend/orders/statusButton.php";
+    require_once "../CT07_Nhom11/mvc/views/frontend/orders/statusButton.php";
     $orders = $data["orders"];
     $state = $data['state'];
     if($state > 1) $badge = ["type" => "danger", "text" => "Đã quá hạn"];
     else if($state < 1) $badge = ["type" => "warning", "text" => "Chưa hoàn thành"];
     else $badge = ["type" => "success", "text" => "Đã hoàn thành"];;
 ?>
-<link rel='stylesheet' href="../TEST_3/public/css/dateInput.css" />
+<link rel='stylesheet' href="../CT07_Nhom11/public/css/dateInput.css" />
 <style>
     .title {
         display: -webkit-box;
@@ -94,11 +94,12 @@
             </div>
         </div>
         <?
+            $action = $_SESSION["user"]["role_id"] == 3 ? 'userOrderList' : 'companyOrderList';
             $this->loadView("frontend.component.paging",
                 [
                     'page' => $data['page'],
                     'totalPage' => $data['totalPage'],
-                    'url' => "http://localhost/Project/TEST_3/Order/companyOrderList/" . $state
+                    'url' => "http://localhost/Project/CT07_Nhom11/Order/" . $action . "/" . $state
                 ]
             );
         ?>
@@ -106,7 +107,7 @@
 </div>
 
 
-<script src="../TEST_3/public/js/fetchUpdateOrder.js"></script>
+<script src="../CT07_Nhom11/public/js/fetchUpdateOrder.js"></script>
 
 
 

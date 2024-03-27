@@ -1,6 +1,6 @@
 <?
 class App {
-    const BASE_SOURCE = 'Project/TEST_3';
+    const BASE_SOURCE = 'Project/CT07_Nhom11';
     private $controller = "Welcome";
     private $action = "index";
     private $params = [];
@@ -8,16 +8,16 @@ class App {
         $arr = $this->processURL();
         // Kiểm tra đã đăng nhập chưa khi truy cập vào các contrlller
         if (!checkLogin() && $arr[0] != 'Welcome' && $arr[0] != 'Authenciation') { 
-            header("Location: /Project/TEST_3/Authenciation/login");
+            header("Location: /Project/CT07_Nhom11/Authenciation/login");
             exit;
         }
         // Controller
-        if (file_exists("../TEST_3/mvc/controllers/" . $arr[0] . "Controller.php")) {
+        if (file_exists("../CT07_Nhom11/mvc/controllers/" . $arr[0] . "Controller.php")) {
             $this->controller = $arr[0];
             unset($arr[0]);
         }
         else {
-            include "../TEST_3/mvc/views/_404.php";
+            include "../CT07_Nhom11/mvc/views/_404.php";
         }
         $controllerName = $this->controller . "Controller";
         $this->controller = new $controllerName;
@@ -28,7 +28,7 @@ class App {
                 $this->action = $arr[1];
             }
             else {
-                include "../TEST_3/mvc/views/_404.php";
+                include "../CT07_Nhom11/mvc/views/_404.php";
                 exit();
             }
             unset($arr[1]);

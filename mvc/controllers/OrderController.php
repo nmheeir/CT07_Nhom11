@@ -62,7 +62,7 @@ class OrderController extends BaseController
         }
     }
 
-    public function userOrderList($isCompleted = 0, $shipperId = null, $page = 1) {
+    public function userOrderList($isCompleted = 0, $page = 1) {
         if(!isset($shipperId) || $_SESSION["user"]["role_id"] >= 3) {
             $shipperId = $_SESSION["user"]["id"];
         }
@@ -157,7 +157,7 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function updateOrder($id)
+    public function updateOrder($id = 0)
     {
         // check role
         AuthenciationController::checkRoleIsManager();
@@ -180,7 +180,9 @@ class OrderController extends BaseController
                 'action' => "addOrder",
             ]);
         } else {
-            $this->loadView("_404.php");
+            $this->loadView("_404", [
+                'message' => $orderDetail->message
+            ]);
         }
     }
 }

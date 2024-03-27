@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <base href="http://localhost/Project/TEST_3/" />
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
-    <link rel="stylesheet" href="../TEST_3/public/css/login.css">
-    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
+    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/base.css" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/login.css">
+    <link rel="stylesheet" href="../CT07_Nhom11/vendor/bootstrap/css/bootstrap.css" />
     <style>
         /* Thêm CSS cho hiển thị thông báo lỗi */
         .error-message {
@@ -21,7 +21,7 @@
 <body>
     <div class="login-box">
         <h2>Đăng nhập</h2>
-        <form method="post" action="http://localhost/Project/TEST_3/Authenciation/login">
+        <form method="post" action="http://localhost/Project/CT07_Nhom11/Authenciation/login">
             <div class="user-box">
                 <input type="text" autocomplete="off" name="username" required <? if (isset($_SESSION["session_login"])) echo "value={$_SESSION['session_login']['username']}" ?>>
                 <label>Username</label>
@@ -44,15 +44,15 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    Submit
+                    Đăng nhập
                 </button>
-                <a href="http://localhost/Project/TEST_3/Authenciation/register" class="link-info">Đăng kí</a>
+                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/register" class="link-info">Đăng kí</a>
             </div>
         </form>
     </div>
 
-    <script src="../TEST_3/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../CT07_Nhom11/bootstrap/js/bootstrap.js"></script>
+    <script src="../CT07_Nhom11/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -9,13 +9,13 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 }
 ?>
 
-<link rel='stylesheet' href="../TEST_3/public/css/addOrder.css" />
-<link rel='stylesheet' href="../TEST_3/public/css/dateInput.css" />
-<script src="../TEST_3/public/js/fetchUpdateOrder.js"></script>
-<script src="../TEST_3/public/js/fetchAddOrder.js"></script>
-<script src="../TEST_3/public/js/showToast.js"></script>
-<script src="../TEST_3/public/js/clearInput.js"></script>
-<script src="../TEST_3/public/js/showModal.js"></script>
+<link rel='stylesheet' href="../CT07_Nhom11/public/css/addOrder.css" />
+<link rel='stylesheet' href="../CT07_Nhom11/public/css/dateInput.css" />
+<script src="../CT07_Nhom11/public/js/fetchUpdateOrder.js"></script>
+<script src="../CT07_Nhom11/public/js/fetchAddOrder.js"></script>
+<script src="../CT07_Nhom11/public/js/showToast.js"></script>
+<script src="../CT07_Nhom11/public/js/clearInput.js"></script>
+<script src="../CT07_Nhom11/public/js/showModal.js"></script>
 
     <div class="container p-2">
         <h3 class="text-white text-center">
@@ -54,12 +54,12 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 
         <?
         if (!isset($data["orderId"])) {
-            echo "<button class='btn btn-primary w-100' onclick='fetchAddOrder()'>Add Order</button>";
+            echo "<button class='btn btn-primary w-100' onclick='fetchAddOrder()'>Thêm đơn hàng</button>";
         } else {
-            echo "<button class='btn btn-primary w-100' onclick=\"showModalWithCallBack('Bạn có muốn cập nhật đơn hàng?', updateOrder)\">Update Order</button>";
+            echo "<button class='btn btn-primary w-100' onclick=\"showModalWithCallBack('Bạn có muốn cập nhật đơn hàng?', updateOrder)\">Chỉnh sửa đơn hàng</button>";
         }
         ?>
 
     </div>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="../TEST_3/public/js/fetchAddressAndCoordinate.js"></script>
+<script src="../CT07_Nhom11/public/js/fetchAddressAndCoordinate.js"></script>

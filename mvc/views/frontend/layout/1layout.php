@@ -14,15 +14,15 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 <html lang="en">
 
 <head>
-    <base href="http://localhost/Project/TEST_3/" />
+    <base href="http://localhost/Project/CT07_Nhom11/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         Master | <? echo $fn; ?> </title>
-    <link rel="stylesheet" href="../TEST_3/vendor/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="../TEST_3/public/css/user.css" />
-    <link rel="stylesheet" href="../TEST_3/public/css/base.css" />
-    <link rel="stylesheet" href="../TEST_3/node_modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../CT07_Nhom11/vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/user.css" />
+    <link rel="stylesheet" href="../CT07_Nhom11/public/css/base.css" />
+    <link rel="stylesheet" href="../CT07_Nhom11/node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         .my-gradient {
             background: #0d1a25;
@@ -49,7 +49,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                         <li class="nav-item">
                             <a href="User/home" class="nav-link align-middle px-0">
-                                <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">Home</span>
+                                <i class="fs-4 bi-house"></i><span class="ms-1 d-none d-sm-inline">Trang chủ</span>
                             </a>
                         </li>
                         <li>
@@ -92,9 +92,9 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
                         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                             <?
                             if (!empty($mainUser['avatar'])) {
-                                echo "<img src=\"../TEST_3/public/upload/avatars/{$mainUser['username']}/{$mainUser['avatar']}\" alt='...' width='30' height='30' class='rounded-circle'>";
+                                echo "<img src=\"../CT07_Nhom11/public/upload/avatars/{$mainUser['username']}/{$mainUser['avatar']}\" alt='...' width='30' height='30' class='rounded-circle'>";
                             } else {
-                                echo "<img src='../TEST_3/public/upload/Kiki.webp' alt='Default Avatar' width='30' height='30' class='rounded-circle'>";
+                                echo "<img src='../CT07_Nhom11/public/upload/Kiki.webp' alt='Default Avatar' width='30' height='30' class='rounded-circle'>";
                             }
                             ?>
                             <span class="d-none d-sm-inline mx-1"><? echo $_SESSION["user"]["username"]; ?></span>
@@ -114,8 +114,8 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
             </div>
         </div>
     </div>
-    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.js"></script>
-    <script src="../TEST_3/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../CT07_Nhom11/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../CT07_Nhom11/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

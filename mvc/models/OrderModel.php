@@ -57,6 +57,9 @@
             JOIN users u ON o.shipper_id = u.id
             WHERE o.id = ". $orderId . "
         ");
+        if (empty($data)) {
+            return new DataView(false, null, "Không tìm thấy đơn hàng");
+        }
         return new DataView(true, $data, "ok");
     }
 

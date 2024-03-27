@@ -4,17 +4,17 @@
     },
     "autoload": {
         "files": [
-            "../TEST_3/mvc/inc/send_mail.php",
-            "../TEST_3/mvc/inc/checkLogin.php",
-            "../TEST_3/mvc/inc/checkUploadFile.php",
-            "../TEST_3/mvc/inc/action_process.php"
+            "../CT07_Nhom11/mvc/inc/send_mail.php",
+            "../CT07_Nhom11/mvc/inc/checkLogin.php",
+            "../CT07_Nhom11/mvc/inc/checkUploadFile.php",
+            "../CT07_Nhom11/mvc/inc/action_process.php"
 
         ],
         "classmap": [
-           "../TEST_3/mvc/controllers",
-           "../TEST_3/mvc/core",
-           "../TEST_3/mvc/inc",
-           "../TEST_3/mvc/models"
+           "../CT07_Nhom11/mvc/controllers",
+           "../CT07_Nhom11/mvc/core",
+           "../CT07_Nhom11/mvc/inc",
+           "../CT07_Nhom11/mvc/models"
        ]
     }
 }
