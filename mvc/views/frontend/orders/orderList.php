@@ -99,7 +99,7 @@
                 [
                     'page' => $data['page'],
                     'totalPage' => $data['totalPage'],
-                    'url' => "http://localhost/Project/CT07_Nhom11/Order/" . $data["action"] . "/" . $state .$shiperId
+                    'url' => "http://localhost/CT07_Nhom11/Order/" . $data["action"] . "/" . $state .$shiperId
                 ]
             );
         ?>

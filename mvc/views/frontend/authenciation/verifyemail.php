@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Your Email</title>
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/verifyEmail.css" />
 </head>
 

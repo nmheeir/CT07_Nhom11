@@ -3,7 +3,7 @@
 
 <head>
     <title>404 | Not Found</title>
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/404.css" />
 </head>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
@@ -51,7 +51,7 @@
         <div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
             <h1>Chào mừng tới trang web G&H</h1>
             <h2>Trang web giúp bạn quản lí công ty giao hàng của bạn.</h2>
-            <a href="Project/CT07_Nhom11/Welcome/index" class="btn-get-started">Đăng nhập</a>
+            <a href="CT07_Nhom11/Welcome/index" class="btn-get-started">Đăng nhập</a>
         </div>
     </section><!-- End Hero Section -->
 
@@ -165,7 +165,7 @@
                         <p class="cta-text">Tạo công ty của bạn với chi phí cực rẻ</p>
                     </div>
                     <div class="col-lg-3 cta-btn-container text-center">
-                        <a class="cta-btn align-middle" href="/Project/CT07_Nhom11/Authenciation/registerCompany">Tạo công ty</a>
+                        <a class="cta-btn align-middle" href="/CT07_Nhom11/Authenciation/registerCompany">Tạo công ty</a>
                     </div>
                 </div>
 
