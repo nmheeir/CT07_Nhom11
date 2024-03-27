@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th3 27, 2024 lúc 03:26 AM
+-- Thời gian đã tạo: Th3 27, 2024 lúc 05:54 AM
 -- Phiên bản máy phục vụ: 8.0.31
 -- Phiên bản PHP: 7.4.33
 
@@ -39,7 +39,8 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`id`, `company_name`, `master_user_id`) VALUES
 (1, 'Công ty Giao hàng xuyên quốc gia', 1),
-(23, 'Công ty vận chuyển đơn hàng của bạn', 50);
+(23, 'Công ty vận chuyển đơn hàng của bạn', 50),
+(24, 'Công ty', 58);
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,8 @@ INSERT INTO `complain` (`id`, `type`, `company_id`, `username`, `content`, `comp
 (37, 1, 1, 'giadeptrai', 'Dịch vụ khách hàng không hài lòng trên website', '2024-03-21 10:15:59'),
 (38, 3, 1, 'giadeptrai', 'Sản phẩm không đúng mô tả', '2024-03-21 10:15:59'),
 (39, 2, 1, 'giadeptrai', 'kkuhkhkhkhkh', '2024-03-21 11:12:19'),
-(41, 1, 1, 'giadeptrai', 'không có vấn đề gì', '2024-03-27 10:12:38');
+(41, 1, 1, 'giadeptrai', 'không có vấn đề gì', '2024-03-27 10:12:38'),
+(42, 1, 1, 'giadeptrai', 'website nhìn rất xấu', '2024-03-27 12:37:02');
 
 -- --------------------------------------------------------
 
@@ -112,8 +114,8 @@ INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude
 (130, 1, 8, 'Order 97', 20.77035410587709, 106.23629711217833, 'Can Tho, Vietnam', 1, '2024-02-05 13:22:28', '2024-03-13 08:24:37', '1970-01-01 01:00:00'),
 (131, 1, 8, 'Order 98', 20.263810569200487, 105.20927616181716, 'Can Tho, Vietnam', 0, '2024-02-06 13:22:28', NULL, '2024-03-12 08:24:57'),
 (132, 1, 8, 'Order 99', 20.305287074581987, 105.8620749119316, 'Can Tho, Vietnam', 1, '2024-02-29 13:22:28', '2024-03-14 13:26:22', '1970-01-01 01:00:00'),
-(133, 1, 8, 'Thử đổi order 1', 10.7563816, 106.5916968, 'Tỉnh lộ 10, Phường Tân Tạo A, Quận Bình Tân, Thành phố Hồ Chí Minh, 73118, Việt Nam', 0, '2024-03-03 13:22:28', NULL, '2024-03-27 00:00:00'),
-(134, 1, 8, 'Order 81', 20.263891013119267, 106.96722784029993, 'Can Tho, Vietnam', 0, '2024-02-20 13:22:28', NULL, NULL),
+(133, 1, 8, 'Thử đổi order 1', 10.7563816, 106.5916968, 'Tỉnh lộ 10, Phường Tân Tạo A, Quận Bình Tân, Thành phố Hồ Chí Minh, 73118, Việt Nam', 0, '2024-03-03 13:22:28', NULL, '2024-03-26 00:00:00'),
+(134, 1, 56, 'Order 81', 20.263891013119267, 106.96722784029993, 'Can Tho, Vietnam', 0, '2024-02-20 13:22:28', NULL, '2024-03-28 00:00:00'),
 (135, 1, 8, 'Order 82', 21.00904257177286, 105.35863553672903, 'Can Tho, Vietnam', 0, '2024-02-12 13:22:28', NULL, NULL),
 (136, 1, 8, 'Order 83', 20.098350784832938, 105.57569524559723, 'Can Tho, Vietnam', 0, '2024-02-04 13:22:28', NULL, NULL),
 (137, 1, 8, 'Order 84', 20.123915745992136, 106.37246415146856, 'Can Tho, Vietnam', 0, '2024-02-18 13:22:28', NULL, NULL),
@@ -214,7 +216,10 @@ INSERT INTO `orders` (`id`, `company_id`, `shipper_id`, `description`, `latitude
 (232, 1, 8, 'giao hang afdasdfad', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 07:44:10', NULL, '2024-10-09 17:00:00'),
 (233, 1, 8, 'them don hang', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 0, '2024-03-08 08:20:47', NULL, '2000-11-10 17:00:00'),
 (236, 1, 8, 'giao hàng đi', 10.7763897, 106.7011391, 'Thành phố Hồ Chí Minh, Việt Nam', 1, '2024-03-27 03:04:13', '2024-03-27 03:07:45', '1970-01-01 01:00:00'),
-(237, 1, 56, 'them don hang', 10.8677621, 106.7660348, 'Thủ Đức, Phường Linh Trung, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 00848, Việt Nam', 1, '2024-03-27 03:11:06', '2024-03-27 03:11:18', '1970-01-01 01:00:00');
+(237, 1, 56, 'them don hang', 10.8677621, 106.7660348, 'Thủ Đức, Phường Linh Trung, Thành phố Thủ Đức, Thành phố Hồ Chí Minh, 00848, Việt Nam', 1, '2024-03-27 03:11:06', '2024-03-27 03:11:18', '1970-01-01 01:00:00'),
+(238, 1, 56, 'test thêm đơn hàng', 21.0283334, 105.854041, 'Hà Nội, Việt Nam', 0, '2024-03-27 05:05:22', NULL, '2024-03-26 00:00:00'),
+(239, 1, 56, 'test thêm đơn hàng', 21.0283334, 105.854041, 'Hà Nội, Việt Nam', 0, '2024-03-27 05:05:55', NULL, '2024-03-29 00:00:00'),
+(240, 1, 56, 'giao hàng đi friend', 10.6564461, 107.26674688112058, 'Huyện Châu Đức, Tỉnh Bà Rịa - Vũng Tàu, Việt Nam', 1, '2024-03-27 05:35:30', '2024-03-27 05:35:46', '1970-01-01 01:00:00');
 
 -- --------------------------------------------------------
 
@@ -233,7 +238,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `name`) VALUES
 (1, 'Chủ công ty'),
-(2, 'Quản lí'),
+(2, 'Quản lý'),
 (3, 'Nhân viên giao hàng');
 
 -- --------------------------------------------------------
@@ -268,7 +273,8 @@ INSERT INTO `users` (`id`, `username`, `email`, `phone`, `password`, `role_id`, 
 (8, 'giadeptrai', 'giadeptrai@gmail.com', '188181', 'gia18112004', 3, 'Khưu Thành Gia', 1, '2024-01-17 05:06:47', '$2y$10$wu.rQxGQB49x4Ogvw8Es4.oWmDeGj186LFS1iDBz5X3UQ7juS17ci', 1, 'avt.jpg'),
 (50, 'test_company', 'abc@123.1', NULL, '11111111', 1, 'Test Company', 23, '2024-03-09 18:51:23', '$2y$10$Vs4CiPU3vsuxH6y9VvmpFeBNBbycA7jlN8jIyxYpwr4Vvaru5JRVS', 1, NULL),
 (51, 'test_user_company', 'accgarena7624@gmail.com', NULL, '11111111', 3, 'test_user_company', 23, '2024-03-11 17:08:58', '$2y$10$NVsmOao9dv8ddkzJpBVAPeTCjrjwgIlAo6GVZ6nRZHYWgdTfq3flq', 1, NULL),
-(56, 'haixautinh', 'root@cc.ccc', NULL, '11111111', 3, 'haixautinh', 1, '2024-03-21 02:46:29', '$2y$10$buBr2y3heFnFAVPbenRdAOIIa2iQhH.6hPObbPnJibAWm6e4tpXuy', 1, NULL);
+(56, 'haixautinh', 'root@cc.ccc', NULL, '11111111', 3, 'haixautinh', 1, '2024-03-21 02:46:29', '$2y$10$buBr2y3heFnFAVPbenRdAOIIa2iQhH.6hPObbPnJibAWm6e4tpXuy', 1, NULL),
+(58, 'congty', 'ngmiha2004@gmail.com', NULL, '11111111', 1, 'conty', 24, '2024-03-27 05:34:09', '$2y$10$L7uNT7leYjtCNbMP0CEx..3urztYNKlNzbuCbDC0.zcTI7KG3DKXG', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -289,7 +295,9 @@ CREATE TABLE `verify` (
 
 INSERT INTO `verify` (`id`, `code`, `expires`, `email`) VALUES
 (28, 757803, '2024-03-10 02:00:39', 'accgarena7624@gmail.com'),
-(34, 316893, '2024-03-21 10:00:18', 'root@cc.ccc');
+(34, 316893, '2024-03-21 10:00:18', 'root@cc.ccc'),
+(35, 109851, '2024-03-27 12:46:56', 'abc@123.2'),
+(36, 641933, '2024-03-27 12:48:03', 'ngmiha2004@gmail.com');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -349,31 +357,31 @@ ALTER TABLE `verify`
 -- AUTO_INCREMENT cho bảng `company`
 --
 ALTER TABLE `company`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `complain`
 --
 ALTER TABLE `complain`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT cho bảng `verify`
 --
 ALTER TABLE `verify`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
