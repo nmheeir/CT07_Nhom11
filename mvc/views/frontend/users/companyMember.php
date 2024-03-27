@@ -58,7 +58,7 @@
                  [
                      'page' => $data['page'],
                      'totalPage' => $data['totalPage'],
-                     'url' => "http://localhost/Project/CT07_Nhom11/User/companyMember" 
+                     'url' => "http://localhost/CT07_Nhom11/User/companyMember" 
                  ]
              );
             ?>

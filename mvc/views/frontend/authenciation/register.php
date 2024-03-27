@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/base.css" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/login.css">
     <link rel="stylesheet" href="../CT07_Nhom11/vendor/bootstrap/css/bootstrap.css" />
@@ -21,7 +21,7 @@
 <body>
     <div class="login-box">
         <h2>Đăng kí</h2>
-        <form method="post" action="http://localhost/Project/CT07_Nhom11/Authenciation/register">
+        <form method="post" action="http://localhost/CT07_Nhom11/Authenciation/register">
             <div class="user-box">
                 <input type="text" name="username" required oninput="validateUsername()" <? if (isset($_SESSION["session_register_user"])) echo "value={$_SESSION['session_register_user']['username']}" ?>>
                 <label>Username</label>
@@ -64,10 +64,10 @@
                     <span></span>
                     Đăng kí
                 </button>
-                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/login" class="link-info">Đăng nhập</a>
+                <a href="http://localhost/CT07_Nhom11/Authenciation/login" class="link-info">Đăng nhập</a>
             </div>
             <div class="d-flex justify-content-around align-items-center mt-2">
-                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/registerCompany" class="link-info">Đăng kí công ty của bạn</a>
+                <a href="http://localhost/CT07_Nhom11/Authenciation/registerCompany" class="link-info">Đăng kí công ty của bạn</a>
             </div>
         </form>
     </div>

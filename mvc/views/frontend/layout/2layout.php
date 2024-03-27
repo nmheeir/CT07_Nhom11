@@ -13,7 +13,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
 <html lang="en">
 
 <head>
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>

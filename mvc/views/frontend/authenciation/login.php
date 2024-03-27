@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/base.css" />
     <link rel="stylesheet" href="../CT07_Nhom11/public/css/login.css">
     <link rel="stylesheet" href="../CT07_Nhom11/vendor/bootstrap/css/bootstrap.css" />
@@ -21,7 +21,7 @@
 <body>
     <div class="login-box">
         <h2>Đăng nhập</h2>
-        <form method="post" action="http://localhost/Project/CT07_Nhom11/Authenciation/login">
+        <form method="post" action="http://localhost/CT07_Nhom11/Authenciation/login">
             <div class="user-box">
                 <input type="text" autocomplete="off" name="username" required <? if (isset($_SESSION["session_login"])) echo "value={$_SESSION['session_login']['username']}" ?>>
                 <label>Username</label>
@@ -46,7 +46,7 @@
                     <span></span>
                     Đăng nhập
                 </button>
-                <a href="http://localhost/Project/CT07_Nhom11/Authenciation/register" class="link-info">Đăng kí</a>
+                <a href="http://localhost/CT07_Nhom11/Authenciation/register" class="link-info">Đăng kí</a>
             </div>
         </form>
     </div>

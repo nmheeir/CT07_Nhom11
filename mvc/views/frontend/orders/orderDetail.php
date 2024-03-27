@@ -101,7 +101,7 @@
                         }
                         ?>
                         <div class='text' style='margin-left: 24px'>
-                            <a href='/Project/CT07_Nhom11/User/detail/<?echo $data['order']['shipper_id']?>' class='text-decoration-none link'>
+                            <a href='/CT07_Nhom11/User/detail/<?echo $data['order']['shipper_id']?>' class='text-decoration-none link'>
                                 <h3 class='h5'><? echo $data["order"]["fullname"] ?></h3>
         
                             </a>

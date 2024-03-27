@@ -10,7 +10,7 @@ function fetchAddOrder() {
         'address': document.getElementById('searchAddress').value,
         'deadline': document.getElementById('deadline').value
     };
-    fetch(`http://localhost/Project/CT07_Nhom11/Order/save`, {
+    fetch(`http://localhost/CT07_Nhom11/Order/save`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

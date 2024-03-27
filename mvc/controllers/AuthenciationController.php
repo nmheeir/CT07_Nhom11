@@ -60,7 +60,7 @@ class AuthenciationController extends BaseController
                 $cookie_user_id = $data->data["id"];
                 setcookie("user_id", $cookie_user_id, time() + (86400 * 30), "/");
                 // redirect
-                header("Location: http://localhost/Project/CT07_Nhom11/User/home");
+                header("Location: http://localhost/CT07_Nhom11/User/home");
                 exit;
             } else {
                 $_SESSION["error_login"] = $data->message;
@@ -79,7 +79,7 @@ class AuthenciationController extends BaseController
         if (isset($_SESSION["user"])) {
             unset($_SESSION["user"]);
         }
-        header("Location: /Project/CT07_Nhom11/Welcome/landing");
+        header("Location: /CT07_Nhom11/Welcome/landing");
     }
 
     public function register()
@@ -189,7 +189,7 @@ class AuthenciationController extends BaseController
     {
         // nếu không có session đăng kí thì cút
         if(!isset($_SESSION['session_register_' . $userOrCompany])) {
-            header("Location: http://localhost/Project/CT07_Nhom11/Authenciation/login");
+            header("Location: http://localhost/CT07_Nhom11/Authenciation/login");
             exit;
         }
 
@@ -239,7 +239,7 @@ class AuthenciationController extends BaseController
                         unset($_SESSION['session_register_company']);
                     }
                     // dẫn qua login
-                    header("Location: http://localhost/Project/CT07_Nhom11/Authenciation/login");
+                    header("Location: http://localhost/CT07_Nhom11/Authenciation/login");
                     exit;
                 } else if ($time > $expiresTime) {
                     $errorMessage = "Mã quá hạn, vui lòng thử lại mã khác";

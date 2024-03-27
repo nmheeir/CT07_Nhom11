@@ -3,7 +3,7 @@ function fetchMailByType(type) {
   var selectedValue = type;
 
   var url =
-    "http://localhost/Project/CT07_Nhom11/User/fetchMailByType/" +
+    "http://localhost/CT07_Nhom11/User/fetchMailByType/" +
     encodeURIComponent(selectedValue);
 
   // Sử dụng Fetch API để thực hiện GET request

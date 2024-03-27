@@ -1,6 +1,6 @@
 <?
 class App {
-    const BASE_SOURCE = 'Project/CT07_Nhom11';
+    const BASE_SOURCE = 'CT07_Nhom11';
     private $controller = "Welcome";
     private $action = "index";
     private $params = [];
@@ -8,7 +8,7 @@ class App {
         $arr = $this->processURL();
         // Kiểm tra đã đăng nhập chưa khi truy cập vào các contrlller
         if (!checkLogin() && $arr[0] != 'Welcome' && $arr[0] != 'Authenciation') { 
-            header("Location: /Project/CT07_Nhom11/Authenciation/login");
+            header("Location: /CT07_Nhom11/Authenciation/login");
             exit;
         }
         // Controller

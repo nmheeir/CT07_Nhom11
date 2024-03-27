@@ -9,7 +9,7 @@ $complainMail = $data['mail'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="http://localhost/Project/CT07_Nhom11/" />
+    <base href="http://localhost/CT07_Nhom11/" />
     <script src="../CT07_Nhom11/public/js/fetchGetMail.js"></script>
 </head>
 
