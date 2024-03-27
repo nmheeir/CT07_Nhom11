@@ -102,7 +102,7 @@ if (isset($data['orderId']) && isset($data['orderDetail'])) {
                     </div>
                 </div>
             </div>
-            <div class="col p-0 scroll my-gradient">
+            <div class="col p-0 scroll my-gradient content-container">
                 <?
                 $this->loadView("frontend.{$page}.{$action}", [
                     'data' => $data,

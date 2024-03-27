@@ -11,10 +11,6 @@
                     $endPage = min($startPage + $visiblePages - 1, $totalPages);
                     
                     $base_url = $data['url'];
-
-                    if (isset($data['shipperId'])) {
-                        $base_url .= '/' . $data['shipperId'];
-                    }
                     //Hiền thị nút preivious
                     if($totalPages > 1 && $currentPage > 1) {
                         echo '<li class="page-item"><a class="page-link" href="' . $base_url .'/'. ($currentPage - 1). $queryString .'">Previous</a></li>';

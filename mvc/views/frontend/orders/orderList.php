@@ -94,12 +94,12 @@
             </div>
         </div>
         <?
-            $action = $_SESSION["user"]["role_id"] == 3 ? 'userOrderList' : 'companyOrderList';
+            $shiperId = isset($data["shipperId"]) ? "/" . $data["shipperId"] : "";
             $this->loadView("frontend.component.paging",
                 [
                     'page' => $data['page'],
                     'totalPage' => $data['totalPage'],
-                    'url' => "http://localhost/Project/CT07_Nhom11/Order/" . $action . "/" . $state
+                    'url' => "http://localhost/Project/CT07_Nhom11/Order/" . $data["action"] . "/" . $state .$shiperId
                 ]
             );
         ?>
