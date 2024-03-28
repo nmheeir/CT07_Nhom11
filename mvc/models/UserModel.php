@@ -128,6 +128,4 @@ class UserModel extends BaseModel {
         $newUserId = $this->save(self::TABLE_NAME, $newUser);
         return new DataView(true, $newUserId, "Ok");
     }
-     
-
 }

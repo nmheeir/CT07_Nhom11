@@ -64,3 +64,12 @@ function sendComplainMail($type, $_message, $user) {
     ]);
     sendMail($mail, $subject, $message);
 }
+
+function sendRecoverPassword($mail, $password) {
+    $baseModel = new BaseModel;
+
+    $subject = "Account Password 'Order Manager Website'";
+    $message = "Mật khẩu tài khoản của bạn là: " . $password;
+
+    sendMail($mail, $subject, $message);
+}

@@ -72,18 +72,21 @@ function updateRole(userId) {
     });
 }
 
-function updateUser() {
+function updateUser(event) {
+  event.preventDefault();
   //xử lí tên file
   var avatarInput = document.getElementById("avatar");
-  var selectedFile = avatarInput.files[0].name;
-  var fileType = selectedFile.split(".").pop().toLowerCase();
+  if (avatarInput.files.length > 0) {
+    var selectedFile = avatarInput.files[0].name;
+    var fileType = selectedFile.split(".").pop().toLowerCase();
+  }
 
   let dataToSend = {
     id: document.getElementById("id").value,
     fullname: document.getElementById("fullname").value,
     email: document.getElementById("email").value,
-    phone: document.getElementById("phone").value,
-    avatar: "avt" + "." + fileType,
+    phone: document.getElementById("phone").value.length > 0 ? document.getElementById("phone").value : null,
+    avatar: avatarInput.files.length > 0 ? "avt" + "." + fileType : null,
   };
 
   fetch(`http://localhost/CT07_Nhom11/User/updateUser`, {
@@ -93,7 +96,7 @@ function updateUser() {
     },
     body: JSON.stringify(dataToSend),
   }).then(() => {
-    window.location.reload()
+    window.location.reload(true);
   });
   console.log("Oke").catch((error) => {
     console.error("Error:", error);

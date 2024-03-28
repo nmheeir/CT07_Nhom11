@@ -39,7 +39,7 @@
 
     public function getOrder($option = [
         'select' => '*',
-        'order_by' => 'id asc'
+        'order_by' => 'deadline asc'
     ])
     {
         $data = $this->get(self::TABLE_NAME, $option);
@@ -89,10 +89,10 @@
         try {
             $checkIsOutOfDate = "";
             if ($isCompleted == 0) {
-                $checkIsOutOfDate = 'AND (deadline > CURRENT_TIMESTAMP OR deadline is NULL)';
+                $checkIsOutOfDate = 'AND (deadline > (CURRENT_TIMESTAMP) OR deadline is NULL)';
             }
             if ($isCompleted == 2) {
-                $checkIsOutOfDate = 'AND deadline < CURRENT_TIMESTAMP';
+                $checkIsOutOfDate = 'AND deadline < (CURRENT_TIMESTAMP)';
                 $isCompleted = 0;
             }
 
@@ -102,7 +102,7 @@
             $shipperCheck = is_null($shipperId) ? "" : " AND shipper_id = " . $shipperId;
             $orders = $this->get(self::TABLE_NAME,[
                 'select' => '*',
-                'order_by' => 'id asc',
+                'order_by' => 'deadline asc',
                 'where' => "is_completed = {$isCompleted} {$checkIsOutOfDate} AND company_id = " . $_SESSION['user']['company_id'] . "" . $filterCreatedAt . $filterDeadline . $shipperCheck,
                 'limit' => 12,
                 'offset' => ($page-1)  * 10

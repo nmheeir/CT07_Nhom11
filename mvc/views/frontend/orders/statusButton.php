@@ -5,15 +5,16 @@
                             Xong
                         </button>";
         $undoneButton = "";
-        if($order["is_completed"] != 0) {
+        if($order["is_completed"] == 1) {
             $statusButton = $undoneButton;
         }
         else {
-            $orderDeadline = strtotime($order['deadline']);
-            $currentTime = time();
-            if ($orderDeadline > $currentTime || $order['deadline'] == NULL) {
+            $deadline_timestamp = strtotime($order['deadline']);
+            date_default_timezone_set('Asia/Ho_Chi_Minh');
+            if (time() < $deadline_timestamp || $deadline_timestamp == null) {
                 $statusButton = $doneButton;
-            } else {
+            }
+            else {
                 $statusButton = $undoneButton;
             }
         }
