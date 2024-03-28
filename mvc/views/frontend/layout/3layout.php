@@ -89,7 +89,7 @@ $fn = convertToReadableString($action);
                             <span class="d-none d-sm-inline mx-1"><? echo $_SESSION["user"]["username"] ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="Authenciation/logout">Sign out</a></li>
+                            <li><a class="dropdown-item" href="Authenciation/logout">Đăng xuất</a></li>
                         </ul>
                     </div>
                 </div>

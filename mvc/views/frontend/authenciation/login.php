@@ -48,6 +48,9 @@
                 </button>
                 <a href="http://localhost/CT07_Nhom11/Authenciation/register" class="link-info">Đăng kí</a>
             </div>
+            <div class="text-center mt-4">
+                <a href="http://localhost/CT07_Nhom11/Authenciation/recoverAccount" class="link-info">Quên mật khẩu</a>
+            </div>
         </form>
     </div>
 

@@ -14,6 +14,7 @@ if (isset($data)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +47,7 @@ if (isset($data)) {
         }
 
         button[name='submit'] {
-            background-color: #4CAF50;
+            background-color: #0d6efd;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -55,7 +56,7 @@ if (isset($data)) {
         }
 
         button[name='submit']:hover {
-            background-color: #45a049;
+            background-color: #0d6efd;
         }
     </style>
     <script src="../CT07_Nhom11/public/js/fetchUser.js"></script>
@@ -80,7 +81,7 @@ if (isset($data)) {
             <label for="avatar">Ảnh đại diện</label>
             <input type="file" id="avatar" name="avatar">
 
-            <button name='submit' onclick="updateUser(); return false">Chỉnh sửa</button>
+            <button name='submit' onclick="updateUser(event); return false">Chỉnh sửa</button>
         </form>
     </div>
 </body>
@@ -92,4 +93,3 @@ if (isset($_POST['submit'])) {
     checkImageFile("avatar", "avatars", $username);
 }
 ?>
-

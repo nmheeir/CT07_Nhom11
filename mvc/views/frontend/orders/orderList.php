@@ -1,10 +1,10 @@
 <?
-    require_once "../CT07_Nhom11/mvc/views/frontend/orders/statusButton.php";
-    $orders = $data["orders"];
-    $state = $data['state'];
-    if($state > 1) $badge = ["type" => "danger", "text" => "Đã quá hạn"];
-    else if($state < 1) $badge = ["type" => "warning", "text" => "Chưa hoàn thành"];
-    else $badge = ["type" => "success", "text" => "Đã hoàn thành"];;
+require_once "../CT07_Nhom11/mvc/views/frontend/orders/statusButton.php";
+$orders = $data["orders"];
+$state = $data['state'];
+if ($state > 1) $badge = ["type" => "danger", "text" => "Đã quá hạn"];
+else if ($state < 1) $badge = ["type" => "warning", "text" => "Chưa hoàn thành"];
+else $badge = ["type" => "success", "text" => "Đã hoàn thành"];;
 ?>
 <link rel='stylesheet' href="../CT07_Nhom11/public/css/dateInput.css" />
 <style>
@@ -14,19 +14,23 @@
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+
     .des {
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
+
     label {
         color: #fff;
     }
-    input[type="date"]{
+
+    input[type="date"] {
         padding: 0 4px;
     }
-    .card{
+
+    .card {
         background-color: transparent;
     }
 
@@ -40,33 +44,33 @@
     <div class="container-lg py-4">
         <div class="row justify-content-center g-2">
             <h3 class="text-white text-center">
-                Các đơn hàng 
+                Các đơn hàng
                 <?
-                    if($state == 0) echo "chưa hoàn thành";
-                    else if($state == 1) echo "đã hoàn thành";
-                    else echo "không hoàn thành";
+                if ($state == 0) echo "chưa hoàn thành";
+                else if ($state == 1) echo "đã hoàn thành";
+                else echo "không hoàn thành";
                 ?>
             </h3>
 
             <!-- lọc order -->
-            <form method="get" class="d-lg-flex d-md-block align-items-center justify-content-center">
+            <form method="get" class="d-lg-flex d-md-block align-items-center justify-content-center" id="filterForm">
                 <div class="user-box m-2">
                     <label class="fs-4">Ngày khởi tạo</label>
-                    <input type="date" name="created_at" value=<? if(isset($_GET['created_at'])) echo $_GET['created_at']; ?>>
+                    <input type="date" name="created_at" value=<? if (isset($_GET['created_at'])) echo $_GET['created_at']; ?>>
                 </div>
                 <div class="user-box m-2">
                     <label class="fs-4">Ngày hết hạn</label>
-                    <input type="date" name="deadline" value=<? if(isset($_GET['deadline'])) echo $_GET['deadline']; ?>>
+                    <input type="date" name="deadline" value=<? if (isset($_GET['deadline'])) echo $_GET['deadline']; ?>>
                 </div>
                 <button type="submit" name="btnSubmit" class="btn btn-info text-white m-2">Lọc đơn hàng</button>
             </form>
             <!-- các order -->
             <div class="row">
-            <?php
-            if (count($orders) > 0) {
-                foreach ($orders as $order) {
-                   $statusButton = StatusButton($order);
-                    echo "
+                <?php
+                if (count($orders) > 0) {
+                    foreach ($orders as $order) {
+                        $statusButton = StatusButton($order, $state);
+                        echo "
                         <div class='card col-xl-3 col-lg-4 col-md-6 p-0'>
                             <div class='p-1'>
                                 <iframe 
@@ -76,7 +80,7 @@
                                 </iframe>
                                 <div class='card-body align-self-stretch' style='height: 150px'>
                                     <h5 class='card-title title'>{$order['address']}</h5>
-                                    <span class='badge text-bg-" . $badge["type"] . "'>". $badge['text'] ."</span>
+                                    <span class='badge text-bg-" . $badge["type"] . "'>" . $badge['text'] . "</span>
                                     <p class='card-text des'>{$order['description']}</p>
                                 </div>
                                 <div class='card-body'>
@@ -86,29 +90,26 @@
                             </div>
                         </div>
                     ";
+                    }
+                } else {
+                    echo "<p class='text-white text-center'>Bạn không có đơn hàng nào trong mục này.</p>";
                 }
-            } else {
-                echo "<p class='text-white text-center'>Bạn không có đơn hàng nào trong mục này.</p>";
-            }
-            ?>
+                ?>
             </div>
         </div>
         <?
-            $shiperId = isset($data["shipperId"]) ? "/" . $data["shipperId"] : "";
-            $this->loadView("frontend.component.paging",
-                [
-                    'page' => $data['page'],
-                    'totalPage' => $data['totalPage'],
-                    'url' => "http://localhost/CT07_Nhom11/Order/" . $data["action"] . "/" . $state .$shiperId
-                ]
-            );
+        $shiperId = isset($data["shipperId"]) ? "/" . $data["shipperId"] : "";
+        $this->loadView(
+            "frontend.component.paging",
+            [
+                'page' => $data['page'],
+                'totalPage' => $data['totalPage'],
+                'url' => "http://localhost/CT07_Nhom11/Order/" . $data["action"] . "/" . $state . $shiperId
+            ]
+        );
         ?>
     </div>
 </div>
 
 
 <script src="../CT07_Nhom11/public/js/fetchUpdateOrder.js"></script>
-
-
-
-

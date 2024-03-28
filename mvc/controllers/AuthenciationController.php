@@ -254,4 +254,24 @@ class AuthenciationController extends BaseController
             ]
         );
     }
+
+    public function recoverAccount() {
+        $errorMessage = "";
+        if (isset($_POST['email'])) {
+            $getEmail = $this->userModel->getUserByEmail($_POST['email']);
+            if ($getEmail->isSuccess) {
+                $email = $getEmail->data->data[0]['email'];
+                $password = $getEmail->data->data[0]['password'];
+                sendRecoverPassword($email, $password);
+                header("Location: Login");
+            } else {
+                $errorMessage = $getEmail->message;
+            }
+        } else {
+            $errorMessage = "Hãy nhập email của bạn";
+        }
+        $this->loadView('frontend.authenciation.recover', [
+            'data' => ['error' => $errorMessage] 
+        ]);
+    }
 }
